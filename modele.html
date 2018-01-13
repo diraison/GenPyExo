@@ -175,9 +175,9 @@ function verifier() {
 // effectue le test alltests[alltestsindex] sur un programme Python
 function verifierSimple(repl) {
 	if (visibilite) {
-		var prog = reecrireCode(editeur.getValue(),repl) + "\n" + repl.slice(-1) + "\n";
+		var prog = reecrireCode(editeur.getValue() + "\n" + repl.slice(-1) + "\n",repl);
 	} else {
-		var prog = reecrireCode(pyresp,repl) + "\n" + repl.slice(-1) + "\n";
+		var prog = reecrireCode(pyresp + "\n" + repl.slice(-1) + "\n",repl);
 	}
 	var sortie = document.getElementById("sortie");
 	var erreur = document.getElementById("erreur");
