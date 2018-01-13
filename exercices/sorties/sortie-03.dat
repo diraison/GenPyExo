@@ -1,0 +1,10 @@
+Les sorties en Python 3
+Exercice 3
+Modifiez la dernière ligne du programme pour obtenir les sorties suivantes qui donnent le résultat du produit des variables <i>x</i> et <i>y</i> :<ul><li>5 * 4 = 20</li><li>3 * 9 = 27</li></ul>
+# Solution de l\'exercice\n\nx = 5        #? exemple de valeur\ny = 4        #? exemple de valeur\n\n## Il faut modifier la chaîne de formatage et\n## rajouter x*y en 3ème paramètre de format()\n\nprint("{} * {} = {}".format(x, y, x*y))
+[ ["5","4",""], ["3","9",""], ["0","2",""], ["1.4","25.8",""] ]
+x = 5        #? exemple de valeur
+y = 4        #? exemple de valeur
+
+# indication : 2 modifications sont nécessaires
+print("{} * {} = ".format(x, y, ))

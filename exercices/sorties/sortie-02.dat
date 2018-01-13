@@ -1,0 +1,8 @@
+Les sorties en Python 3
+Exercice 2
+Modifiez la dernière ligne pour qu'elle affiche les valeurs de x et de son carré sous la forme:<ul><li>Le carré de 4 est 16</li><li>Le carré de -3 est 9</li></ul>
+# Solution\n\nx = 6      #? exemple de valeur\n\nprint("Le carré de", x, "est", x*x)
+[ ["6",""], ["4",""], ["-3",""], ["1.5", ""] ]
+x = 6      #? exemple de valeur
+
+print("Le carré de", x

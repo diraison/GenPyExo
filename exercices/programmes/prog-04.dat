@@ -1,0 +1,18 @@
+Programme en Python 3
+Exercice 4
+Complétez les ... de la fonction calculerAire() pour qu'elle calcule l'aire du rectangle à partir de son périmètre et de sa longueur.
+# La solution\n\ndef calculerAire(perimetre, longueur):\n    largeur = perimetre / 2 - longueur\n    aire = longueur * largeur\n    return aire\n\n### programme principal ###\n\nperimetre = float( input("Le périmètre ?") )\nlongueur  = float( input("La longueur ?") )\n\naire = calculerAire(perimetre, longueur)\n\nprint("L\'aire du rectangle est", aire)
+[ ["10","0",""], ["36","5",""], ["20","6",""], ["16.4","3.8",""] ]
+def calculerAire( ... , ... ):
+    largeur = ...
+    aire = ...
+    return aire
+
+### programme principal ###
+
+perimetre = float( input("Le périmètre ?") )
+longueur  = float( input("La longueur ?") )
+
+aire = calculerAire(perimetre, longueur)
+
+print("L'aire du rectangle est", aire)

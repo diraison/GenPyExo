@@ -1,0 +1,14 @@
+Turtle en Python 3
+Exercice 1
+Corrigez les 4 erreurs du programme suivant afin d'obtenir un carré rouge de côté 120.
+# Voici la réponse\n\nfrom turtle import *\n\ntortue = Turtle()\n\ntortue.color("red")       # couleur rouge\n\nfor n in range(4):        # 4 côtés à tracer\n    tortue.forward(120)   # côté (120)\n    tortue.left(90)       # angle droit (90°)
+[ [] ]
+from turtle import *
+
+tortue = Turtle()
+
+tortue.color("blue")
+
+for n in range(3):
+    tortue.forward(100)
+    tortue.left(100)

@@ -1,0 +1,7 @@
+Fonction en Python 3
+Exercice 2
+Corrigez la fonction \(produit\) pour qu'elle prenne deux paramètres \(a\) et \(n\) , et retourne leur produit.
+# Une solution simple\n\ndef produit(a,n):\n    return a * n\n\n# le produit de deux nombres est le\n# résultat de leur multiplication
+[ ["produit(0,7)", "P=#?\nprint(P)"], ["produit(5,4)", "P=#?\nprint(P)"], ["produit(0,0)", "P=#?\nprint(P)"], ["produit(-8,3)", "P=#?\nprint(P)"] ]
+def produit(a):
+    return a + a

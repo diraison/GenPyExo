@@ -1,0 +1,8 @@
+Les entrées en Python 3
+Exercice 1
+Complétez la première ligne pour que le programme :<ul><li>commence par demander votre âge</li><li>affiche le message correct à la fin</li></ul>
+# Une réponse possible\n\n## On utilise input() pour demander l\'âge\n## et on convertit la chaîne de caractères\n## retournée par input() en un entier en\n## appelant la fonction int()\n\nage = int( input("Quel âge avez-vous ?") )\n\nprint("C\'était", age-1, "ans l\'année dernière")
+[ ["16",""], ["12",""], ["3",""] ]
+age = 
+
+print("C'était", age-1, "ans l'année dernière")

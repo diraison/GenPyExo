@@ -1,0 +1,15 @@
+Instruction conditionnelle en Python 3
+Exercice 3
+Compléter le programme pour qu'il affiche le résultat de :<ul style="margin: 0"><li>\(3x-7\) &nbsp; pour &nbsp; \(x \geqslant 5\)</li><li>\(2x-1\) &nbsp; pour &nbsp; \(x < 5\)</li></ul>
+# Voici une réponse possible\n\nx = float( input("x ? ") )\n\nif x >= 5:\n    y = 3 * x - 7\nelse:\n    y = 2 * x - 1\n\nprint("y =", y)
+[ [0.0,""], [4.0,""], [4.95,""], [5.0,""], [6.0,""] ]
+# Voici une réponse possible
+
+x = float( input("x ? ") )
+
+if x :
+    y = 
+else:
+    y = 
+
+print("y =", y)

@@ -1,0 +1,11 @@
+Instruction conditionnelle en Python 3
+Exercice 2
+Corriger le programme suivant pour qu'une réduction de 5 % soit appliquée à un prix atteignant ou dépassant les 100 €.
+# Voici une réponse possible\n\nprix = float( input("prix ? ") )\n\nif prix >= 100:\n    prix = prix - 5 / 100 * prix\n\nprint("prix réduit :", prix)
+[ [80.0,""], [100.0,""], [240.0,""] ]
+prix = float( input("prix ? ") )
+
+if prix :         # 1ère ligne à corriger
+    prix =        # 2nde ligne à corriger
+
+print("prix réduit :", prix)

@@ -1,0 +1,6 @@
+Fonction en Python 3
+Exercice 1
+Vous devez créer une fonction \(f\) qui prend en paramètre un nombre \(x\) et qui retourne \(5x-3\).
+# Voici la solution\n\ndef f(x):\n    return 5*x-3
+[ ["f(0)", "r=#?\nprint(r)"], ["f(-1)", "r=#?\nprint(r)"], ["f(4)", "r=#?\nprint(r)"], ["f(2.1)", "r=#?\nprint(r)"] ]
+def f
