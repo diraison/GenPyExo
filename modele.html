@@ -3,12 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>##TITRE1## - ##TITRE2##</title>
-	<script src="http://www.skulpt.org/static/skulpt.min.js"></script> 
-	<script src="http://www.skulpt.org/static/skulpt-stdlib.js"></script> 
-	<link  href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.js"></script> 
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/python/python.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
 <style>
 html {		background-color: #f7f7ff;	background-image: url("http://image.ibb.co/jruSmG/math.png");	margin-top: 10px;	}
 h1 {		text-align: center;					}
@@ -58,6 +59,16 @@ var editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "
 editeur.setSize(null, 360);
 
 Sk.python3 = true;
+Sk.externalLibraries = {
+	numpy : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
+		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/math.js'] },
+	matplotlib : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/__init__.js' },
+	"matplotlib.pyplot" : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/pyplot/__init__.js',
+		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'], }
+	};
 
 function builtinRead(x) {
 	if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
@@ -100,6 +111,7 @@ function executer() {
 	entreefmsg = "";
 	entreefres = false;
 	Sk.pre = "sortie";
+	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
@@ -186,6 +198,7 @@ function verifierSimple(repl) {
 	entreefmsg = "";
 	entreefres = false;
 	Sk.pre = "sortie";
+	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
