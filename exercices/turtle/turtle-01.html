@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Turtle en Python 3 - Exercice 1</title>
+	<script src="http://www.skulpt.org/static/skulpt.min.js"></script> 
+	<script src="http://www.skulpt.org/static/skulpt-stdlib.js"></script> 
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.js"></script> 
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/python/python.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+<style>
+html {		background-color: #f7f7ff;	background-image: url("http://image.ibb.co/jruSmG/math.png");	margin-top: 10px;	}
+h1 {		text-align: center;					}
+h3 {		font-size: 18pt;		margin-top: 15px;	margin-bottom: 12px;	}
+article {	margin-top: 30px;					}
+div.enonce {	padding-left: 40px;	margin-bottom: 5px;	font-family: Times, serif, Times New Roman;	font-size: 16pt;	}
+div.travail {	float: left;		width: 55%;			}
+div.CodeMirror { border-style: solid;	border-width: 1px;	border-color: #000;	font-size: 16pt;	resize: vertical;	}
+button {	margin-top: 0px;	}
+div.reponses {	float: left;	width: 41%;	margin-left: 1%;	padding-left: 1%;	font-size: 12pt;	}
+ul {		margin-top: 10px;	margin-bottom: 10px;		}
+#sortie {	height: auto;		font-weight: bold;		}
+#erreur {	margin: 10px 0 10px 0;	padding: 10px 0 10px 10px;	height: 20px;	background-color: #fcc;
+		font-size: 10pt;	color: #880000;			font-weight: bold;				}
+span.solution {	color: #0000cc;		}
+span.solution > img {			display: none;		}
+span.solution:hover > img {		border: 1px solid #0000cc;	background: rgba(255,255,238,1.0);	position: absolute;
+					margin-left: 32px;		margin-top: 8px;	display: block;		z-index: 4;	}
+</style>
+</head>
+<body onload="genererReponses()">
+<header><h1>Turtle en Python 3</h1></header>
+<article>
+	<h3>Exercice 1</h3>
+	<div class="enonce">Corrigez les 4 erreurs du programme suivant afin d'obtenir un carré rouge de côté 120.</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">from turtle import *
+
+tortue = Turtle()
+
+tortue.color("blue")
+
+for n in range(3):
+    tortue.forward(100)
+    tortue.left(100)</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+</article>
+<script>
+/*
+ * © Jean Diraison <jean.diraison@ac-rennes.fr> - 9 decembre 2017
+ *   programme javascript sous licence GPLv3
+ */
+
+var pyresp = '# Voici la réponse\n\nfrom turtle import *\n\ntortue = Turtle()\n\ntortue.color("red")       # couleur rouge\n\nfor n in range(4):        # 4 côtés à tracer\n    tortue.forward(120)   # côté (120)\n    tortue.left(90)       # angle droit (90°)\n';	// le programme qu'il faut realiser (la reponse)
+
+var editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+editeur.setSize(null, 360);
+
+Sk.python3 = true;
+
+function builtinRead(x) {
+	if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+		throw "File not found: '" + x + "'";
+	return Sk.builtinFiles["files"][x];
+}
+
+function supprimerFin(s,e) {	// retourne la chaine s tronquee de e si celle-ci termine s
+	n = (s.length < e.length ? s.length : e.length);
+	h = s.substring(0, s.length-n-1);             // supprime aussi le \n de separation
+	t = s.substr(-n,n);
+	return (t === e ? h : s);
+}
+
+var entreefmsg = "";
+var entreefres = false;
+
+function entreef(prompt) {
+	entreefres = true;
+	var sortie = document.getElementById("sortie");
+	sortie.innerHTML = supprimerFin(sortie.innerHTML, entreefmsg);
+	return window.prompt(entreefmsg ? entreefmsg.trim() : "");
+}
+
+function sortief(text) { 
+	var sortie = document.getElementById("sortie");
+	entreefmsg = text;
+	entreefres = false;
+	sortie.innerHTML += entreefmsg;
+} 
+
+// execute de le programme rentre par l'utilisateur
+function executer() {
+	var prog = editeur.getValue();
+	var sortie = document.getElementById("sortie");
+	var erreur = document.getElementById("erreur");
+	document.getElementById("resultat").style.visibility = (visibilite ? "visible" : "hidden");
+	sortie.innerHTML = '';
+	erreur.innerHTML = '';
+	entreefmsg = "";
+	entreefres = false;
+	Sk.pre = "sortie";
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true});
+	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	var myPromise = Sk.misceval.asyncToPromise(function() {
+			return Sk.importMainWithBody("<stdin>", false, prog, true);
+	});
+	myPromise.then(function(mod) {
+			document.getElementById("erreur").innerHTML += 'success' + "<br>";
+			//console.log('success');
+		},
+			function(err) {
+			document.getElementById("erreur").innerHTML = err.toString() + "<br>";
+			//console.log(err.toString());
+	});
+}
+
+var reponsesalltests = [];	// tableau de collecte des bonnes reponses a obtenir
+var visibilite = false;		// masque l'affichage des reponses
+
+var alltests = [ [] ];	// tableau de tous les tests a realiser
+var alltestsindex = 0;		// index du test a realiser
+var testi = 0;			// index de la donnee en courrante dans testd
+var testd = [];			// contient les donnees d'un test : les entrees/substitutions et l'instruction finale (affichage de reponse)
+var rapport = "";		// rapport a afficher a la fin de la verification des tests
+var nbsucces = 0;		// decompte des tests reussis
+var nbverifications = -1;	// compteur d'appui sur le bouton de verification
+
+function entreef_(prompt) {
+	entreefres = true;
+	var sortie = document.getElementById("sortie");
+	sortie.innerHTML = supprimerFin(sortie.innerHTML, entreefmsg);
+	if (testi == testd.length)
+		return "";
+	return testd[testi++];
+}
+
+function reecrireCode(str, data) {
+	var tab = str.split("\n");
+	for (var i = 0; i < tab.length; i++) {
+		if (tab[i].indexOf("#?") == -1)		// aucune modification a apporter si absence de #?
+			continue;
+		if (tab[i].indexOf("=") != -1) {	// remplacer ce qui suit le signe = s'il existe
+			var k = tab[i].indexOf("=");
+			tab[i] = tab[i].substring(0,k+1) + (testi < data.length ? data[testi++] : "");
+		} else {				// remplacer toute la ligne sinon
+			tab[i] = (testi < data.length ? data[testi++] : "");
+		}
+	}
+	return tab.join("\n");
+}
+
+// lance la verification de l'ensemble des tests de alltests[]
+function verifier() {
+	nbverifications++;
+	document.getElementById("verifb").innerHTML = "Vérifier la réponse ("+nbverifications+")";
+	document.getElementById("resultat").style.visibility = (visibilite ? "visible" : "hidden");
+	if (nbverifications == 10) {
+		editeur.getDoc().setValue(pyresp);
+		alert("Voici une solution possible");
+		return;
+	}
+	if (alltests.length == 0) {
+		verifierSimple([]);
+		return;
+	}
+	rapport = "";
+	nbsucces = 0;
+	alltestsindex = 0;
+	testd = alltests[alltestsindex++];
+	testi = 0;
+	verifierSimple(testd);
+}
+
+// effectue le test alltests[alltestsindex] sur un programme Python
+function verifierSimple(repl) {
+	if (visibilite) {
+		var prog = reecrireCode(editeur.getValue() + "\n" + repl.slice(-1) + "\n",repl);
+	} else {
+		var prog = reecrireCode(pyresp + "\n" + repl.slice(-1) + "\n",repl);
+	}
+	var sortie = document.getElementById("sortie");
+	var erreur = document.getElementById("erreur");
+	sortie.innerHTML = '';
+	erreur.innerHTML = '';
+	entreefmsg = "";
+	entreefres = false;
+	Sk.pre = "sortie";
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true});
+	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	var myPromise = Sk.misceval.asyncToPromise(function() {
+			return Sk.importMainWithBody("<stdin>", false, prog, true);
+	});
+	myPromise.then(finVerifierSimple,
+		function(err) {
+			document.getElementById("erreur").innerHTML = err.toString() + "<br>";
+			//console.log(err.toString());
+	});
+}
+
+// fonction appelee a la fin de l'execution du script s'il n'y a pas d'erreur d'execution
+function finVerifierSimple(mod) {
+	var sortie = document.getElementById("sortie");
+	var texte = sortie.innerHTML.trim();
+	var dessins = document.getElementById("dessin").children;
+	var image = (dessins.length >= 2 ? dessins[1].toDataURL() : "");
+
+	console.log("Test "+alltestsindex+":\nentree: "+testd.slice(0,testi)+"\nsortie: "+texte);
+
+	// collecte les reponses attendues avec le programme correct (texte et image)
+	if (!visibilite) {
+		reponsesalltests.push([texte,image]);
+		if (alltestsindex < alltests.length) {
+			testd = alltests[alltestsindex++];
+			testi = 0;
+			verifierSimple(testd);
+		} else {
+			document.getElementById("verifb").disabled = false;
+			document.getElementById("execfb").disabled = false;
+			document.getElementById("dessin").innerHTML = "";
+			visibilite = true;
+		}
+		return;
+	}
+
+	document.getElementById("erreur").innerHTML = 'success';
+
+	// evalue les resultats du test par rapport aux bonnes reponses et met a jour le rapport
+	var reponses = reponsesalltests[alltestsindex-1];
+
+	if (texte == reponses[0] && image == reponses[1]) {
+		nbsucces++;
+	} else if (texte == reponses[0]) {
+		rapport += "\n * la <span class=\"solution\">figure attendue<img src=\""+reponses[1]+"\" alt=\"solution\"></span>";
+		if (testd.length != 0)
+			rapport += " avec " + testd;
+		rapport += " est différente";
+	} else {
+		if (testi == 0 ) {
+			rapport += "\n * ceci ne donne pas " + reponses[0];
+		} else {
+			rapport += "\n * " + testd.slice(0,testi) + " en entrée, ne donne pas " + reponses[0];
+		}
+	}
+
+	var nbtests = alltests.length;
+
+	// passe au test suivant s'il en reste
+	if (alltestsindex < nbtests) {
+		testd = alltests[alltestsindex++];
+		testi = 0;
+		verifierSimple(testd);
+		return;
+	}
+
+	// dresse le bilan final et affiche le rapport s'il ne reste plus aucun test a passer
+	sortie.innerHTML = "Vous avez réussi "+ nbsucces +" test(s) sur un total de "+ nbtests +".\n";
+	if (nbsucces == nbtests) {
+		sortie.innerHTML += "\nParfait !";
+	} else {
+		sortie.innerHTML += "Essayez encore, vous pouvez faire mieux.\n\nRapport :" + rapport;
+	}
+}
+
+// cree la liste des bonnes reponses attendues
+// appelee automatiquement au chargement de la page
+function genererReponses() {
+	reponsesalltests = [];
+	visibilite = false;
+	verifier();
+}
+</script>
+</body>
+</html>
