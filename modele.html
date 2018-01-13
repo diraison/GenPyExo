@@ -59,6 +59,9 @@ var editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "
 editeur.setSize(null, 360);
 
 Sk.python3 = true;
+var SkFuture = { print_function: true, division: true, absolute_import: null, unicode_literals: false,
+		 // skulpt specific
+		 set_repr: false, class_repr: false, inherit_from_object: false, super_args: false };
 Sk.externalLibraries = {
 	numpy : {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
@@ -83,21 +86,13 @@ function supprimerFin(s,e) {	// retourne la chaine s tronquee de e si celle-ci t
 	return (t === e ? h : s);
 }
 
-var entreefmsg = "";
-var entreefres = false;
-
 function entreef(prompt) {
-	entreefres = true;
-	var sortie = document.getElementById("sortie");
-	sortie.innerHTML = supprimerFin(sortie.innerHTML, entreefmsg);
-	return window.prompt(entreefmsg ? entreefmsg.trim() : "");
+	return window.prompt(prompt ? prompt : "?");
 }
 
 function sortief(text) { 
 	var sortie = document.getElementById("sortie");
-	entreefmsg = text;
-	entreefres = false;
-	sortie.innerHTML += entreefmsg;
+	sortie.innerHTML += text;
 } 
 
 // execute de le programme rentre par l'utilisateur
@@ -108,11 +103,9 @@ function executer() {
 	document.getElementById("resultat").style.visibility = (visibilite ? "visible" : "hidden");
 	sortie.innerHTML = '';
 	erreur.innerHTML = '';
-	entreefmsg = "";
-	entreefres = false;
 	Sk.pre = "sortie";
 	Sk.canvas = "dessin";
-	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true});
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
@@ -139,9 +132,6 @@ var nbsucces = 0;		// decompte des tests reussis
 var nbverifications = -1;	// compteur d'appui sur le bouton de verification
 
 function entreef_(prompt) {
-	entreefres = true;
-	var sortie = document.getElementById("sortie");
-	sortie.innerHTML = supprimerFin(sortie.innerHTML, entreefmsg);
 	if (testi == testd.length)
 		return "";
 	return testd[testi++];
@@ -195,11 +185,9 @@ function verifierSimple(repl) {
 	var erreur = document.getElementById("erreur");
 	sortie.innerHTML = '';
 	erreur.innerHTML = '';
-	entreefmsg = "";
-	entreefres = false;
 	Sk.pre = "sortie";
 	Sk.canvas = "dessin";
-	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true});
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
