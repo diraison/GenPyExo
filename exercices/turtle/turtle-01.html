@@ -3,12 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Turtle en Python 3 - Exercice 1</title>
-	<script src="http://www.skulpt.org/static/skulpt.min.js"></script> 
-	<script src="http://www.skulpt.org/static/skulpt-stdlib.js"></script> 
-	<link  href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.js"></script> 
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/python/python.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
 <style>
 html {		background-color: #f7f7ff;	background-image: url("http://image.ibb.co/jruSmG/math.png");	margin-top: 10px;	}
 h1 {		text-align: center;					}
@@ -38,13 +39,11 @@ span.solution:hover > img {		border: 1px solid #0000cc;	background: rgba(255,255
 	<div class="travail">
 		<textarea id="code">from turtle import *
 
-tortue = Turtle()
-
-tortue.color("blue")
+color("blue")
 
 for n in range(3):
-    tortue.forward(100)
-    tortue.left(100)</textarea>
+    forward(100)
+    left(100)</textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
 		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
@@ -60,12 +59,22 @@ for n in range(3):
  *   programme javascript sous licence GPLv3
  */
 
-var pyresp = '# Voici la réponse\n\nfrom turtle import *\n\ntortue = Turtle()\n\ntortue.color("red")       # couleur rouge\n\nfor n in range(4):        # 4 côtés à tracer\n    tortue.forward(120)   # côté (120)\n    tortue.left(90)       # angle droit (90°)\n';	// le programme qu'il faut realiser (la reponse)
+var pyresp = '# Voici la réponse\n\nfrom turtle import *\n\ncolor("red")          # couleur rouge\n\nfor n in range(4):    # 4 côtés à tracer\n    forward(120)      # côté (120)\n    left(90)          # angle droit (90°)\n';	// le programme qu'il faut realiser (la reponse)
 
 var editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
 editeur.setSize(null, 360);
 
 Sk.python3 = true;
+Sk.externalLibraries = {
+	numpy : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
+		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/math.js'] },
+	matplotlib : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/__init__.js' },
+	"matplotlib.pyplot" : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/pyplot/__init__.js',
+		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'], }
+	};
 
 function builtinRead(x) {
 	if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
@@ -108,6 +117,7 @@ function executer() {
 	entreefmsg = "";
 	entreefres = false;
 	Sk.pre = "sortie";
+	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
@@ -194,6 +204,7 @@ function verifierSimple(repl) {
 	entreefmsg = "";
 	entreefres = false;
 	Sk.pre = "sortie";
+	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	var myPromise = Sk.misceval.asyncToPromise(function() {
