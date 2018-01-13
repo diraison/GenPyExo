@@ -1,0 +1,49 @@
+Matplotlib et Numpy en Python 3
+Exemple 1
+Executez le programme suivant.
+
+[ [] ]
+from math import sqrt
+import matplotlib.pyplot as plt
+import numpy as np
+from random import randint
+
+###############################
+
+def lancerPiece():
+    return randint(0,1)
+
+def frequencePiles(n):
+    total = 0.0
+    for i in range(n):
+        if lancerPiece() == 0:
+            total += 1
+    return total / n
+
+###############################
+
+N = 400     # taille des echantillons
+p = 0.5     # probabilite
+
+# cadrage du repere et legende
+T = np.array([0, 100])
+U = np.array([0, 1])
+plt.plot(T,U,"k.")
+plt.xlabel("100 echantillons")
+plt.ylabel("frequence de Piles")
+
+# frequences des 100 echantillons
+X = np.array( range(100) )
+Y = np.array( [frequencePiles(N) for i in range(100)] )
+plt.plot(X,Y, "o")
+
+# bornes de l'intervalle de fluctuation (en rouge)
+Z = np.array([p + 1/sqrt(N)] * 2)
+plt.plot(T,Z, "r.-")
+Z = np.array([p - 1/sqrt(N)] * 2)
+plt.plot(T,Z, "r.-")
+Z = np.array([p] * 2)
+plt.plot(T,Z, "k.--")
+
+# affichage
+plt.show()
