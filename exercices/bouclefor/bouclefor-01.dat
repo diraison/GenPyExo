@@ -1,0 +1,7 @@
+Boucle for en Python 3
+Exercice 1
+Complétez le programme pour qu'affiche la table de 3 sous la forme :<ul><li>3 * 0 = 0</li><li>3 * 1 = 3</li><li>...</li><li>3 * 10 = 30</li>
+# Voici une réponse possible\n\nfor n in range(11):        # n varie de 0 à 10\n    print(3,"*",n,"=",3*n)
+[ [ "" ] ]
+for n in range()
+    print()

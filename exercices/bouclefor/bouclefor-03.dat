@@ -1,0 +1,13 @@
+Boucle for en Python 3
+Exercice 3
+Modifiez le programme suivant pour obtenir un carré rouge de côté 120.<br><br>Ce programme utilise le module <span style="color:blue;">turtle</span> (<i>tortue</i>) qui permet de tracer des figures géométriques à l'aide de fonctions spécialisées :<ul><li><strong>color("green")</strong> pour fixer la couleur du tracé en vert</li><li><strong>forward(50)</strong> pour avancer de 50 pixels</li><li><strong>left(60)</strong> pour tourner à gauche de 60°</li></ul>
+# Voici la réponse\n\nfrom turtle import *  # pour utiliser turtle\n\ncolor("red")          # couleur rouge\n\nfor n in range(4):    # 4 côtés à tracer\n    forward(120)      # avance de 120 pixels\n    left(90)          # tourne à gauche de 90°
+[ [ "" ] ]
+from turtle import *
+
+color("blue")
+
+for n in range(3):
+    forward(100)
+    left(100)
+
