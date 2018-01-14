@@ -1,0 +1,6 @@
+Instruction conditionnelle en Python 3
+Exercice 5
+Une boutique de photocopies propose le tarif suivant :<ul><li>plein tarif : 0,08 € / photocopie, les 50 premières</li><li>tarif réduit : 0,06 € / photocopie, les suivantes</li></ul>Écrire une fonction calculerPrix() qui prend en paramètre le nombre <strong>n</strong> de photocopies à réaliser et retourne le prix à payer en euro pour toutes ces photocopies.
+# Solution de l\'exercice\n\ndef calculerPrix(n):\n    if n <= 50:\n        prix = n * 0.08\n    else:\n        # les 50 premières sont à 0.08 € pièce\n        # les n-50 suivantes à 0.06 € pièce\n        prix = 50 * 0.08 + (n-50) * 0.06\n    return prix
+[ ["calculerPrix(10)","s=#?\nprint(s)"], ["calculerPrix(40)","s=#?\nprint(s)"], ["calculerPrix(50)","s=#?\nprint(s)"], ["calculerPrix(51)","s=#?\nprint(s)"], ["calculerPrix(100)","s=#?\nprint(s)"] ]
+def calculerPrix(n):
