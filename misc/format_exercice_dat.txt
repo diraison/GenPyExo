@@ -1,16 +1,20 @@
-Ligne 1 : Titre principal
-
-Ligne 2 : Titre secondaire
-
-Ligne 3 : Enoncé au format HTML
-	  Il doit tenir sur une seule ligne. On peut utiliser <br> pour réaliser un saut de ligne en HTML.
-	  Il peut contenir des formules mathématiques au format LaTeX, encadrées par \( et \) au lieu de $ ou $$.
-
-Ligne 4 : Script python solution
-          Ce programme sert à la fois de réponse au bout de 9 tentatives et de générateur de résultats pour les tests à effectuer.
-
-Ligne 5 : Tableau de tests
-	  Un test est un tableau d'entrées suivi d'une commande finale rajoutée à la fin du code python, comme "print(x)".
-
-Ligne 6 et suivantes : Code python indicatif
-	  C'est le programme fourni au départ, plus ou moins complet, avec ou sans erreurs à corriger.
+Titre principal
+====================
+Titre secondaire
+====================
+Enoncé au format HTML
+Il peut contenir des formules mathématiques au format LaTeX, encadrées par \( et \) au lieu de $ ou $$.
+====================
+Script python solution
+Ce programme sert à la fois de réponse au bout de 9 tentatives et de générateur de résultats pour les tests à effectuer.
+====================
+Tableau de tests au format javascript
+Un test est un tableau d'entrées suivi d'une commande finale rajoutée à la fin du code python, comme "print(x)".
+[ [ "entree1", "entree2, "" ],			     // premier test,  sans code python à la fin
+  [ "entree1", "entree2", "print(total)" ],	     // second test, avec la ligne "print(total)" executée en fin de programme
+  [ "entree1", "entree2", "a=123\nprint(x-a)" ],     // troisième test, avec deux lignes "a=123" et "print(x-a)" rajoutée en fin de programme
+  [ "entree1", "entree2", "entree3", "x=#?\nprint(x*y)" ],     // quatrième test, avec '#?' remplacée par 'entree3' donnant 'x=entree3'
+  [...] ]
+====================
+Code python indicatif
+  C'est le programme fourni au départ, plus ou moins complet, avec ou sans erreurs à corriger.

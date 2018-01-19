@@ -1,8 +1,30 @@
-Programme en Python 3
+Programme en Python
+===============================
 Exercice 3
-Eloïse a un choisi un nombre secret <strong>n</strong> puis elle a appliqué l'algorithme suivant :<ul><li>J'ai soustrait 5 à mon nombre</li><li>J'ai ensuite multiplié le total par 4</li><li>Et pour finir, j'ai soustrait mon nombre au résultat</li></ul>Elle a noté <strong>x</strong> le nouveau nombre obtenu.<br>Votre défi consiste à écrire la formule permettant de retrouver le nombre secret <strong>n</strong> à partir de <strong>x</strong>.
-# Voici la solution\n"""\n  On note n le nombre secret et x le résultat\n    ainsi :  x = ( n - 5 ) * 4 - n\n  \n  On résout cette équation d\'inconnue n\n    comme :  x = 3 * n - 20\n    on a  :  n = ( x + 20 ) / 3\n"""\n\n#? x est le nombre calculé et donné par Éloïse\n\nn = ( x + 20 ) / 3
+===============================
+Eloïse a un choisi un nombre secret <strong>n</strong> puis elle a appliqué l'algorithme suivant :<ul>
+<li>J'ai soustrait 5 à mon nombre</li>
+<li>J'ai ensuite multiplié le total par 4</li>
+<li>Et pour finir, j'ai soustrait mon nombre au résultat</li></ul>
+Elle a noté <strong>x</strong> le nouveau nombre obtenu.<br>
+Votre défi consiste à écrire la formule permettant de retrouver le nombre secret <strong>n</strong> à partir de <strong>x</strong>.
+===============================
+# Voici la solution
+"""
+  On note n le nombre secret et x le résultat
+    ainsi :  x = ( n - 5 ) * 4 - n
+  
+  On résout cette équation d'inconnue n
+    comme :  x = 3 * n - 20
+    on a  :  n = ( x + 20 ) / 3
+"""
+
+#? x est le nombre calculé et donné par Éloïse
+
+n = ( x + 20 ) / 3
+===============================
 [ ["x = 1.0", "print(n)"], ["x = 4.0", "print(n)"], ["x = 10.0", "print(n)"] ]
+===============================
 #? x est le nombre calculé et donné par Éloïse
 
 n = 

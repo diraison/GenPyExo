@@ -1,8 +1,17 @@
-Les sorties en Python 3
+Les sorties en Python
+===============================
 Exercice 1
+===============================
 Modifiez la dernière ligne pour afficher le contenu de la variable <i>x</i> même si celui-ci doit changer.
-# Une solution possible\n\nx = 27    #? exemple de valeur\n\nprint(x)
+===============================
+# Une solution possible
+
+x = 27    #? exemple de valeur
+
+print(x)
+===============================
 [ ["27",""], ["'test'",""], ["-6.30",""], ["5/2",""] ]
+===============================
 x = 27    #? exemple de valeur
 
 print()

@@ -1,8 +1,25 @@
-Instruction conditionnelle en Python 3
+Instruction conditionnelle en Python
+===============================
 Exercice 6
+===============================
 Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui retourne le plus grand des ces trois nombres.
-# Solution de l\'exercice\ndef maximum(a, b, c):\n    if a > b and a > c:\n        return a\n    if b > a and b > c:\n        return b\n    else:\n        return c\n\nx = float( input("1er nombre ?") )\ny = float( input("2nd nombre ?") )\nz = float( input("3e  nombre ?") )\nprint("Le plus grand est", maximum(x,y,z))
+===============================
+# Solution de l'exercice
+def maximum(a, b, c):
+    if a > b and a > c:
+        return a
+    if b > a and b > c:
+        return b
+    else:
+        return c
+
+x = float( input("1er nombre ?") )
+y = float( input("2nd nombre ?") )
+z = float( input("3e  nombre ?") )
+print("Le plus grand est", maximum(x,y,z))
+===============================
 [ ["8","5","2",""], ["7","9","4",""], ["1","3","6",""], ["4","1","5",""], ["2","7","3",""], ["9","6","8",""] ]
+===============================
 def maximum(a, b, c):
 
 

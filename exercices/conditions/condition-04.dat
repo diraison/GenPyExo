@@ -1,8 +1,25 @@
-Instruction conditionnelle en Python 3
+Instruction conditionnelle en Python
+===============================
 Exercice 4
-Complétez l'instruction conditionnelle pour que le programme affiche la réponse qui convient.<br>Vous utiliserez l'opérateur % (modulo) qui donne le reste de la division euclidienne.<br>Ainsi <span style="color:blue;">26 % 10 == 6</span> puisque 26 divisé par 10 fait 2 et il reste de 6.
-# Solution de l\'exercice\n\nn = int( input("Rentrer un nombre") )\n\n## On teste si le reste de la division par 2 est\n## 0 pour conclure qu\'il s\'agit d\'un nombre pair\n\nif n % 2 == 0:\n    print(n, "est un nombre pair")\nelse:\n    print(n, "est un nombre impair")
+===============================
+Complétez l'instruction conditionnelle pour que le programme affiche la réponse qui convient.<br>
+Vous utiliserez l'opérateur % (modulo) qui donne le reste de la division euclidienne.<br>
+Ainsi <span style="color:blue;">26 % 10 == 6</span> puisque 26 divisé par 10 fait 2 et il reste de 6.
+===============================
+# Solution de l'exercice
+
+n = int( input("Rentrer un nombre") )
+
+## On teste si le reste de la division par 2 est
+## 0 pour conclure qu'il s'agit d'un nombre pair
+
+if n % 2 == 0:
+    print(n, "est un nombre pair")
+else:
+    print(n, "est un nombre impair")
+===============================
 [ ["0",""], ["1",""], ["5",""], ["8",""], ["123",""], ["2018",""] ]
+===============================
 n = int( input("Rentrer un nombre") )
 
 if           :
