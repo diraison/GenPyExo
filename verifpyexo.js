@@ -184,11 +184,11 @@ function finVerifierSimple(mod) {
 		} else {
 			rapport += "\n * la <span class=\"solution\">figure attendue<img src=\""+reponses[1]+"\" alt=\"solution\"></span>";
 		}
-		if (testd.length != 0)
-			rapport += " avec " + testd;
+		if (testi != 0)
+			rapport += " avec " + testd.slice(0,testi);
 		rapport += " est différente";
 	} else {
-		if (testi == 0 ) {
+		if (testi == 0) {
 			rapport += "\n * ceci ne donne pas " + reponses[0];
 		} else {
 			rapport += "\n * " + testd.slice(0,testi) + " en entrée, ne donne pas " + reponses[0];
