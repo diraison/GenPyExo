@@ -9,32 +9,14 @@
 	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
-<style>
-html {		background-color: #f7f7ff;	background-image: url("http://image.ibb.co/jruSmG/math.png");	margin-top: 10px;	}
-h1 {		text-align: center;					}
-h3 {		font-size: 18pt;		margin-top: 15px;	margin-bottom: 12px;	}
-article {	margin-top: 30px;					}
-div.enonce {	padding-left: 40px;	margin-bottom: 5px;	font-family: Times, serif, Times New Roman;	font-size: 16pt;	}
-div.travail {	float: left;		width: 55%;			}
-div.CodeMirror { border-style: solid;	border-width: 1px;	border-color: #000;	font-size: 16pt;	resize: vertical;	}
-button {	margin-top: 0px;	}
-div.reponses {	float: left;	width: 41%;	margin-left: 1%;	padding-left: 1%;	font-size: 12pt;	}
-ul {		margin-top: 10px;	margin-bottom: 10px;		}
-#sortie {	height: auto;		font-weight: bold;		}
-#erreur {	margin: 10px 0 10px 0;	padding: 10px 0 10px 10px;	height: 20px;	background-color: #fcc;
-		font-size: 10pt;	color: #880000;			font-weight: bold;				}
-span.solution {	color: #0000cc;		}
-span.solution > img {			display: none;		}
-span.solution:hover > img {		border: 1px solid #0000cc;	background: rgba(255,255,238,1.0);	position: absolute;
-					margin-left: 32px;		margin-top: 8px;	display: block;		z-index: 4;	}
-</style>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
 </head>
 <body onload="genererReponses()">
 <header><h1>Instruction conditionnelle en Python</h1></header>
 <article>
-	<h3>Exercice 5</h3>
+	<h2>Exercice 5</h2>
 	<div class="enonce">Une boutique de photocopies propose le tarif suivant :<ul>
 <li>plein tarif : 0,08 € / photocopie, les 50 premières</li>
 <li>tarif réduit : 0,06 € / photocopie, les suivantes</li></ul>
