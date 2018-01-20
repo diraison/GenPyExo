@@ -219,7 +219,7 @@ function finVerifierSimple(mod) {
 function genererReponses() {
 	reponsesalltests = [];
 	visibilite = false;
-	pyresp = document.getElementById("solution").innerHTML.replace(/&gt;/g,'>').replace(/&lt;/g,'<').replace(/&amp;/g,'&');
+	pyresp = document.getElementById("solution").textContent;
 	verifier();
 }
 
