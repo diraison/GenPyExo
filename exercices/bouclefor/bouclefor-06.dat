@@ -2,11 +2,11 @@ Boucle for en Python
 ===============================
 Exercice 6
 ===============================
-Complétez la fonction <strong>carre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées du carré à tracer et <strong>c</strong> la longueur du côté du carré à tracer.<br>
+Complétez la fonction <strong>carre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées et <strong>c</strong> la longueur du côté du carré à tracer.<br>
 Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
 <ul>
 <li><strong>up()</strong> pour lever le crayon et ne rien tracer</li>
-<li><strong>down(50)</strong> pour baisser le crayon et recommencer à tracer</li>
+<li><strong>down()</strong> pour baisser le crayon et recommencer à tracer</li>
 <li><strong>goto(-30,70)</strong> pour déplacer le crayon aux coordonnées (-30,70)</li>
 <li><strong>forward(50)</strong> pour avancer de 50 pixels</li>
 <li><strong>left(60)</strong> pour tourner à gauche de 60°</li></ul>
