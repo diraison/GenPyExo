@@ -1,0 +1,34 @@
+Boucle for en Python
+===============================
+Exercice 6
+===============================
+Complétez la fonction <strong>carre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées du carré à tracer et <strong>c</strong> la longueur du côté du carré à tracer.<br>
+Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
+<ul>
+<li><strong>up()</strong> pour lever le crayon et ne rien tracer</li>
+<li><strong>down(50)</strong> pour baisser le crayon et recommencer à tracer</li>
+<li><strong>goto(-30,70)</strong> pour déplacer le crayon aux coordonnées (-30,70)</li>
+<li><strong>forward(50)</strong> pour avancer de 50 pixels</li>
+<li><strong>left(60)</strong> pour tourner à gauche de 60°</li></ul>
+===============================
+# Voici la réponse
+
+from turtle import *
+
+def carre(x,y,c):
+    up()                 # lever le crayon
+    goto(x,y)            # se déplacer en (x,y)
+    down()               # abaisser le crayon
+    for n in range(4):   # 4 côtés
+        forward(c)       # côté de longueur c
+        left(90)         # angle droit
+===============================
+[ ["carre(0,0,100)","#?"], ["carre(-30,-30,60)","#?"], ["carre(-20,-20,60)","carre(10,10,50)","#?\n#?"] ]
+===============================
+from turtle import *
+
+def carre(x,y,c):
+    up()
+    goto(
+    
+    for n in range(4):

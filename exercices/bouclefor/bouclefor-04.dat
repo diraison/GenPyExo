@@ -1,0 +1,31 @@
+Boucle for en Python
+===============================
+Exercice 4
+===============================
+Modifiez le programme pour obtenir un escalier qui monte vers la droite et comportant 7 marches, chacune de hauteur 16 et de largeur 24.<br>
+<br>
+Ce programme utilise le module <span style="color:blue;">turtle</span> (<i>tortue</i>)
+qui permet de tracer des figures géométriques à l'aide de fonctions spécialisées :
+<ul>
+<li><strong>forward(50)</strong> pour avancer de 50 pixels</li>
+<li><strong>left(60)</strong> pour tourner à gauche de 60°</li>
+<li><strong>right(45)</strong> pour tourner à droite de 45°</li></ul>
+===============================
+# Voici la réponse
+
+from turtle import *  # pour utiliser turtle
+
+for n in range(7):    # 7 marches à tracer
+    left(90)          # tourne à gauche de 90°
+    forward(16)       # monte de 16 pixels
+    right(90)         # tourne à droite de 90°
+    forward(24)       # avance de 24 pixels
+===============================
+[ [ "" ] ]
+===============================
+from turtle import *
+
+for n in range():
+    left(90)
+    forward(16)
+
