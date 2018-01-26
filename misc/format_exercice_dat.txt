@@ -13,7 +13,8 @@ Un test est un tableau d'entrées suivi d'une commande finale rajoutée à la fi
 [ [ "entree1", "entree2, "" ],			     // premier test,  sans code python à la fin
   [ "entree1", "entree2", "print(total)" ],	     // second test, avec la ligne "print(total)" executée en fin de programme
   [ "entree1", "entree2", "a=123\nprint(x-a)" ],     // troisième test, avec deux lignes "a=123" et "print(x-a)" rajoutée en fin de programme
-  [ "entree1", "entree2", "entree3", "x=#?\nprint(x*y)" ],     // quatrième test, avec '#?' remplacée par 'entree3' donnant 'x=entree3'
+  [ "entree1", "entree2", "entree3", "x=#?\nprint(x*y)" ],     // quatrième test, avec '#?' remplacée par 'entree1' donnant 'x=entree1'
+  [ "f(x)", "entree2", "entree3", "#?" ],         // cinquième test, avec '#?' remplacée par 'f(x)' generant l'appelle de la fonction f avec l'argument x 
   [...] ]
 ====================
 Code python indicatif
