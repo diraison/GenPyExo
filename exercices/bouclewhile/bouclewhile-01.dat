@@ -4,12 +4,12 @@ Exercice 1
 ===============================
 Complétez le programme pour obtenir la réponse au problème suivant :<br>
 <p style="margin-left: 60px">Lydia vient d'arrêter la chaudière alors que la température de l'eau était affichée à 64°.<br>
-Elle sait que cette température va baisser de 0.2% à chaque minute qui passe.<br>
+Elle sait que cette température va baisser de 0,2% à chaque minute qui passe.<br>
 Au bout de combien de minutes la température de l'eau sera-t-elle descendue en-dessous de 30° ?</p>
 ===============================
 # Voici la réponse
 
-temperature = 64    # température initiale
+temperature = 64    #? température initiale
 
 duree = 0           # temps écoulé en minute
 
@@ -21,14 +21,14 @@ while temperature >= 30:
 
 print("Dans", duree, "minutes.")
 ===============================
-[ [""] ]
+[ ["64",""], ["30.05",""], ["30",""], ["20",""] ]
 ===============================
-temperature = 64    # température initiale
+temperature = 64    #? température initiale
 
 duree = 0           # temps écoulé en minute
 
 while   :
-
-
+    temperature = 
+    duree = 
 
 print("Dans", duree, "minutes.")
