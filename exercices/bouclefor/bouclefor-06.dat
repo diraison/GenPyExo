@@ -2,7 +2,7 @@ Boucle for en Python
 ===============================
 Exercice 6
 ===============================
-Complétez la fonction <strong>carre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées et <strong>c</strong> la longueur du côté du carré à tracer.<br>
+Complétez la fonction <strong>tracerCarre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées et <strong>c</strong> la longueur du côté du carré qu'elle doit tracer.<br>
 Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
 <ul>
 <li><strong>up()</strong> pour lever le crayon et ne rien tracer</li>
@@ -15,7 +15,7 @@ Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turt
 
 from turtle import *
 
-def carre(x,y,c):
+def tracerCarre(x,y,c):
     up()                 # lever le crayon
     goto(x,y)            # se déplacer en (x,y)
     down()               # abaisser le crayon
@@ -23,11 +23,11 @@ def carre(x,y,c):
         forward(c)       # côté de longueur c
         left(90)         # angle droit
 ===============================
-[ ["carre(0,0,100)","#?"], ["carre(-30,-30,60)","#?"], ["carre(-20,-20,60)","carre(10,10,50)","#?\n#?"] ]
+[ ["tracerCarre(0,0,100)","#?"], ["tracerCarre(-30,-30,60)","#?"], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","#?\n#?"] ]
 ===============================
 from turtle import *
 
-def carre(x,y,c):
+def tracerCarre(x,y,c):
     up()
     goto(
     
