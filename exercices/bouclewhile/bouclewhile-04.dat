@@ -1,0 +1,31 @@
+Boucle while en Python
+===============================
+Exercice 4
+===============================
+Implémentez la <a href="https://fr.wikipedia.org/wiki/M%C3%A9thode_de_dichotomie#Programmation">méthode de dichotomie</a> afin de résoudre l'équation \(x^2-x-1=0\) dans l'intervalle [0;10] et obtenir ainsi une approximation du nombre d'or.
+===============================
+# Voici la solution
+
+def f(x): return x*x-x-1   #? résoudre f(x)≈0
+
+a,b = 0,10                # intervalle [a;b]
+while b-a > 0.00001:      # précision désirée
+    m = (a+b) / 2         # milieu de [a;b]
+    if f(a) * f(m) <= 0:  # signes différents ?
+        b = m             # solution dans [a;m]
+    else:
+        a = m             # solution dans [m;b]
+
+print("f({:.7}) ≈ {:.7}".format(a,f(a)))
+===============================
+[ ["def f(x): return x*x-x-1",""], ["def f(x): return x-4",""], ["def f(x): return x*x-2",""] ]
+===============================
+def f(x): return x*x-x-1   #? résoudre f(x)≈0
+
+a,b = 0,10                # intervalle [a;b]
+while b-a > 0.00001:      # précision désirée
+
+
+
+print("f({:.7}) ≈ {:.7}".format(a,f(a)))
+

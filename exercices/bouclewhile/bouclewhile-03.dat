@@ -1,0 +1,36 @@
+Boucle while en Python
+===============================
+Exercice 3
+===============================
+Complétez le programme pour réaliser le jeu du trop-grand trop-petit afin de retrouver le code secret.
+===============================
+# Voici la réponse
+from random import *
+#?
+code = randint(10,100)
+message = "Quel est mon code secret ?"
+while True:
+    n = int(input(message))
+    if n > code:
+        message = "Trop grand..."
+    elif n < code:
+        message = "Trop petit..."
+    else:
+        print("Gagné c'est", code)
+        break
+===============================
+[ ["seed(1)","47","    print(message)"], ["seed(2)","60","49","    print(message)"], ["seed(3)","30","80","60","    print(message)"] ]
+===============================
+from random import *
+#?
+code = randint(10,100)
+message = "Quel est mon code secret ?"
+while :
+    n = int(input(    ))
+    if :
+        message = "Trop grand..."
+    elif :
+        message = "Trop petit..."
+    else:
+        print("Gagné c'est", code)
+        break
