@@ -1,6 +1,6 @@
 Boucle for en Python
 ===============================
-Exercice 8
+Exercice 7
 ===============================
 Complétez le programme pour obtenir dans <strong>resultat</strong> la chaîne de caractères <strong>mot</strong> écrite dans l'ordre inverse.<br> Ainsi "<i>abc</i>" doit donner "<i>cba</i>" et "<i>lacer</i>" doit donner "<i>recal</i>".
 ===============================
@@ -22,7 +22,7 @@ print(resultat)
 ===============================
 mot = "mathematiques"     #? exemple
 
-resultat = 
+resultat = ""
 for lettre in :
     resultat = 
 
