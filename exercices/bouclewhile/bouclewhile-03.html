@@ -17,22 +17,22 @@
 <header><h1>Boucle while en Python</h1></header>
 <article>
 	<h2>Exercice 3</h2>
-	<div class="enonce">Complétez le programme pour réaliser le jeu du trop-grand trop-petit afin de retrouver le code secret.
+	<div class="enonce">Complétez le programme pour réaliser le jeu du plus ou moins afin de trouver le nombre secret.
 </div>
 	<br>
 	<div class="travail">
 		<textarea id="code">from random import *
 #?
-code = randint(10,100)
-message = "Quel est mon code secret ?"
+secret = randint(10,100)
+message = "Quel est mon nombre secret ?"
 while :
     n = int(input(    ))
     if :
-        message = "Trop grand..."
+        message = "C'est plus..."
     elif :
-        message = "Trop petit..."
+        message = "C'est moins..."
     else:
-        print("Gagné c'est", code)
+        print("Gagné c'est", secret)
         break
 </textarea>
 		<pre id="erreur"></pre>
@@ -46,16 +46,16 @@ while :
 	<pre id="solution" style="display:none"># Voici la réponse
 from random import *
 #?
-code = randint(10,100)
-message = "Quel est mon code secret ?"
+secret = randint(10,100)
+message = "Quel est mon nombre secret ?"
 while True:
     n = int(input(message))
-    if n > code:
-        message = "Trop grand..."
-    elif n < code:
-        message = "Trop petit..."
+    if secret > n:
+        message = "C'est plus..."
+    elif secret < n:
+        message = "C'est moins..."
     else:
-        print("Gagné c'est", code)
+        print("Gagné c'est", secret)
         break
 </pre>
 </article>
