@@ -79,7 +79,7 @@ span.solution > img {
 }
 
 span.solution:hover > img {
-	background: rgba(255,255,238,1.0);
+	background-color: rgba(255,255,238,1.0);
 	border: 1px solid #0000cc;
 	display: block;
 	margin-left: 32px;
@@ -93,7 +93,7 @@ span.solution > span {
 }
 
 span.solution:hover > span {
-	background: rgba(255,255,238,1.0);
+	background-color: rgba(255,255,238,1.0);
 	border: 1px solid #0000cc;
 	display: block;
 	margin-left: 32px;
