@@ -101,3 +101,9 @@ span.solution:hover > span {
 	position: absolute;
 	z-index: 4;
 }
+
+svg text {
+	font-family: Arial, sans, Helvetica;
+	font-size: 85%;
+	font-weight: bold;
+}
