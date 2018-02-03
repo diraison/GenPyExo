@@ -1107,6 +1107,14 @@ jsplotlib.plot = function(chart) {
     return this;
   };
 
+  that.xgrid = function(b) {
+    this._xaxis._grid(b);
+  };
+
+  that.ygrid = function(b) {
+    this._yaxis._grid(b);
+  };
+
   that.title = function(title_string) {
     this._title_string = title_string;
     this._title_size = this._chartheight * 0.1;
@@ -1626,6 +1634,7 @@ jsplotlib.construct_axis = function() {
     that._will_draw_axis = true;
     that._x_or_y = x_or_y;
     that._size = 0;
+    that._show_grid = false;
     that._label_offset = 0;
     that._label_string = "";
     if (x_or_y === "x") {
@@ -1749,10 +1758,27 @@ jsplotlib.construct_axis = function() {
         this._compute_transform_string();
         this._axis = d3.svg.axis().scale(this.get_scale()).ticks(this.n_ticks)
           .orient(this._orientation).tickSubdivide(0).tickFormat(this._formatter);
-        parent_graph.chart.append("svg:g").attr("id", this._id).attr("class",
-          this._x_or_y + " axis").attr("transform", this._transform_string).call(
-          this._axis);
+        if (this._show_grid) {
+            var size = 0;
+            if (this._x_or_y === "x") {
+                size = parent_graph._height;
+            } else if (this._x_or_y === "y") {
+                size = parent_graph._width;
+            }
+            this._axis = this._axis.tickSize(-size);
+            parent_graph.chart.append("svg:g").attr("id", this._id).attr("class",
+                this._x_or_y + " axis").attr("transform", this._transform_string).call(
+                this._axis).selectAll(".tick:not(:first-of-type):not(:last-of-type) line")
+                .attr("stroke-dasharray", "3,3");
+        } else {
+            parent_graph.chart.append("svg:g").attr("id", this._id).attr("class",
+                this._x_or_y + " axis").attr("transform", this._transform_string).call(
+                this._axis);
+        }
       }
+    };
+    that._grid = function(b) {
+        this._show_grid = b < 0 ? !this._show_grid : b;
     };
     that._draw_label = function() {
       this._compute_transform_string();
@@ -2464,6 +2490,50 @@ var $builtinmodule = function(name) {
   mod.ylim = new Sk.builtin.func(ylim_f);
 
 
+  // grid function
+  var grid_f = function(b,axis,which) {
+    Sk.builtin.pyCheckArgs("grid", arguments, 0, 3, false, false);
+
+    if (which != null && !Sk.builtin.checkNone(which)) {
+        throw new Sk.builtin.NotImplementedError("the 'which' parameter is currently not supported");
+    }
+
+    if (axis == null) {
+        axis = "both";
+    } else if (Sk.builtin.checkString(axis)) {
+        axis = Sk.ffi.remapToJs(axis);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(axis) + "' is not supported for axis.");
+    }
+
+    if (axis !== "both" && axis !== "x" && axis !== "y") {
+        throw new Sk.builtin.ValueError("axis: must be 'both' (default), 'x' or 'y'");
+    }
+
+    if (b == null) {
+        b = -1;
+    } else if (Sk.builtin.checkBool(b)) {
+        b = Sk.ffi.remapToJs(b) ? 1 : 0;
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(b) + "' is not supported for b.");
+    }
+
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        if (axis === "both" || axis === "x")
+            plot.xgrid(b);
+        if (axis === "both" || axis === "y")
+            plot.ygrid(b);
+    }
+  };
+
+  grid_f.co_varnames=["b","axis","which"];
+  grid_f.$defaults = [Sk.builtin.bool.true$,Sk.builtin.none.none$,Sk.builtin.none.none$];
+  mod.grid = new Sk.builtin.func(grid_f);
+
+
   /* list of not implemented methods */
   mod.findobj = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
@@ -2907,10 +2977,6 @@ var $builtinmodule = function(name) {
   });
   mod.cla = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError("cla is not yet implemented");
-  });
-  mod.grid = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "grid is not yet implemented");
   });
   mod.legend = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
