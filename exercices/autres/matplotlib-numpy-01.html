@@ -44,9 +44,8 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-T = np.array([0, 100])
-U = np.array([0, 1])
-plt.plot(T,U,"k.")
+plt.xlim(0,100)
+plt.ylim(0,1)
 plt.xlabel("100 echantillons")
 plt.ylabel("frequence de Piles")
 
@@ -56,6 +55,7 @@ Y = np.array( [frequencePiles(N) for i in range(100)] )
 plt.plot(X,Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
+T = np.array([0, 100])
 Z = np.array([p + 1/sqrt(N)] * 2)
 plt.plot(T,Z, "r.-")
 Z = np.array([p - 1/sqrt(N)] * 2)
@@ -97,9 +97,8 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-T = np.array([0, 100])
-U = np.array([0, 1])
-plt.plot(T,U,"k.")
+plt.xlim(0,100)
+plt.ylim(0,1)
 plt.xlabel("100 echantillons")
 plt.ylabel("frequence de Piles")
 
@@ -109,6 +108,7 @@ Y = np.array( [frequencePiles(N) for i in range(100)] )
 plt.plot(X,Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
+T = np.array([0, 100])
 Z = np.array([p + 1/sqrt(N)] * 2)
 plt.plot(T,Z, "r.-")
 Z = np.array([p - 1/sqrt(N)] * 2)
