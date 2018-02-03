@@ -666,7 +666,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
         }).attr("cy", function(d) {
           return yscale(d[1]);
         }).attr("r", function(d) {
-          return 0;
+          return 0.2;
         });
         break;
       case ".":
@@ -718,6 +718,30 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
         }).attr("y2", function(d) {
           return yscale(d[1]);
         });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]);
+        }).attr("y1", function(d) {
+          return yscale(d[1]) - marker_size;
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size;
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+      case "_":
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]) - marker_size;
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]);
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+      case "|":
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -796,6 +820,126 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             return plist.toString().replace(/,/g," ");
           });
         this._markers = this._points.selectAll("polygon");
+        break;
+      case '1':
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) - marker_size * 0.577;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) - marker_size * 0.577;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]);
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size * 1.155;
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+      case '2':
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size * 0.577;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size * 0.577;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]);
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) - marker_size * 1.155;
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+     case '3':
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size * 0.577;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) - marker_size;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size * 0.577;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size * 1.155;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]);
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+     case '4':
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size * 0.577;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) - marker_size;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size * 0.577;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]);
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size * 1.155;
+        }).attr("y1", function(d) {
+          return yscale(d[1]);
+        }).attr("y2", function(d) {
+          return yscale(d[1]);
+        });
+        this._markers = this._points.selectAll("line");
         break;
     }
 
@@ -1614,13 +1758,13 @@ jsplotlib.parse_marker = function(style) {
     case '>':
       return ">";
     case '1':
-      return "x";
+      return "1";
     case '2':
-      return "x";
+      return "2";
     case '3':
-      return "x";
+      return "3";
     case '4':
-      return "x";
+      return "4";
     case 's':
       return "s";
     case 'p':
@@ -1640,9 +1784,9 @@ jsplotlib.parse_marker = function(style) {
     case 'd':
       return "x";
     case '|':
-      return "x";
+      return "|";
     case '_':
-      return "x";
+      return "_";
     default:
       return "";
   }
