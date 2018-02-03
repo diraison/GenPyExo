@@ -769,15 +769,43 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           });
         this._markers = this._points.selectAll("rect");
         break;
+      case 'D':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 5 / 4;
+            var plist = [ cx-s, cy,
+                          cx,   cy-s,
+                          cx+s, cy,
+                          cx,   cy+s ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
+        break;
+      case 'd':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 5 / 4;
+            var plist = [ cx-s/2, cy,
+                          cx,     cy-s,
+                          cx+s/2, cy,
+                          cx,     cy+s ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
+        break;
       case '^':
         this._points.append("polygon")
           .attr("points", function(d) {
             var cx = xscale(d[0]);
             var cy = yscale(d[1]);
             var s  = marker_size * 2;
-            var plist = [ Math.round(cx-0.5*s), Math.round(cy+0.289*s),
-                          Math.round(cx+0.5*s), Math.round(cy+0.289*s),
-                          Math.round(cx),       Math.round(cy-0.577*s) ];
+            var plist = [ cx-0.5*s, cy+0.289*s,
+                          cx+0.5*s, cy+0.289*s,
+                          cx,       cy-0.577*s ];
             return plist.toString().replace(/,/g," ");
           });
         this._markers = this._points.selectAll("polygon");
@@ -788,9 +816,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             var cx = xscale(d[0]);
             var cy = yscale(d[1]);
             var s  = marker_size * 2;
-            var plist = [ Math.round(cx-0.5*s), Math.round(cy-0.289*s),
-                          Math.round(cx+0.5*s), Math.round(cy-0.289*s),
-                          Math.round(cx),       Math.round(cy+0.577*s) ];
+            var plist = [ cx-0.5*s, cy-0.289*s,
+                          cx+0.5*s, cy-0.289*s,
+                          cx,       cy+0.577*s ];
             return plist.toString().replace(/,/g," ");
           });
         this._markers = this._points.selectAll("polygon");
@@ -801,9 +829,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             var cx = xscale(d[0]);
             var cy = yscale(d[1]);
             var s  = marker_size * 2;
-            var plist = [ Math.round(cx+0.289*s), Math.round(cy-0.5*s),
-                          Math.round(cx+0.289*s), Math.round(cy+0.5*s),
-                          Math.round(cx-0.577*s), Math.round(cy) ];
+            var plist = [ cx+0.289*s, cy-0.5*s,
+                          cx+0.289*s, cy+0.5*s,
+                          cx-0.577*s, cy ];
             return plist.toString().replace(/,/g," ");
           });
         this._markers = this._points.selectAll("polygon");
@@ -814,9 +842,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             var cx = xscale(d[0]);
             var cy = yscale(d[1]);
             var s  = marker_size * 2;
-            var plist = [ Math.round(cx-0.289*s), Math.round(cy-0.5*s),
-                          Math.round(cx-0.289*s), Math.round(cy+0.5*s),
-                          Math.round(cx+0.577*s), Math.round(cy) ];
+            var plist = [ cx-0.289*s, cy-0.5*s,
+                          cx-0.289*s, cy+0.5*s,
+                          cx+0.577*s, cy ];
             return plist.toString().replace(/,/g," ");
           });
         this._markers = this._points.selectAll("polygon");
@@ -1780,9 +1808,9 @@ jsplotlib.parse_marker = function(style) {
     case 'x':
       return "x";
     case 'D':
-      return "x";
+      return "D";
     case 'd':
-      return "x";
+      return "d";
     case '|':
       return "|";
     case '_':
