@@ -660,6 +660,15 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
       case "None":
       case "":
         break;
+      case ",":
+        this._markers = this._points.append("circle").attr("cx", function(d) {
+          return xscale(d[0]);
+        }).attr("cy", function(d) {
+          return yscale(d[1]);
+        }).attr("r", function(d) {
+          return 0;
+        });
+        break;
       case ".":
         this._markers = this._points.append("circle").attr("cx", function(d) {
           return xscale(d[0]);
@@ -680,18 +689,39 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
         break;
       case "x":
         this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]) - marker_size * 0.7;
+        }).attr("x2", function(d) {
+          return xscale(d[0]) + marker_size * 0.7;
+        }).attr("y1", function(d) {
+          return yscale(d[1]) - marker_size * 0.7;
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size * 0.7;
+        });
+        this._points.append("line").attr("x1", function(d) {
+          return xscale(d[0]) + marker_size * 0.7;
+        }).attr("x2", function(d) {
+          return xscale(d[0]) - marker_size * 0.7;
+        }).attr("y1", function(d) {
+          return yscale(d[1]) - marker_size * 0.7;
+        }).attr("y2", function(d) {
+          return yscale(d[1]) + marker_size * 0.7;
+        });
+        this._markers = this._points.selectAll("line");
+        break;
+      case "+":
+        this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]) - marker_size;
         }).attr("x2", function(d) {
           return xscale(d[0]) + marker_size;
         }).attr("y1", function(d) {
-          return yscale(d[1]) - marker_size;
+          return yscale(d[1]);
         }).attr("y2", function(d) {
-          return yscale(d[1]) + marker_size;
+          return yscale(d[1]);
         });
         this._points.append("line").attr("x1", function(d) {
-          return xscale(d[0]) + marker_size;
+          return xscale(d[0]);
         }).attr("x2", function(d) {
-          return xscale(d[0]) - marker_size;
+          return xscale(d[0]);
         }).attr("y1", function(d) {
           return yscale(d[1]) - marker_size;
         }).attr("y2", function(d) {
@@ -714,6 +744,58 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             return marker_size;
           });
         this._markers = this._points.selectAll("rect");
+        break;
+      case '^':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 2;
+            var plist = [ Math.round(cx-0.5*s), Math.round(cy+0.289*s),
+                          Math.round(cx+0.5*s), Math.round(cy+0.289*s),
+                          Math.round(cx),       Math.round(cy-0.577*s) ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
+        break;
+      case 'v':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 2;
+            var plist = [ Math.round(cx-0.5*s), Math.round(cy-0.289*s),
+                          Math.round(cx+0.5*s), Math.round(cy-0.289*s),
+                          Math.round(cx),       Math.round(cy+0.577*s) ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
+        break;
+      case '<':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 2;
+            var plist = [ Math.round(cx+0.289*s), Math.round(cy-0.5*s),
+                          Math.round(cx+0.289*s), Math.round(cy+0.5*s),
+                          Math.round(cx-0.577*s), Math.round(cy) ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
+        break;
+      case '>':
+        this._points.append("polygon")
+          .attr("points", function(d) {
+            var cx = xscale(d[0]);
+            var cy = yscale(d[1]);
+            var s  = marker_size * 2;
+            var plist = [ Math.round(cx-0.289*s), Math.round(cy-0.5*s),
+                          Math.round(cx-0.289*s), Math.round(cy+0.5*s),
+                          Math.round(cx+0.577*s), Math.round(cy) ];
+            return plist.toString().replace(/,/g," ");
+          });
+        this._markers = this._points.selectAll("polygon");
         break;
     }
 
@@ -1520,17 +1602,17 @@ jsplotlib.parse_marker = function(style) {
     case '.':
       return ".";
     case ',':
-      return "x";
+      return ",";
     case 'o':
       return "o";
     case 'v':
-      return "x";
+      return "v";
     case '^':
-      return "x";
+      return "^";
     case '<':
-      return "x";
+      return "<";
     case '>':
-      return "x";
+      return ">";
     case '1':
       return "x";
     case '2':
@@ -1550,7 +1632,7 @@ jsplotlib.parse_marker = function(style) {
     case 'H':
       return "x";
     case '+':
-      return "x";
+      return "+";
     case 'x':
       return "x";
     case 'D':
