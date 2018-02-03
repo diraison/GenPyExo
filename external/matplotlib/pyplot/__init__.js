@@ -182,7 +182,7 @@ jsplotlib.rc = {
   "lines.color": "blue",
   "lines.marker": "None",
   "lines.markeredgewidth": 0.5,
-  "lines.markersize": 6,
+  "lines.markersize": 5,
   "lines.dash_joinstyle": "miter",
   "lines.dash_capstyle": "butt",
   "lines.solid_jointyle": "miter",
@@ -883,8 +883,19 @@ jsplotlib.plot = function(chart) {
       ys = ys.concat(this._lines[i]._y);
     }
 
-    this._xlimits([d3.min(xs), d3.max(xs)]);
-    this._ylimits([d3.min(ys), d3.max(ys)]);
+    if (this._xlim == null)	this._xlim = [ null, null ];
+    if (this._ylim == null)	this._ylim = [ null, null ];
+
+    if (this._xlim[0] == null)	this._xlim[0] = d3.min(xs);
+    if (this._xlim[1] == null)	this._xlim[1] = d3.max(xs);
+
+    if (this._ylim[0] == null)	this._ylim[0] = d3.min(ys);
+    if (this._ylim[1] == null)	this._ylim[1] = d3.max(ys);
+
+    //alert(this._xlim + "\n" + this._ylim);
+
+    this._xlimits(this._xlim);
+    this._ylimits(this._ylim);
 
     return this;
   };
@@ -1456,9 +1467,9 @@ jsplotlib.construct_axis = function() {
       if (this._x_or_y === "x") {
         offset_h = 0;
         offset_v = parent_graph._height;
-        offset_label_h = parent_graph._yaxis._size + parent_graph._chartwidth /
-          2;
-        offset_label_v = parent_graph._height + this._size - this._label_offset;
+        offset_label_h = (parent_graph._yaxis._size + parent_graph._chartwidth) /
+          2 - 20;
+        offset_label_v = parent_graph._height + this._size - this._label_offset - 20;
         this._writing_mode = "horizontal-tb";
         this._orientation = "bottom";
       } else if (this._x_or_y === "y") {
@@ -1466,7 +1477,7 @@ jsplotlib.construct_axis = function() {
         offset_v = 0;
         offset_label_h = this._label_offset;
         offset_label_v = parent_graph._chartheight / 2;
-        label_rotation = "rotate(270)";
+        label_rotation = "rotate(180)";
         this._writing_mode = "vertical-rl";
         this._orientation = "left";
       } else {
@@ -1494,7 +1505,7 @@ jsplotlib.construct_axis = function() {
       if (this._will_draw_axis && this._will_draw_label) {
         parent_graph.chart.append("svg:g").attr("class", this._x_or_y +
           " axis_label").attr("transform", this._label_transform_string).append(
-          "text").append("tspan").attr("text-anchor", "middle").attr("class",
+          "text").append("tspan").attr("text-anchor", "top").attr("class",
           this._x_or_y + " axis_label").attr("writing-mode", this._writing_mode)
           .text(this._label_string);
       }
@@ -1824,7 +1835,7 @@ var $builtinmodule = function(name) {
     if (!chart) {
       $('#' + Sk.canvas).empty();
       // min height and width
-      chart = jsplotlib.make_chart(600, 600, "#" + Sk.canvas);
+      chart = jsplotlib.make_chart(480, 480, "#" + Sk.canvas);
     }
   };
 
@@ -2126,6 +2137,79 @@ var $builtinmodule = function(name) {
 
   mod.clf = new Sk.builtin.func(clf_f);
 
+
+  // xlim function
+
+  var xlim_f = function(s, e) {
+    Sk.builtin.pyCheckArgs("xlim", arguments, 0, 2, false);
+
+    if (arguments.length <= 0)
+        return new Sk.builtins.tuple(plot._xlim);
+
+    if (Sk.builtin.checkSequence(s)) {
+        lim = Sk.ffi.remapToJs(s);
+    } else if (Sk.builtin.checkNumber(s)) {
+        if (Sk.builtin.checkNumber(e)) {
+            lim = [ Sk.ffi.remapToJs(s), Sk.ffi.remapToJs(e) ];
+        } else {
+            throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(e) + "' is not supported for e.");
+        }
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for s.");
+    }
+    if (lim[0] > lim[1]) { lim = [lim[1],lim[0]]; }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        plot._xlim = lim;
+        plot._xlimits(lim);
+    }
+  };
+
+  xlim_f.co_varnames = ['s', 'e'];
+  xlim_f.$defaults = [Sk.builtin.none.none$, Sk.builtin.none.none$];
+  mod.xlim = new Sk.builtin.func(xlim_f);
+
+
+  // ylim function
+
+  var ylim_f = function(s, e) {
+    Sk.builtin.pyCheckArgs("ylim", arguments, 0, 2, false);
+
+    if (arguments.length <= 0)
+        return new Sk.builtins.tuple(this._ylim);
+
+    if (Sk.builtin.checkSequence(s)) {
+        lim = Sk.ffi.remapToJs(s);
+    } else if (Sk.builtin.checkNumber(s)) {
+        if (Sk.builtin.checkNumber(e)) {
+            lim = [ Sk.ffi.remapToJs(s), Sk.ffi.remapToJs(e) ];
+        } else {
+            throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(e) + "' is not supported for e.");
+        }
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for s.");
+    }
+    if (lim[0] > lim[1]) { lim = [lim[1],lim[0]]; }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        plot._ylim = lim;
+        plot._ylimits(lim);
+    }
+  };
+
+  ylim_f.co_varnames = ['s', 'e'];
+  ylim_f.$defaults = [Sk.builtin.none.none$, Sk.builtin.none.none$];
+  mod.ylim = new Sk.builtin.func(ylim_f);
+
+
   /* list of not implemented methods */
   mod.findobj = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
@@ -2286,14 +2370,6 @@ var $builtinmodule = function(name) {
   });
   mod.box = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError("box is not yet implemented");
-  });
-  mod.xlim = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "xlim is not yet implemented");
-  });
-  mod.ylim = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "ylim is not yet implemented");
   });
   mod.xscale = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
