@@ -107,3 +107,13 @@ svg text {
 	font-size: 85%;
 	font-weight: bold;
 }
+
+textcode {
+    display: inline;
+    color: #008800;
+    font-family: monospace, "Andale mono", "Courier New";
+    font-size: 90%;
+    font-weight: bold;
+    margin: 1em 0;
+    white-space: pre;
+}
