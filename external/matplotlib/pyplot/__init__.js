@@ -544,7 +544,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
       .append("g").attr("class", "pplot_lines");
 
     // set appropriate line style
-    if (this._linestyle === "-") {
+    if (this._linestyle === "-" || this._linestyle === null) {
       this._lines = this._line_containers.append("line")
         .attr("x1", function(d) {
           return xscale(d[0][0]);
@@ -659,6 +659,13 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
       case " ":
       case "None":
       case "":
+        this._markers = this._points.append("circle").attr("cx", function(d) {
+          return xscale(d[0]);
+        }).attr("cy", function(d) {
+          return yscale(d[1]);
+        }).attr("r", function(d) {
+          return 0;
+        });
         break;
       case ",":
         this._markers = this._points.append("circle").attr("cx", function(d) {
@@ -1795,7 +1802,7 @@ jsplotlib.construct_axis = function() {
 }();
 
 jsplotlib.parse_marker = function(style) {
-  if (!style) return "x";
+  if (!style) return "";
   switch (style) {
     case '.':
       return ".";
