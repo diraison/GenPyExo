@@ -1775,7 +1775,7 @@ jsplotlib.construct_axis = function() {
             this._axis = this._axis.tickSize(-size);
             parent_graph.chart.append("svg:g").attr("id", this._id).attr("class",
                 this._x_or_y + " axis").attr("transform", this._transform_string).call(
-                this._axis).selectAll(".tick:not(:first-of-type):not(:last-of-type) line")
+                this._axis).selectAll(".tick:not(:first-of-type) line")
                 .attr("stroke-dasharray", "3,3");
         } else {
             parent_graph.chart.append("svg:g").attr("id", this._id).attr("class",
