@@ -149,7 +149,7 @@ function finVerifierSimple(mod) {
 	var image = "";
 	if (dessins.length >= 2 ) {
 		image = dessins[1].toDataURL();				// CANVAS image
-	} else if (dessins.length == 1 && document.getElementById("chart1") !== null) {
+	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
 		image = document.getElementById("dessin").innerHTML;	// SVG
 	}
 
@@ -179,8 +179,9 @@ function finVerifierSimple(mod) {
 	if (texte == reponses[0] && image == reponses[1]) {
 		nbsucces++;
 	} else if (texte == reponses[0]) {
-		if (image.substr(1,3) == "svg") {
-			rapport += "\n * la <span class=\"solution\">figure attendue<span>"+reponses[1]+"</span></span>";
+		if (reponses[1].substr(1,3) == "svg") {
+			var svgreids = reponses[1].replace(RegExp("pplotchart","g"),"pplot"+alltestsindex+"-chart");
+			rapport += "\n * la <span class=\"solution\">figure attendue<span>"+svgreids+"</span></span>";
 		} else {
 			rapport += "\n * la <span class=\"solution\">figure attendue<img src=\""+reponses[1]+"\" alt=\"solution\"></span>";
 		}
