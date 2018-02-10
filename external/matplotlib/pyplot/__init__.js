@@ -2512,6 +2512,7 @@ var $builtinmodule = function(name) {
         throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(b) + "' is not supported for b.");
     }
 
+    create_chart();
     if (!plot) {
         plot = jsplotlib.plot(chart);
     }
