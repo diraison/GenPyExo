@@ -1113,6 +1113,18 @@ jsplotlib.plot = function(chart) {
     this._ylimits(lim);
     return this;
   };
+    
+  that._get_xlim = function() {
+    if (!this._xaxis._domain)
+        return [0,1];
+    return this._xaxis._domain;
+  }
+
+  that._get_ylim = function() {
+    if (!this._yaxis._domain)
+        return [0,1];
+    return this._yaxis._domain;
+  }
 
   // sets the ylimits based on a minmax array/tuple
   that._ylimits = function(min_max_tuple) {
@@ -2423,7 +2435,7 @@ var $builtinmodule = function(name) {
     Sk.builtin.pyCheckArgs("xlim", arguments, 0, 2, false);
 
     if (arguments.length <= 0)
-        return new Sk.builtins.tuple(plot._xlim);
+        return new Sk.builtins.tuple(plot ? plot._get_xlim() : [0,1]);
 
     if (Sk.builtin.checkSequence(s)) {
         lim = Sk.ffi.remapToJs(s);
@@ -2456,7 +2468,7 @@ var $builtinmodule = function(name) {
     Sk.builtin.pyCheckArgs("ylim", arguments, 0, 2, false);
 
     if (arguments.length <= 0)
-        return new Sk.builtins.tuple(this._ylim);
+        return new Sk.builtins.tuple(plot ? plot._get_ylim() : [0,1]);
 
     if (Sk.builtin.checkSequence(s)) {
         lim = Sk.ffi.remapToJs(s);
