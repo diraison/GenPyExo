@@ -250,7 +250,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
   // if only y provided, create Array from 1 to N
   if (!that._x || that._x.length === 0) {
-    that._x = jsplotlib.linspace(1, that._y.length, that._y.length);
+    that._x = jsplotlib.linspace(0, that._y.length-1, that._y.length);
   }
 
   that.antialiased = function(a) {
