@@ -1388,14 +1388,14 @@ jsplotlib.plot = function(chart) {
 
     this._create_clipping();
 
-    // draw lines
-    for (i = 0; i < this._lines.length; i++) {
-      this._lines[i].draw(this);
-    }
-
     // draw bars
     for (i = 0; i < this._bars.length; i++) {
         this._bars[i].draw(this);
+    }
+
+    // draw lines
+    for (i = 0; i < this._lines.length; i++) {
+      this._lines[i].draw(this);
     }
 
     this._draw_axes();
