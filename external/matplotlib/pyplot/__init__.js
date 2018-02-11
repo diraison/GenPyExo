@@ -2659,7 +2659,7 @@ var $builtinmodule = function(name) {
         throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(edgecolor) + "' is not supported for edgecolor.");
     }
     if (edgecolor != null) {
-        color = Sk.ffi.remapToJs(edgecolor);
+        edgecolor = Sk.ffi.remapToJs(edgecolor);
     } else {
         edgecolor = "black";
     }
