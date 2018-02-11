@@ -566,12 +566,18 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
     // this adds the bars to the chart
     if (this._bartype) {
-        var width = Math.abs(xscale(this._linewidth)-xscale(0));
+        var s = this._linewidth;
+        if (s === undefined) {
+            s = new Array(y.length).fill(0.8);               // default bar width
+        } else if (typeof(this._linewidth) === "number") {
+            s = new Array(y.length).fill(this._linewidth);
+        }
+        var xys = d3.zip(x, y, s);
         this._bar = parent_chart.chart.append("svg:g").attr("id", get_bars_id(this._bar_id))
             .attr("class", "pplot_bars")
             .style("clip-path", "url(#" + get_clipping_id() + ")")
             .style("stroke", jsplotlib.color_to_hex(this._markeredgecolor))
-            .style("stroke-width", this._linewidth)
+            .style("stroke-width", this._markeredgewidth)
             .style("stroke-opacity", this._alpha);
         this._bars = this._bar.selectAll("rect.pplot_bars" + this._bar_id)
             .data(xys).enter()
@@ -579,7 +585,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             .style("fill", jsplotlib.color_to_hex(this._color))
             .attr("x", function(d) { return xscale(d[0]); })
             .attr("y", function(d) { return yscale(d[1] > 0 ? d[1] : 0); })
-            .attr("width", function(d) { return width; })
+            .attr("width", function(d) { return Math.abs(xscale(d[2])-xscale(0)); })
             .attr("height", function(d) { return Math.abs(yscale(d[1] > 0 ? d[1] : -d[1])-yscale(0)); });
         return this;
     }
@@ -1218,7 +1224,7 @@ jsplotlib.plot = function(chart) {
             ybs = ybs.concat(this._bars[i]._y);
         }
         var xbmin = d3.min(xbs);
-        var xbmax = d3.max(xbs)+1;   // bar width space
+        var xbmax = d3.max(xbs)+1;   // default bar width space
         var ybmin = d3.min(ybs);
         var ybmax = d3.max(ybs);
         ybmin = (ybmin > 0 ? 0 : ybmin);
@@ -2637,15 +2643,6 @@ var $builtinmodule = function(name) {
         throw new Sk.builtin.ValueError("missing 1 required positional argument: 'height'");
     }
 
-    if (width != null && !Sk.builtin.checkNumber(width)) {
-        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(width) + "' is not supported for width.");
-    }
-    if (width != null) {
-        width = Sk.ffi.remapToJs(width);
-    } else {
-        width = 0.8;
-    }
-
     if (color != null && !Sk.builtin.checkString(color)) {
         throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(color) + "' is not supported for color.");
     }
@@ -2666,14 +2663,51 @@ var $builtinmodule = function(name) {
 
     if (Sk.builtin.checkSequence(left)) {
         left = Sk.ffi.remapToJs(left);
+    } else if (Sk.abstr.typeName(left) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(left);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('left contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        left = data.buffer.slice(0, dim).map(function(x) { return Sk.ffi.remapToJs(x); });
     } else {
         throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(left) + "' is not supported for left.");
     }
 
     if (Sk.builtin.checkSequence(height)) {
         height = Sk.ffi.remapToJs(height);
+    } else if (Sk.abstr.typeName(height) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(height);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('height contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        height = data.buffer.slice(0, dim).map(function(x) { return Sk.ffi.remapToJs(x); });
     } else {
         throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(height) + "' is not supported for height.");
+    }
+
+    if (width == null) {
+        width = 0.8;
+    } else if (Sk.builtin.checkNumber(width)) {
+        width = Sk.ffi.remapToJs(width);
+    } else if (Sk.builtin.checkSequence(width)) {
+        width = Sk.ffi.remapToJs(width);
+    } else if (Sk.abstr.typeName(width) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(width);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('width contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        width = data.buffer.slice(0, dim).map(function(x) { return Sk.ffi.remapToJs(x); });
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(width) + "' is not supported for width.");
     }
 
     create_chart();
@@ -2682,13 +2716,12 @@ var $builtinmodule = function(name) {
     }
     if (plot) {
         bar = new jsplotlib.Line2D(left, height, 1, width);
-        var parameters = {
+        bar.update({
             "bartype":         true,
             "linewidth":       width,
             "color":           color,
             "markeredgecolor": edgecolor
-        };
-        bar.update(parameters);
+        });
         plot.add_bar(bar);
     }
   };
