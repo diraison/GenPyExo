@@ -1,0 +1,43 @@
+Matplotlib et Numpy en Python
+===============================
+Exemple 2
+===============================
+Executez le programme suivant.
+===============================
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-4,8,100)
+
+plt.bar(x,4*np.sin(x),width=0.06,color="red")
+plt.bar(x,4*np.cos(x),width=-0.06,color="yellow")
+plt.bar(range(5),[3,-2,7,4,2], color="blue",
+        width=0.25,align="center")
+
+plt.plot(x,4*np.cos(x),color="k")
+plt.plot(x,4*np.sin(x),color="k")
+
+plt.grid(axis="y")
+plt.xlim(-1,5)
+plt.ylim(-4,8)
+plt.show()
+===============================
+[ [ "" ] ]
+===============================
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-4,8,100)
+
+plt.bar(x,4*np.sin(x),width=0.06,color="red")
+plt.bar(x,4*np.cos(x),width=-0.06,color="yellow")
+plt.bar(range(5),[3,-2,7,4,2], color="blue",
+        width=0.25,align="center")
+
+plt.plot(x,4*np.cos(x),color="k")
+plt.plot(x,4*np.sin(x),color="k")
+
+plt.grid(axis="y")
+plt.xlim(-1,5)
+plt.ylim(-4,8)
+plt.show()
