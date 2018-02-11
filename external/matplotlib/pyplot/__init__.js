@@ -246,7 +246,8 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   that._pickradius = pickradius || 5;
   that._drawstyle = drawstyle || null;
   that._markevery = markevery || null;
-  that._bartype = false;
+  that._graphtype = null;
+  that._barwidth = 0.8;
   //kwargs
 
   // if only y provided, create Array from 1 to N
@@ -388,8 +389,13 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     return this;
   };
 
-  that.bartype = function(b) {
-    this._bartype = b;
+  that.graphtype = function(gt) {
+    this._graphtype = gt;
+    return this;
+  };
+
+  that.barwidth = function(bw) {
+    this._barwidth = bw;
     return this;
   };
 
@@ -462,8 +468,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             case 'markevery':
               this.markevery(val);
               break;
-            case 'bartype':
-              this.bartype(val);
+            case 'graphtype':
+              this.graphtype(val);
+              break;
+            case 'barwidth':
+              this.barwidth(val);
               break;
           }
         }
@@ -564,13 +573,21 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
         return get_chart_id() + "-bars" + n;
     }
 
+    var x_edge_align = function(d) {
+        return xscale(d[0] + (d[2] < 0 ? d[2] : 0));
+    };
+    var x_center_align = function(d) {
+        return xscale(d[0] + (d[2] < 0 ? d[2] : -d[2])/2);
+    };
+    var x_pos_align = (this._drawstyle == "center" ? x_center_align : x_edge_align);
+
     // this adds the bars to the chart
-    if (this._bartype) {
-        var s = this._linewidth;
+    if (this._graphtype === "bar") {
+        var s = this._barwidth;
         if (s === undefined) {
             s = new Array(y.length).fill(0.8);               // default bar width
-        } else if (typeof(this._linewidth) === "number") {
-            s = new Array(y.length).fill(this._linewidth);
+        } else if (typeof(s) === "number") {
+            s = new Array(y.length).fill(s);
         }
         var xys = d3.zip(x, y, s);
         this._bar = parent_chart.chart.append("svg:g").attr("id", get_bars_id(this._bar_id))
@@ -583,7 +600,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             .data(xys).enter()
             .append("rect").attr("class", "pplot_bars" + this._bar_id)
             .style("fill", jsplotlib.color_to_hex(this._color))
-            .attr("x", function(d) { return xscale(d[0]); })
+            .attr("x", x_pos_align)
             .attr("y", function(d) { return yscale(d[1] > 0 ? d[1] : 0); })
             .attr("width", function(d) { return Math.abs(xscale(d[2])-xscale(0)); })
             .attr("height", function(d) { return Math.abs(yscale(d[1] > 0 ? d[1] : -d[1])-yscale(0)); });
@@ -2632,8 +2649,8 @@ var $builtinmodule = function(name) {
   mod.grid = new Sk.builtin.func(grid_f);
 
   // bar function
-  var bar_f = function(left, height, width, color, edgecolor) {
-    Sk.builtin.pyCheckArgs("bar", arguments, 0, 5, false);
+  var bar_f = function(left, height, width, color, edgecolor, align, bottom) {
+    Sk.builtin.pyCheckArgs("bar", arguments, 0, 7, false);
 
     if (left == null || Sk.builtin.checkNone(left)) {
         throw new Sk.builtin.ValueError("missing 1 required positional argument: 'left'");
@@ -2659,6 +2676,21 @@ var $builtinmodule = function(name) {
         edgecolor = Sk.ffi.remapToJs(edgecolor);
     } else {
         edgecolor = "black";
+    }
+
+    if (align == null) {
+        align = "edge";
+    } else if (Sk.builtin.checkString(align)) {
+        align = Sk.ffi.remapToJs(align);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(align) + "' is not supported for align.");
+    }
+    if (align != "edge" && align != "center") {
+        throw new Sk.builtin.ValueError("align: must be 'edge' (default), 'center'");
+    }
+
+    if (bottom != null && !Sk.builtin.checkNone(bottom)) {
+        throw new Sk.builtin.NotImplementedError("the 'bottom' parameter is currently not supported");
     }
 
     if (Sk.builtin.checkSequence(left)) {
@@ -2715,20 +2747,22 @@ var $builtinmodule = function(name) {
         plot = jsplotlib.plot(chart);
     }
     if (plot) {
-        bar = new jsplotlib.Line2D(left, height, 1, width);
+        bar = new jsplotlib.Line2D(left, height);
         bar.update({
-            "bartype":         true,
-            "linewidth":       width,
+            "graphtype":       "bar",
+            "barwidth":        width,
             "color":           color,
-            "markeredgecolor": edgecolor
+            "markeredgecolor": edgecolor,
+            "drawstyle":       align
         });
         plot.add_bar(bar);
     }
   };
 
-  bar_f.co_varnames=["x","height","width","color","edgecolor"];
+  bar_f.co_varnames=["x","height","width","color","edgecolor", "align", "bottom"];
   bar_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
-                     Sk.builtin.none.none$,Sk.builtin.none.none$];
+                     Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
+                     Sk.builtin.none.none$];
   mod.bar = new Sk.builtin.func(bar_f);
 
 
