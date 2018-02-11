@@ -246,6 +246,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   that._pickradius = pickradius || 5;
   that._drawstyle = drawstyle || null;
   that._markevery = markevery || null;
+  that._bartype = false;
   //kwargs
 
   // if only y provided, create Array from 1 to N
@@ -372,6 +373,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     return this;
   };
 
+  that.bar_id = function(bid) {
+    this._bar_id = bid;
+    return this;
+  };
+
   that.xrange = function(min, max, N) {
     this._x = jsplotlib.linspace(min, max, N);
     return this;
@@ -379,6 +385,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
   that.yrange = function(min, max, N) {
     this._y = jsplotlib.linspace(min, max, N);
+    return this;
+  };
+
+  that.bartype = function(b) {
+    this._bartype = b;
     return this;
   };
 
@@ -450,6 +461,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
               break;
             case 'markevery':
               this.markevery(val);
+              break;
+            case 'bartype':
+              this.bartype(val);
               break;
           }
         }
@@ -541,14 +555,38 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
       return x;
     };
       
-    var get_lines_id = function(n) {
-        return get_chart_id() + "-lines" + n;
-    }
-
     // those are the default formatters, we just use a precision if its a number
     parent_chart._xaxis._formatter = parent_chart._xaxis._formatter || default_formatter;
 
     parent_chart._yaxis._formatter = parent_chart._yaxis._formatter || default_formatter;
+
+    var get_bars_id = function(n) {
+        return get_chart_id() + "-bars" + n;
+    }
+
+    // this adds the bars to the chart
+    if (this._bartype) {
+        var width = Math.abs(xscale(this._linewidth)-xscale(0));
+        this._bar = parent_chart.chart.append("svg:g").attr("id", get_bars_id(this._bar_id))
+            .attr("class", "pplot_bars")
+            .style("clip-path", "url(#" + get_clipping_id() + ")")
+            .style("stroke", jsplotlib.color_to_hex(this._markeredgecolor))
+            .style("stroke-width", this._linewidth)
+            .style("stroke-opacity", this._alpha);
+        this._bars = this._bar.selectAll("rect.pplot_bars" + this._bar_id)
+            .data(xys).enter()
+            .append("rect").attr("class", "pplot_bars" + this._bar_id)
+            .style("fill", jsplotlib.color_to_hex(this._color))
+            .attr("x", function(d) { return xscale(d[0]); })
+            .attr("y", function(d) { return yscale(d[1] > 0 ? d[1] : 0); })
+            .attr("width", function(d) { return width; })
+            .attr("height", function(d) { return Math.abs(yscale(d[1] > 0 ? d[1] : -d[1])-yscale(0)); });
+        return this;
+    }
+
+    var get_lines_id = function(n) {
+        return get_chart_id() + "-lines" + n;
+    }
 
     // this adds the line to the chart
     this._line = parent_chart.chart.append("svg:g").attr("id", get_lines_id(this._line_id))
@@ -1006,6 +1044,8 @@ jsplotlib.plot = function(chart) {
   that.axes_colorcycle_position = 0;
   that.line_count = 0;
   that._lines = []; // we support multiple lines
+  that.bar_count = 0;
+  that._bars = []; 
 
   that.add_line = function(line) {
     if (line) {
@@ -1017,6 +1057,15 @@ jsplotlib.plot = function(chart) {
 
     return this;
   };
+
+  that.add_bar = function(bar) {
+      if (bar) {
+          this._bars.push(bar);
+          bar._bar_id = this.bar_count++;
+          this._update_limits();
+          this._update_chart_ratio();
+      }
+  }
 
   // calculate width-height-ratio
 
@@ -1156,8 +1205,32 @@ jsplotlib.plot = function(chart) {
       ys = ys.concat(this._lines[i]._y);
     }
 
-    this._xlimits([d3.min(xs), d3.max(xs)]);
-    this._ylimits([d3.min(ys), d3.max(ys)]);
+    var xmin = d3.min(xs);
+    var xmax = d3.max(xs);
+    var ymin = d3.min(ys);
+    var ymax = d3.max(ys);
+    
+    if (this._bars.length > 0) {
+        var xbs = [];
+        var ybs = [];
+        for (i = 0; i < this._bars.length; i++) {
+            xbs = xbs.concat(this._bars[i]._x);
+            ybs = ybs.concat(this._bars[i]._y);
+        }
+        var xbmin = d3.min(xbs);
+        var xbmax = d3.max(xbs)+1;   // bar width space
+        var ybmin = d3.min(ybs);
+        var ybmax = d3.max(ybs);
+        ybmin = (ybmin > 0 ? 0 : ybmin);
+        ybmax = (ybmax < 0 ? 0 : ybmax);
+        xmin = (xmin == undefined || xmin > xbmin ? xbmin : xmin);
+        xmax = (xmax == undefined || xmax < xbmax ? xbmax : xmax);
+        ymin = (ymin == undefined || ymin > ybmin ? ybmin : ymin);
+        ymax = (ymax == undefined || ymax < ybmax ? ybmax : ymax);
+    }
+
+    this._xlimits([xmin, xmax]);
+    this._ylimits([ymin, ymax]);
 
     return this;
   };
@@ -1183,6 +1256,7 @@ jsplotlib.plot = function(chart) {
       var ys = []; // all y-values
 
       // calculate limits
+      /*
       for (i = 0; i < this._lines.length; i++) {
         xs = xs.concat(this._lines[i]._x);
         ys = ys.concat(this._lines[i]._y);
@@ -1190,6 +1264,12 @@ jsplotlib.plot = function(chart) {
 
       var _abs_height = Math.abs(d3.min(xs) - d3.max(xs));
       var _abs_width = Math.abs(d3.min(ys) - d3.max(ys));
+      */
+      var xlims = this._get_xlim();
+      var ylims = this._get_ylim();
+      
+      var _abs_height = Math.abs(xlims[0] - xlims[1]);
+      var _abs_width = Math.abs(ylims[0] - ylims[1]);
 
       var w_ratio = _abs_height / _abs_width;
       var h_ratio = _abs_width / _abs_height;
@@ -1311,6 +1391,11 @@ jsplotlib.plot = function(chart) {
     // draw lines
     for (i = 0; i < this._lines.length; i++) {
       this._lines[i].draw(this);
+    }
+
+    // draw bars
+    for (i = 0; i < this._bars.length; i++) {
+        this._bars[i].draw(this);
     }
 
     this._draw_axes();
@@ -2540,6 +2625,79 @@ var $builtinmodule = function(name) {
   grid_f.$defaults = [Sk.builtin.bool.true$,Sk.builtin.none.none$,Sk.builtin.none.none$];
   mod.grid = new Sk.builtin.func(grid_f);
 
+  // bar function
+  var bar_f = function(left, height, width, color, edgecolor) {
+    Sk.builtin.pyCheckArgs("bar", arguments, 0, 5, false);
+
+    if (left == null || Sk.builtin.checkNone(left)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'left'");
+    }
+
+    if (height == null || Sk.builtin.checkNone(height)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'height'");
+    }
+
+    if (width != null && !Sk.builtin.checkNumber(width)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(width) + "' is not supported for width.");
+    }
+    if (width != null) {
+        width = Sk.ffi.remapToJs(width);
+    } else {
+        width = 0.8;
+    }
+
+    if (color != null && !Sk.builtin.checkString(color)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(color) + "' is not supported for color.");
+    }
+    if (color != null) {
+        color = Sk.ffi.remapToJs(color);
+    } else {
+        color = "blue";
+    }
+
+    if (edgecolor != null && !Sk.builtin.checkString(edgecolor)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(edgecolor) + "' is not supported for edgecolor.");
+    }
+    if (edgecolor != null) {
+        color = Sk.ffi.remapToJs(edgecolor);
+    } else {
+        edgecolor = "black";
+    }
+
+    if (Sk.builtin.checkSequence(left)) {
+        left = Sk.ffi.remapToJs(left);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(left) + "' is not supported for left.");
+    }
+
+    if (Sk.builtin.checkSequence(height)) {
+        height = Sk.ffi.remapToJs(height);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(height) + "' is not supported for height.");
+    }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        bar = new jsplotlib.Line2D(left, height, 1, width);
+        var parameters = {
+            "bartype":         true,
+            "linewidth":       width,
+            "color":           color,
+            "markeredgecolor": edgecolor
+        };
+        bar.update(parameters);
+        plot.add_bar(bar);
+    }
+  };
+
+  bar_f.co_varnames=["x","height","width","color","edgecolor"];
+  bar_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
+                     Sk.builtin.none.none$,Sk.builtin.none.none$];
+  mod.bar = new Sk.builtin.func(bar_f);
+
 
   /* list of not implemented methods */
   mod.findobj = new Sk.builtin.func(function() {
@@ -2813,9 +2971,6 @@ var $builtinmodule = function(name) {
   mod.axvspan = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
       "axvspan is not yet implemented");
-  });
-  mod.bar = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError("bar is not yet implemented");
   });
   mod.barh = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
