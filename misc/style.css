@@ -108,6 +108,10 @@ svg text {
 	font-weight: bold;
 }
 
+svg text .graph_title {
+	font-size: 140%;
+}
+
 textcode {
     display: inline;
     color: #008800;
