@@ -737,7 +737,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]) - marker_size * 0.7;
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size * 0.7;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]) + marker_size * 0.7;
         }).attr("x2", function(d) {
@@ -746,7 +746,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]) - marker_size * 0.7;
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size * 0.7;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
       case "+":
@@ -758,7 +758,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]);
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -767,7 +767,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]) - marker_size;
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
       case "_":
@@ -779,7 +779,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]);
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
       case "|":
@@ -791,7 +791,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]) - marker_size;
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
       case 's':
@@ -899,7 +899,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) - marker_size * 0.577;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -908,7 +908,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) - marker_size * 0.577;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -917,7 +917,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size * 1.155;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
       case '2':
@@ -929,7 +929,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size * 0.577;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -938,7 +938,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size * 0.577;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -947,7 +947,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) - marker_size * 1.155;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
      case '3':
@@ -959,7 +959,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) - marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -968,7 +968,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -977,7 +977,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]);
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
      case '4':
@@ -989,7 +989,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) - marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -998,7 +998,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]) + marker_size;
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._points.append("line").attr("x1", function(d) {
           return xscale(d[0]);
         }).attr("x2", function(d) {
@@ -1007,7 +1007,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
           return yscale(d[1]);
         }).attr("y2", function(d) {
           return yscale(d[1]);
-        });
+        }).style("stroke", jsplotlib.color_to_hex(this._color));
         this._markers = this._points.selectAll("line");
         break;
     }
