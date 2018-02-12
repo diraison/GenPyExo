@@ -40,9 +40,12 @@ function executer() {
 	var prog = editeur.getValue()+"\n";
 	var sortie = document.getElementById("sortie");
 	var erreur = document.getElementById("erreur");
+	var dessin = document.getElementById("dessin");
 	document.getElementById("resultat").style.visibility = (visibilite ? "visible" : "hidden");
 	sortie.innerHTML = '';
 	erreur.innerHTML = '';
+	if (dessin !== null)
+		dessin.innerHTML = '';
 	Sk.pre = "sortie";
 	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture});
