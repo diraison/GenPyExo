@@ -1024,6 +1024,21 @@ var $builtinmodule = function(name) {
             return Sk.misceval.callsim(self.random_sample, self, args);
         });
 
+        // standard_normal: mtrand.pyx:L1519
+        var js_standard_normal = function(self, size) {
+            // get *args
+            if (size == null) {
+                size = Sk.builtin.none.none$;
+            }
+
+            var py_res = cont0_array(self.internal_state, rk_gauss, size, self.lock);
+
+            return py_res;
+        };
+        js_standard_normal.co_varnames = ['self', 'size'];
+        js_standard_normal.$defaults = [Sk.builtin.none.none$];
+        $loc.standard_normal = new Sk.builtin.func(js_standard_normal);
+
         // binomial: mtrand.pyx:L3587
         var js_binomial = function(self, n, p, size) {
             Sk.builtin.pyCheckArgs("binomial", arguments, 2, 3, true);
@@ -1121,6 +1136,8 @@ var $builtinmodule = function(name) {
     mod.random_sample = Sk.abstr.gattr(mod._rand, 'random_sample', true);
     mod.random = mod.random_sample;
     mod.sample = mod.random_sample;
+    mod.standard_normal = Sk.abstr.gattr(mod._rand, 'standard_normal', true);
+    mod.randn = Sk.abstr.gattr(mod._rand, 'randn', true);
     mod.binomial = Sk.abstr.gattr(mod._rand, 'binomial', true);
     mod.randint = Sk.abstr.gattr(mod._rand, 'randint', true);
     mod.random_integers = Sk.abstr.gattr(mod._rand, 'random_integers', true);
