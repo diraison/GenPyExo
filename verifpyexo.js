@@ -13,6 +13,8 @@ Sk.externalLibraries = {
 	numpy : {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
 		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/math.js'] },
+	"numpy.random" : {
+		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/random/__init__.js' },
 	matplotlib : {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/__init__.js' },
 	"matplotlib.pyplot" : {
