@@ -248,6 +248,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   that._markevery = markevery || null;
   that._graphtype = null;
   that._barwidth = 0.8;
+  that._histbins = 10;
+  that._normed = false;
+
   //kwargs
 
   // if only y provided, create Array from 1 to N
@@ -399,6 +402,16 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     return this;
   };
 
+  that.histbins = function(bins) {
+    this._histbins = bins;
+    return this;
+  };
+
+  that.normed = function(n) {
+    this._normed = n;
+    return this;
+  };
+
   /**
     Updates possible attributes provided as kwargs
   **/
@@ -473,6 +486,12 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
               break;
             case 'barwidth':
               this.barwidth(val);
+              break;
+            case 'histbins':
+              this.histbins(val);
+              break;
+            case 'normed':
+              this.normed(val);
               break;
           }
         }
@@ -1068,7 +1087,7 @@ jsplotlib.plot = function(chart) {
   that.line_count = 0;
   that._lines = []; // we support multiple lines
   that.bar_count = 0;
-  that._bars = []; 
+  that._bars = [];
 
   that.add_line = function(line) {
     if (line) {
@@ -1088,7 +1107,34 @@ jsplotlib.plot = function(chart) {
           this._update_limits();
           this._update_chart_ratio();
       }
-  }
+  };
+
+  // Hugly Hack : convert hist to bar and add
+  that.add_hist = function(hist) {
+    if (hist) {
+      var bins = hist._histbins;
+      var y = new Array(bins).fill(0);
+      var x = new Array(bins).fill(0);
+      var xmax = d3.max(hist._x);
+      var xmin = d3.min(hist._x);
+      var h = (xmax - xmin) / bins;
+      var count = hist._x.length;
+      for (var i = 0; i < hist._x.length; i++) {
+        var k = Math.floor( (hist._x[i] - xmin) / h );
+        if (k == y.length) { k--; }
+        y[k] += 1;
+      }
+      for (var i = 0; i < y.length; i++) {
+        x[i] = xmin + i * h;
+        if (hist._normed) { y[i] /= count * h; }
+      }
+      hist._graphtype = "bar";
+      hist._y = y;
+      hist._x = x;
+      hist._barwidth = h;
+      this.add_bar(hist);
+    }
+  };
 
   // calculate width-height-ratio
 
@@ -2765,6 +2811,99 @@ var $builtinmodule = function(name) {
                      Sk.builtin.none.none$];
   mod.bar = new Sk.builtin.func(bar_f);
 
+ // hist function
+  var hist_f = function(x, bins, normed, color, edgecolor, align) {
+    Sk.builtin.pyCheckArgs("hist", arguments, 0, 6, false);
+
+    if (x == null || Sk.builtin.checkNone(x)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'x'");
+    }
+
+    if (bins != null && !Sk.builtin.checkNumber(bins)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(bins) + "' is not supported for 'bins'.");
+    }
+    if (bins != null) {
+        bins = Sk.ffi.remapToJs(bins);
+    } else {
+        bins = 10;
+    }
+
+    if (normed != null && !Sk.builtin.checkBool(normed)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(normed) + "' is not supported for 'normed'.");
+    }
+    if (normed != null) {
+        normed = Sk.ffi.remapToJs(normed);
+    } else {
+        normed = false;
+    }
+
+    if (color != null && !Sk.builtin.checkString(color)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(color) + "' is not supported for 'color'.");
+    }
+    if (color != null) {
+        color = Sk.ffi.remapToJs(color);
+    } else {
+        color = "blue";
+    }
+
+    if (edgecolor != null && !Sk.builtin.checkString(edgecolor)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(edgecolor) + "' is not supported for 'edgecolor'.");
+    }
+    if (edgecolor != null) {
+        edgecolor = Sk.ffi.remapToJs(edgecolor);
+    } else {
+        edgecolor = "black";
+    }
+
+    if (align == null) {
+        align = "edge";
+    } else if (Sk.builtin.checkString(align)) {
+        align = Sk.ffi.remapToJs(align);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(align) + "' is not supported for align.");
+    }
+    if (align != "edge" && align != "center") {
+        throw new Sk.builtin.ValueError("align: must be 'edge' (default), 'center'");
+    }
+
+    if (Sk.builtin.checkSequence(x)) {
+        x = Sk.ffi.remapToJs(x);
+    } else if (Sk.abstr.typeName(x) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(x);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('x contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        x = data.buffer.slice(0, dim).map(function(t) { return Sk.ffi.remapToJs(t); });
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(left) + "' is not supported for 'x'.");
+    }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        hist = new jsplotlib.Line2D(x);
+        hist.update({
+            "graphtype":       "hist",
+            "histbins":        bins,
+            "normed":          normed,
+            "color":           color,
+            "markeredgecolor": edgecolor,
+            "drawstyle":       align
+        });
+        plot.add_hist(hist);
+    }
+    return Sk.ffi.remapToPy([hist._y, hist._x, null]);
+  };
+
+  hist_f.co_varnames=["x","bins","normed","color","edgecolor","align"];
+  hist_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
+                      Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$];
+  mod.hist = new Sk.builtin.func(hist_f);
 
   /* list of not implemented methods */
   mod.findobj = new Sk.builtin.func(function() {
@@ -3093,10 +3232,6 @@ var $builtinmodule = function(name) {
   mod.hexbin = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
       "hexbin is not yet implemented");
-  });
-  mod.hist = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "hist is not yet implemented");
   });
   mod.hist2d = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
