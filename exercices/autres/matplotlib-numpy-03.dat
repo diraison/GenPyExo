@@ -1,0 +1,49 @@
+Matplotlib et Numpy en Python
+===============================
+Exemple 3
+===============================
+Executez le programme suivant.
+===============================
+import matplotlib.pyplot as plt
+import numpy.random as rnd
+
+#?##########################
+muX, sigmaX = 120, 25
+x = muX + sigmaX * rnd.randn(10000)
+muY, sigmaY = 70, 10
+y = muY + sigmaY * rnd.randn(10000)
+
+plt.hist(x,2*sigmaX,normed=True,color='r',alpha=0.75)
+plt.hist(y,2*sigmaY,normed=True,color='b',alpha=0.75)
+
+plt.xlabel('Répartition')
+plt.ylabel('Probabilités')
+plt.title('Histogrammes')
+plt.text(145,0.014,"µ=120, σ=25")
+plt.text(85,0.034,"µ=70, σ=10")
+plt.axis([40,170,0,0.04])
+plt.grid(axis="y")
+plt.show()
+===============================
+[ [ "rnd.seed(1234)", "" ] ]
+===============================
+import matplotlib.pyplot as plt
+import numpy.random as rnd
+
+#?##########################
+muX, sigmaX = 120, 25
+x = muX + sigmaX * rnd.randn(10000)
+muY, sigmaY = 70, 10
+y = muY + sigmaY * rnd.randn(10000)
+
+plt.hist(x,2*sigmaX,normed=True,color='r',alpha=0.75)
+plt.hist(y,2*sigmaY,normed=True,color='b',alpha=0.75)
+
+plt.xlabel('Répartition')
+plt.ylabel('Probabilités')
+plt.title('Histogrammes')
+plt.text(145,0.014,"µ=120, σ=25")
+plt.text(85,0.034,"µ=70, σ=10")
+plt.axis([40,170,0,0.04])
+plt.grid(axis="y")
+plt.show()

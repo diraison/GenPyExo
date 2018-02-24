@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Matplotlib et Numpy en Python - Exemple 3</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Matplotlib et Numpy en Python</h1></header>
+<article>
+	<h2>Exemple 3</h2>
+	<div class="enonce">Executez le programme suivant.
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">import matplotlib.pyplot as plt
+import numpy.random as rnd
+
+#?##########################
+muX, sigmaX = 120, 25
+x = muX + sigmaX * rnd.randn(10000)
+muY, sigmaY = 70, 10
+y = muY + sigmaY * rnd.randn(10000)
+
+plt.hist(x,2*sigmaX,normed=True,color='r',alpha=0.75)
+plt.hist(y,2*sigmaY,normed=True,color='b',alpha=0.75)
+
+plt.xlabel('Répartition')
+plt.ylabel('Probabilités')
+plt.title('Histogrammes')
+plt.text(145,0.014,"µ=120, σ=25")
+plt.text(85,0.034,"µ=70, σ=10")
+plt.axis([40,170,0,0.04])
+plt.grid(axis="y")
+plt.show()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none">import matplotlib.pyplot as plt
+import numpy.random as rnd
+
+#?##########################
+muX, sigmaX = 120, 25
+x = muX + sigmaX * rnd.randn(10000)
+muY, sigmaY = 70, 10
+y = muY + sigmaY * rnd.randn(10000)
+
+plt.hist(x,2*sigmaX,normed=True,color='r',alpha=0.75)
+plt.hist(y,2*sigmaY,normed=True,color='b',alpha=0.75)
+
+plt.xlabel('Répartition')
+plt.ylabel('Probabilités')
+plt.title('Histogrammes')
+plt.text(145,0.014,"µ=120, σ=25")
+plt.text(85,0.034,"µ=70, σ=10")
+plt.axis([40,170,0,0.04])
+plt.grid(axis="y")
+plt.show()
+</pre>
+</article>
+<script>
+alltests = [ [ "rnd.seed(1234)", "" ] ];
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>
