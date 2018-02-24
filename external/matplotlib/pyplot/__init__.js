@@ -1139,7 +1139,7 @@ jsplotlib.plot = function(chart) {
       this._lines.push(line);
       line._line_id = this.line_count++;
       this._update_limits();
-      this._update_chart_ratio();
+      //this._update_chart_ratio();
     }
 
     return this;
@@ -1150,7 +1150,7 @@ jsplotlib.plot = function(chart) {
           this._bars.push(bar);
           bar._bar_id = this.bar_count++;
           this._update_limits();
-          this._update_chart_ratio();
+          //this._update_chart_ratio();
       }
   };
 
@@ -1398,10 +1398,6 @@ jsplotlib.plot = function(chart) {
 
       h_ratio = h_ratio > 1 ? 1.25 : h_ratio < 1 ? 0.85 : 1;
       w_ratio = w_ratio > 1 ? 1.25 : w_ratio < 1 ? 0.85 : 1;
-      
-      // ratio forced
-      h_ratio = 1;
-      w_ration = 1;
 
       that._chartheight = _height * h_ratio;
       that._chartwidth = _width * w_ratio;
@@ -2344,7 +2340,7 @@ var $builtinmodule = function(name) {
     if (!chart) {
       $('#' + Sk.canvas).empty();
       // min height and width
-      chart = jsplotlib.make_chart(480, 460, "#" + Sk.canvas);
+      chart = jsplotlib.make_chart(550, 460, "#" + Sk.canvas);
     }
   };
 
