@@ -2397,6 +2397,7 @@ var $builtinmodule = function(name) {
     if (xdata.length === 1 && ydata.length === 1 && stylestring.length === 0) {
       // handle case for plot(x, y)
       line = new jsplotlib.Line2D(xdata[0], ydata[0]);
+      line.update(kwargs);
       plot.add_line(line);
     } else if (xdata.length === ydata.length && xdata.length === stylestring.length) {
       for (i = 0; i < xdata.length; i++) {
@@ -2407,6 +2408,7 @@ var $builtinmodule = function(name) {
           'marker': jsplotlib.parse_marker(ftm_tuple.marker),
           'color': ftm_tuple.color
         });
+        line.update(kwargs);
         plot.add_line(line);
       }
     } else {
@@ -2414,7 +2416,7 @@ var $builtinmodule = function(name) {
     }
 
     // set kwargs that apply for all lines
-    plot.update(kwargs);
+    //plot.update(kwargs);
 
     // result
     var result = [];
@@ -2500,29 +2502,45 @@ var $builtinmodule = function(name) {
   ];
   mod.title = new Sk.builtin.func(title_f);
 
-  var axis_f = function(label, fontdict, loc) {
-    Sk.builtin.pyCheckArgs("axis", arguments, 0, 3);
-
+  // axis function
+  var axis_f = function(v) {
+    Sk.builtin.pyCheckArgs("axis", arguments, 0, 1, false);
+    
+    var lim = null;
+      
     // when called without any arguments it should return the current axis limits
-
-    if (plot && plot._axes) {
-      console.log(plot._axes);
+    if (arguments.length <= 0) {
+        lim = (plot ? plot._get_xlim() : [0,1]);
+        lim = lim.concat(plot ? plot._get_ylim() : [0,1]);
+        return new Sk.builtins.tuple(lim);
     }
 
     // >>> axis(v)
     // sets the min and max of the x and y axes, with
     // ``v = [xmin, xmax, ymin, ymax]``.::
+    if (Sk.builtin.checkSequence(v)) {
+        lim = Sk.ffi.remapToJs(v);
+    } else if (Sk.builtin.checkString(v)) {
+        var info = Sk.ffi.remapToJs(v);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for v.");
+    }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot && plot._axes && lim !== null) {
+        plot._set_xlim([lim[0],lim[1]]);
+        plot._set_ylim([lim[2],lim[3]]);
+    }
 
     //The xmin, xmax, ymin, ymax tuple is returned
-    var res;
-
-    return Sk.ffi.remapToPy([]);
+    return new Sk.builtins.tuple(lim);
   };
 
-  axis_f.co_varnames = ['label', 'fontdict', 'loc', ];
-  axis_f.$defaults = [null, Sk.builtin.none.none$, Sk.builtin.none.none$,
-    Sk.builtin.none.none$
-  ];
+  axis_f.co_varnames = ['v'];
+  axis_f.$defaults = [Sk.builtin.none.none$];
   mod.axis = new Sk.builtin.func(axis_f);
 
   var xlabel_f = function(s, fontdict, loc) {
@@ -2819,13 +2837,13 @@ var $builtinmodule = function(name) {
     }
   };
 
-  bar_f.co_varnames=["x","height","width","color","edgecolor", "align", "bottom","alpha"];
+  bar_f.co_varnames=["x","height","width","color","edgecolor","align","bottom","alpha"];
   bar_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                      Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                      Sk.builtin.none.none$,Sk.builtin.none.none$];
   mod.bar = new Sk.builtin.func(bar_f);
 
- // hist function
+  // hist function
   var hist_f = function(x, bins, normed, color, edgecolor, align, alpha) {
     Sk.builtin.pyCheckArgs("hist", arguments, 0, 7, false);
 
