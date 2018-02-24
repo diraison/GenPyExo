@@ -251,6 +251,8 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   that._barwidth = 0.8;
   that._histbins = 10;
   that._normed = false;
+  that._text = null;
+  that._fontsize = 10;
 
   //kwargs
 
@@ -413,6 +415,16 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     return this;
   };
 
+  that.text = function(t) {
+    this._text = t;
+    return this;
+  }
+
+  that.fontsize = function(s) {
+    this._fontsize = s;
+    return this;
+  }
+
   /**
     Updates possible attributes provided as kwargs
   **/
@@ -496,6 +508,12 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
               break;
             case 'normed':
               this.normed(val);
+              break;
+            case 'text':
+              this.text(val);
+              break;
+            case 'fontsize':
+              this.fontsize(val);
               break;
           }
         }
@@ -594,7 +612,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
     var get_bars_id = function(n) {
         return get_chart_id() + "-bars" + n;
-    }
+    };
 
     var x_edge_align = function(d) {
         return xscale(d[0] + (d[2] < 0 ? d[2] : 0));
@@ -627,6 +645,27 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             .attr("y", function(d) { return yscale(d[1] > 0 ? d[1] : 0); })
             .attr("width", function(d) { return Math.abs(xscale(d[2])-xscale(0)); })
             .attr("height", function(d) { return Math.abs(yscale(d[1] > 0 ? d[1] : -d[1])-yscale(0)); });
+        return this;
+    }
+    
+    var get_text_id = function(n) {
+        return get_chart_id() + "-text" + n;
+    };
+
+    if (this._graphtype === "text") {
+        var xys = d3.zip(x, y, this._text);
+        this._text = parent_chart.chart.append("svg:g").attr("id", get_text_id(this._text_id))
+            .attr("class", "pplot_texts")
+            .style("clip-path", "url(#" + get_clipping_id() + ")")
+            .style("font-size", this._fontsize + "pt")
+            .style("fill", jsplotlib.color_to_hex(this._color))
+            .style("opacity", this._alpha);
+        this._texts = this._text.selectAll("text.pplot_texts" + this._text_id)
+            .data(xys).enter()
+            .append("text").attr("class", "pplot_texts" + this._text_id)
+            .attr("x", function(d) { return xscale(d[0]); })
+            .attr("y", function(d) { return yscale(d[1]); })
+            .text(function(d) { return d[2]; });
         return this;
     }
 
@@ -1092,6 +1131,8 @@ jsplotlib.plot = function(chart) {
   that._lines = []; // we support multiple lines
   that.bar_count = 0;
   that._bars = [];
+  that.text_count = 0;
+  that._texts = [];
 
   that.add_line = function(line) {
     if (line) {
@@ -1138,6 +1179,14 @@ jsplotlib.plot = function(chart) {
       hist._barwidth = h;
       this.add_bar(hist);
     }
+  };
+
+  that.add_text = function(text) {
+    if (text) {
+      this._texts.push(text);
+      text._text_id = this.text_count++;
+    }
+    return this;
   };
 
   // calculate width-height-ratio
@@ -1349,6 +1398,10 @@ jsplotlib.plot = function(chart) {
 
       h_ratio = h_ratio > 1 ? 1.25 : h_ratio < 1 ? 0.85 : 1;
       w_ratio = w_ratio > 1 ? 1.25 : w_ratio < 1 ? 0.85 : 1;
+      
+      // ratio forced
+      h_ratio = 1;
+      w_ration = 1;
 
       that._chartheight = _height * h_ratio;
       that._chartwidth = _width * w_ratio;
@@ -1469,6 +1522,11 @@ jsplotlib.plot = function(chart) {
     // draw lines
     for (i = 0; i < this._lines.length; i++) {
       this._lines[i].draw(this);
+    }
+      
+    // draw texts
+    for (i = 0; i < this._texts.length; i++) {
+      this._texts[i].draw(this);
     }
 
     this._draw_axes();
@@ -1761,7 +1819,7 @@ jsplotlib.make_chart = function(width, height, insert_container, insert_mode,
   var DEFAULT_PADDING = 10;
   insert_container = insert_container || "body";
   width = width - 2 * DEFAULT_PADDING || 500;
-  height = height - 2 * DEFAULT_PADDING || 200;
+  height = height - 2 * DEFAULT_PADDING || 400;
   attributes = attributes || {};
 
   // create id, if not given
@@ -1809,11 +1867,11 @@ jsplotlib.construct_axis = function() {
     that._label_offset = 0;
     that._label_string = "";
     if (x_or_y === "x") {
-      that._axis_proportion = 0.12;
-      that._label_proportion = 0.12;
+      that._axis_proportion = 0.08;
+      that._label_proportion = 0.06;
     } else if (x_or_y === "y") {
-      that._axis_proportion = 0.07;
-      that._label_proportion = 0.05;
+      that._axis_proportion = 0.06;
+      that._label_proportion = 0.03;
     } else {
       throw "Invalid axis type (must be x or y): " + this._x_or_y;
     }
@@ -2286,7 +2344,7 @@ var $builtinmodule = function(name) {
     if (!chart) {
       $('#' + Sk.canvas).empty();
       // min height and width
-      chart = jsplotlib.make_chart(480, 420, "#" + Sk.canvas);
+      chart = jsplotlib.make_chart(480, 460, "#" + Sk.canvas);
     }
   };
 
@@ -2523,7 +2581,7 @@ var $builtinmodule = function(name) {
     } else if (Sk.builtin.checkString(v)) {
         var info = Sk.ffi.remapToJs(v);
     } else {
-        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for v.");
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(v) + "' is not supported for v.");
     }
 
     create_chart();
@@ -2888,7 +2946,7 @@ var $builtinmodule = function(name) {
     }
 
     if (alpha != null && !Sk.builtin.checkNumber(alpha)) {
-        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(edgecolor) + "' is not supported for alpha.");
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(alpha) + "' is not supported for alpha.");
     }
     if (alpha != null) {
         alpha = Sk.ffi.remapToJs(alpha);
@@ -2919,7 +2977,7 @@ var $builtinmodule = function(name) {
         }
         x = data.buffer.slice(0, dim).map(function(t) { return Sk.ffi.remapToJs(t); });
     } else {
-        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(left) + "' is not supported for 'x'.");
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(x) + "' is not supported for 'x'.");
     }
 
     create_chart();
@@ -2947,6 +3005,73 @@ var $builtinmodule = function(name) {
                       Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                       Sk.builtin.none.none$];
   mod.hist = new Sk.builtin.func(hist_f);
+
+  // text function
+  var text_f = function(x, y, s, color, fontsize) {
+    Sk.builtin.pyCheckArgs("text", arguments, 3, 5, false);
+
+    if (x == null || Sk.builtin.checkNone(x)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'x'");
+    }
+    if (Sk.builtin.checkNumber(x)) {
+        x = Sk.ffi.remapToJs(x);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(x) + "' is not supported for x.");
+    }
+    if (y == null || Sk.builtin.checkNone(y)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'y'");
+    }
+    if (Sk.builtin.checkNumber(y)) {
+        y = Sk.ffi.remapToJs(y);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(y) + "' is not supported for y.");
+    }
+    if (s == null || Sk.builtin.checkNone(s)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 's'");
+    }
+    if (Sk.builtin.checkString(s)) {
+        s = Sk.ffi.remapToJs(s);
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for s.");
+    }
+    if (color != null && !Sk.builtin.checkString(color)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(color) + "' is not supported for 'color'.");
+    }
+    if (color != null) {
+        color = Sk.ffi.remapToJs(color);
+    } else {
+        color = "black";
+    }
+    if (fontsize != null && !Sk.builtin.checkNumber(fontsize)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(fontsize) + "' is not supported for 'fontsize'.");
+    }
+    if (fontsize != null) {
+        fontsize = Sk.ffi.remapToJs(fontsize);
+    } else {
+        fontsize = 10;
+    }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        text = new jsplotlib.Line2D([x],[y]);
+        text.update({
+            "graphtype": "text",
+            "text": [s],
+            "color": color,
+            "fontsize": fontsize
+        });
+        plot.add_text(text);
+    }
+  };
+
+  text_f.co_varnames = ["x","y","s","color","fontsize"];
+  text_f.$defaults = [Sk.builtin.none.none$, Sk.builtin.none.none$, Sk.builtin.none.none$, 
+                      Sk.builtin.none.none$, Sk.builtin.none.none$];
+  mod.text = new Sk.builtin.func(text_f);
+
 
   /* list of not implemented methods */
   mod.findobj = new Sk.builtin.func(function() {
@@ -3392,10 +3517,6 @@ var $builtinmodule = function(name) {
   mod.table = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
       "table is not yet implemented");
-  });
-  mod.text = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "text is not yet implemented");
   });
   mod.annotate = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
