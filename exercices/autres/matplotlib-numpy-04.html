@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Matplotlib et Numpy en Python - Exemple 4</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Matplotlib et Numpy en Python</h1></header>
+<article>
+	<h2>Exemple 4</h2>
+	<div class="enonce">Executez le programme suivant.
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">import matplotlib.pyplot as plt
+import numpy as np
+import numpy.random as rnd
+#?
+N = 50
+
+for c in "r,g,b,c,y,m,orange,pink".split(","):
+    x, y = rnd.rand(N), rnd.rand(N)
+    area = np.pi * (14 * rnd.rand(N) + 2)**2
+    plt.scatter(x, y, s=area, color=c, alpha=0.5)
+
+plt.axis([-0.05,1.05,-0.05,1.05])
+plt.show()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none">import matplotlib.pyplot as plt
+import numpy as np
+import numpy.random as rnd
+#?
+N = 50
+
+for c in "r,g,b,c,y,m,orange,pink".split(","):
+    x, y = rnd.rand(N), rnd.rand(N)
+    area = np.pi * (14 * rnd.rand(N) + 2)**2
+    plt.scatter(x, y, s=area, color=c, alpha=0.5)
+
+plt.axis([-0.05,1.05,-0.05,1.05])
+plt.show()
+</pre>
+</article>
+<script>
+alltests = [ [ "rnd.seed(1234)", "" ] ];
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>

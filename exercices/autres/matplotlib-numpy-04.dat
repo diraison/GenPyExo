@@ -1,0 +1,35 @@
+Matplotlib et Numpy en Python
+===============================
+Exemple 4
+===============================
+Executez le programme suivant.
+===============================
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.random as rnd
+#?
+N = 50
+
+for c in "r,g,b,c,y,m,orange,pink".split(","):
+    x, y = rnd.rand(N), rnd.rand(N)
+    area = np.pi * (14 * rnd.rand(N) + 2)**2
+    plt.scatter(x, y, s=area, color=c, alpha=0.5)
+
+plt.axis([-0.05,1.05,-0.05,1.05])
+plt.show()
+===============================
+[ [ "rnd.seed(1234)", "" ] ]
+===============================
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.random as rnd
+#?
+N = 50
+
+for c in "r,g,b,c,y,m,orange,pink".split(","):
+    x, y = rnd.rand(N), rnd.rand(N)
+    area = np.pi * (14 * rnd.rand(N) + 2)**2
+    plt.scatter(x, y, s=area, color=c, alpha=0.5)
+
+plt.axis([-0.05,1.05,-0.05,1.05])
+plt.show()
