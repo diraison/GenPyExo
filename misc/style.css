@@ -58,6 +58,7 @@ ul {
 #sortie {
 	height: auto;
 	font-weight: bold;
+	margin-top: 0;
 }
 
 #erreur {
