@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
-	<title>Matplotlib et Numpy en Python - Exemple 1</title>
+	<title>Matplotlib en Python - Exemple 1</title>
 	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
@@ -14,7 +14,7 @@
 	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
 </head>
 <body onload="genererReponses()">
-<header><h1>Matplotlib et Numpy en Python</h1></header>
+<header><h1>Matplotlib en Python</h1></header>
 <article>
 	<h2>Exemple 1</h2>
 	<div class="enonce">Executez le programme suivant.
@@ -23,7 +23,6 @@
 	<div class="travail">
 		<textarea id="code">from math import sqrt
 import matplotlib.pyplot as plt
-import numpy as np
 from random import seed,randint
 
 #?#############################
@@ -44,25 +43,20 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-plt.xlim(0,100)
-plt.ylim(0,1)
+plt.axis([0,100,0,1])
 plt.xlabel("100 Échantillons")
 plt.ylabel("Fréquence de Piles")
 plt.grid()
 
 # frequences des 100 echantillons
-X = np.array( range(100) )
-Y = np.array( [frequencePiles(N) for i in range(100)] )
-plt.plot(X,Y, "o")
+X = range(100)
+Y = [frequencePiles(N) for i in X]
+plt.plot(X, Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
-T = np.array([0, 100])
-Z = np.array([p + 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p - 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p] * 2)
-plt.plot(T,Z, "k--")
+plt.plot([0,100], [p+1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p-1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p]*2, "k--")
 
 # affichage
 plt.show()
@@ -77,7 +71,6 @@ plt.show()
 	</div>
 	<pre id="solution" style="display:none">from math import sqrt
 import matplotlib.pyplot as plt
-import numpy as np
 from random import seed,randint
 
 #?#############################
@@ -98,25 +91,20 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-plt.xlim(0,100)
-plt.ylim(0,1)
+plt.axis([0,100,0,1])
 plt.xlabel("100 Échantillons")
 plt.ylabel("Fréquence de Piles")
 plt.grid()
 
 # frequences des 100 echantillons
-X = np.array( range(100) )
-Y = np.array( [frequencePiles(N) for i in range(100)] )
-plt.plot(X,Y, "o")
+X = range(100)
+Y = [frequencePiles(N) for i in X]
+plt.plot(X, Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
-T = np.array([0, 100])
-Z = np.array([p + 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p - 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p] * 2)
-plt.plot(T,Z, "k--")
+plt.plot([0,100], [p+1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p-1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p]*2, "k--")
 
 # affichage
 plt.show()

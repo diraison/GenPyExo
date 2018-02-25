@@ -1,4 +1,4 @@
-Matplotlib et Numpy en Python
+Matplotlib en Python
 ===============================
 Exemple 1
 ===============================
@@ -6,7 +6,6 @@ Executez le programme suivant.
 ===============================
 from math import sqrt
 import matplotlib.pyplot as plt
-import numpy as np
 from random import seed,randint
 
 #?#############################
@@ -27,25 +26,20 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-plt.xlim(0,100)
-plt.ylim(0,1)
+plt.axis([0,100,0,1])
 plt.xlabel("100 Échantillons")
 plt.ylabel("Fréquence de Piles")
 plt.grid()
 
 # frequences des 100 echantillons
-X = np.array( range(100) )
-Y = np.array( [frequencePiles(N) for i in range(100)] )
-plt.plot(X,Y, "o")
+X = range(100)
+Y = [frequencePiles(N) for i in X]
+plt.plot(X, Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
-T = np.array([0, 100])
-Z = np.array([p + 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p - 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p] * 2)
-plt.plot(T,Z, "k--")
+plt.plot([0,100], [p+1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p-1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p]*2, "k--")
 
 # affichage
 plt.show()
@@ -54,7 +48,6 @@ plt.show()
 ===============================
 from math import sqrt
 import matplotlib.pyplot as plt
-import numpy as np
 from random import seed,randint
 
 #?#############################
@@ -75,25 +68,20 @@ N = 400     # taille des echantillons
 p = 0.5     # probabilite
 
 # cadrage du repere et legende
-plt.xlim(0,100)
-plt.ylim(0,1)
+plt.axis([0,100,0,1])
 plt.xlabel("100 Échantillons")
 plt.ylabel("Fréquence de Piles")
 plt.grid()
 
 # frequences des 100 echantillons
-X = np.array( range(100) )
-Y = np.array( [frequencePiles(N) for i in range(100)] )
-plt.plot(X,Y, "o")
+X = range(100)
+Y = [frequencePiles(N) for i in X]
+plt.plot(X, Y, "o")
 
 # bornes de l'intervalle de fluctuation (en rouge)
-T = np.array([0, 100])
-Z = np.array([p + 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p - 1/sqrt(N)] * 2)
-plt.plot(T,Z, "r")
-Z = np.array([p] * 2)
-plt.plot(T,Z, "k--")
+plt.plot([0,100], [p+1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p-1/sqrt(N)]*2, "r")
+plt.plot([0,100], [p]*2, "k--")
 
 # affichage
 plt.show()
