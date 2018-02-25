@@ -385,6 +385,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     return this;
   };
 
+  that.scatter_id = function(sid) {
+    this._scatter_id = sid;
+    return this;
+  };
+
   that.xrange = function(min, max, N) {
     this._x = jsplotlib.linspace(min, max, N);
     return this;
@@ -610,6 +615,32 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
     parent_chart._yaxis._formatter = parent_chart._yaxis._formatter || default_formatter;
 
+    var get_scatter_id = function(n) {
+        return get_chart_id() + "-scatter" + n;
+    };
+
+    if (this._graphtype === "scatter") {
+        var s = this._markersize;
+        if (s === undefined) {
+            s = new Array(y.length).fill(1.0);               // default scatter width
+        } else if (typeof(s) === "number") {
+            s = new Array(y.length).fill(s);
+        }
+        var xys = d3.zip(x, y, s);
+        this._scatter = parent_chart.chart.append("svg:g").attr("id", get_scatter_id(this._scatter_id))
+            .attr("class", "pplot_scatters")
+            .style("clip-path", "url(#" + get_clipping_id() + ")")
+            .style("fill", jsplotlib.color_to_hex(this._color));
+        this._scatters = this._scatter.selectAll("circle.pplot_scatters" + this._scatter_id)
+            .data(xys).enter()
+            .append("circle").attr("class", "pplot_scatters" + this._scatter_id)
+            .attr("cx", function(d) { return xscale(d[0]); })
+            .attr("cy", function(d) { return yscale(d[1]); })
+            .attr("r", function(d) { return Math.sqrt(Math.abs(d[2])/3.1416); })
+            .style("opacity", this._alpha);
+        return this;
+    }
+
     var get_bars_id = function(n) {
         return get_chart_id() + "-bars" + n;
     };
@@ -647,7 +678,7 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             .attr("height", function(d) { return Math.abs(yscale(d[1] > 0 ? d[1] : -d[1])-yscale(0)); });
         return this;
     }
-    
+
     var get_text_id = function(n) {
         return get_chart_id() + "-text" + n;
     };
@@ -1129,6 +1160,8 @@ jsplotlib.plot = function(chart) {
   that.axes_colorcycle_position = 0;
   that.line_count = 0;
   that._lines = []; // we support multiple lines
+  that.scatter_count = 0;
+  that._scatters = [];
   that.bar_count = 0;
   that._bars = [];
   that.text_count = 0;
@@ -1141,8 +1174,17 @@ jsplotlib.plot = function(chart) {
       this._update_limits();
       //this._update_chart_ratio();
     }
-
     return this;
+  };
+
+  that.add_scatter = function(scatter) {
+      if (scatter) {
+          this._scatters.push(scatter);
+          scatter._scatter_id = this.scatter_count++;
+          this._update_limits();
+          //this._update_chart_ratio();
+      }
+      return this;
   };
 
   that.add_bar = function(bar) {
@@ -1152,6 +1194,7 @@ jsplotlib.plot = function(chart) {
           this._update_limits();
           //this._update_chart_ratio();
       }
+      return this;
   };
 
   // Hugly Hack : convert hist to bar and add
@@ -1327,11 +1370,16 @@ jsplotlib.plot = function(chart) {
       ys = ys.concat(this._lines[i]._y);
     }
 
+    for (i = 0; i < this._scatters.length; i++) {
+        xs = xs.concat(this._scatters[i]._x);
+        ys = ys.concat(this._scatters[i]._y);
+    }
+
     var xmin = d3.min(xs);
     var xmax = d3.max(xs);
     var ymin = d3.min(ys);
     var ymax = d3.max(ys);
-    
+
     if (this._bars.length > 0) {
         var xbs = [];
         var ybs = [];
@@ -1509,6 +1557,11 @@ jsplotlib.plot = function(chart) {
     this._init_common(); //
 
     this._create_clipping();
+
+    // draw scatters
+    for (i = 0; i < this._scatters.length; i++) {
+        this._scatters[i].draw(this);
+    }
 
     // draw bars
     for (i = 0; i < this._bars.length; i++) {
@@ -2891,7 +2944,7 @@ var $builtinmodule = function(name) {
     }
   };
 
-  bar_f.co_varnames=["x","height","width","color","edgecolor","align","bottom","alpha"];
+  bar_f.co_varnames=["left","height","width","color","edgecolor","align","bottom","alpha"];
   bar_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                      Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                      Sk.builtin.none.none$,Sk.builtin.none.none$];
@@ -3001,6 +3054,118 @@ var $builtinmodule = function(name) {
                       Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
                       Sk.builtin.none.none$];
   mod.hist = new Sk.builtin.func(hist_f);
+
+  // scatter function
+  var scatter_f = function(x, y, s, c, color, alpha) {
+    Sk.builtin.pyCheckArgs("scatter", arguments, 0, 6, false);
+
+    if (x == null || Sk.builtin.checkNone(x)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'x'");
+    }
+
+    if (y == null || Sk.builtin.checkNone(y)) {
+        throw new Sk.builtin.ValueError("missing 1 required positional argument: 'y'");
+    }
+
+    if (c != null && !Sk.builtin.checkString(c)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(c) + "' is not supported for c.");
+    }
+    if (c != null) {
+        c = Sk.ffi.remapToJs(c);
+    } else {
+        c = "blue";
+    }
+
+    if (color != null && !Sk.builtin.checkString(color)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(color) + "' is not supported for color.");
+    }
+    if (color != null) {
+        color = Sk.ffi.remapToJs(color);
+    } else {
+        color = "black";
+    }
+
+    if (alpha != null && !Sk.builtin.checkNumber(alpha)) {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(edgecolor) + "' is not supported for alpha.");
+    }
+    if (alpha != null) {
+        alpha = Sk.ffi.remapToJs(alpha);
+    } else {
+        alpha = 1.0;
+    }
+
+    if (Sk.builtin.checkSequence(x)) {
+        x = Sk.ffi.remapToJs(x);
+    } else if (Sk.abstr.typeName(x) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(x);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('x contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        x = data.buffer.slice(0, dim).map(function(t) { return Sk.ffi.remapToJs(t); });
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(x) + "' is not supported for x.");
+    }
+
+    if (Sk.builtin.checkSequence(y)) {
+        y = Sk.ffi.remapToJs(y);
+    } else if (Sk.abstr.typeName(y) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(y);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('y contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        y = data.buffer.slice(0, dim).map(function(t) { return Sk.ffi.remapToJs(t); });
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(y) + "' is not supported for y.");
+    }
+
+    if (s == null) {
+        s = 20.0;
+    } else if (Sk.builtin.checkNumber(s)) {
+        s = Sk.ffi.remapToJs(s);
+    } else if (Sk.builtin.checkSequence(s)) {
+        s = Sk.ffi.remapToJs(s);
+    } else if (Sk.abstr.typeName(s) === CLASS_NDARRAY) {
+        var data = Sk.ffi.unwrapn(s);
+        var dim = 0;
+        if (data && data.shape && data.shape[0]) {
+            dim = data.shape[0];
+        } else {
+            throw new Sk.builtin.ValueError('s contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+        }
+        s = data.buffer.slice(0, dim).map(function(t) { return Sk.ffi.remapToJs(t); });
+    } else {
+        throw new Sk.builtin.TypeError("'" + Sk.abstr.typeName(s) + "' is not supported for s.");
+    }
+
+    create_chart();
+    if (!plot) {
+        plot = jsplotlib.plot(chart);
+    }
+    if (plot) {
+        scatter = new jsplotlib.Line2D(x, y);
+        scatter.update({
+            "graphtype":       "scatter",
+            "color":           color,
+            "linestyle":       "",
+            "marker":          "s",
+            "markersize":      s,
+            "markeredgecolor": c,
+            "alpha":           alpha
+        });
+        plot.add_scatter(scatter);
+    }
+  };
+
+  scatter_f.co_varnames=["x","y","s","c","color","alpha"];
+  scatter_f.$defaults = [Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$,
+                     Sk.builtin.none.none$,Sk.builtin.none.none$,Sk.builtin.none.none$];
+  mod.scatter = new Sk.builtin.func(scatter_f);
 
   // text function
   var text_f = function(x, y, s, color, fontsize) {
@@ -3442,10 +3607,6 @@ var $builtinmodule = function(name) {
   mod.quiverkey = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
       "quiverkey is not yet implemented");
-  });
-  mod.scatter = new Sk.builtin.func(function() {
-    throw new Sk.builtin.NotImplementedError(
-      "scatter is not yet implemented");
   });
   mod.semilogx = new Sk.builtin.func(function() {
     throw new Sk.builtin.NotImplementedError(
