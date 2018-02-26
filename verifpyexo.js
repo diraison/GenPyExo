@@ -99,15 +99,38 @@ function reecrireCode(str, data) {
 	return tab.join("\n");
 }
 
+// extrait l'image utile du bloc (id) au format png (encode en base64) ou au format svg
 function recupererImage(id) {
 	var dessins = document.getElementById(id).children;
 	var image = "";
 	if (dessins.length >= 2 ) {
-		image = dessins[1].toDataURL();				    // CANVAS image
+		image = dessins[1].toDataURL();			// CANVAS image
 	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
 		image = document.getElementById(id).innerHTML;	// SVG
 	}
 	return image;
+}
+
+// sauvegarde l'image donnee en argument ou l'image affichee en dessin
+function sauverImage(image) {
+	if (image == null)
+		image = recupererImage("dessin");
+	if (image === "")
+		return;
+	var extension = "png";
+	if (image.substr(1,3) == "svg") {
+		var imageblob = new Blob([image], {type:"image/svg+xml"});
+		image = window.URL.createObjectURL(imageblob);
+		extension = "svg";
+	}
+	var a = document.createElement("a");
+	a.href = image;
+	a.download = "image." + extension;
+	a.style.display = "none";
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	window.URL.revokeObjectURL(image);
 }
 
 // lance la verification de l'ensemble des tests de alltests[]
