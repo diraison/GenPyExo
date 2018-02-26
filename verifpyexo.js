@@ -99,6 +99,17 @@ function reecrireCode(str, data) {
 	return tab.join("\n");
 }
 
+function recupererImage(id) {
+	var dessins = document.getElementById(id).children;
+	var image = "";
+	if (dessins.length >= 2 ) {
+		image = dessins[1].toDataURL();				    // CANVAS image
+	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
+		image = document.getElementById(id).innerHTML;	// SVG
+	}
+	return image;
+}
+
 // lance la verification de l'ensemble des tests de alltests[]
 function verifier() {
 	nbverifications++;
@@ -150,13 +161,7 @@ function verifierSimple(repl) {
 function finVerifierSimple(mod) {
 	var sortie = document.getElementById("sortie");
 	var texte = sortie.innerHTML.trim();
-	var dessins = document.getElementById("dessin").children;
-	var image = "";
-	if (dessins.length >= 2 ) {
-		image = dessins[1].toDataURL();				// CANVAS image
-	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
-		image = document.getElementById("dessin").innerHTML;	// SVG
-	}
+	var image = recupererImage("dessin");
 
 	console.log("Test "+alltestsindex+":\nentree: "+testd.slice(0,testi)+"\nsortie: "+texte);
 
