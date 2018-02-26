@@ -1475,7 +1475,7 @@ jsplotlib.plot = function(chart) {
   that._create_clipping = function() {
     chart.append("svg:clipPath").attr("id", get_clipping_id())
     .append("rect")
-    .attr("fill", "red")
+    .attr("fill", "white")
     .attr("x", that._yaxis._size)
     .attr("y", that._title_size)
     .attr("width", that._width)
