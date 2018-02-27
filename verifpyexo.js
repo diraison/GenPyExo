@@ -52,6 +52,8 @@ function executer() {
 	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	Sk.TurtleGraphics.width  = 500;
+	Sk.TurtleGraphics.height = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
 	});
@@ -170,6 +172,8 @@ function verifierSimple(repl) {
 	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	Sk.TurtleGraphics.width  = 500;
+	Sk.TurtleGraphics.height = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
 	});
