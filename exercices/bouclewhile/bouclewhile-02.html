@@ -59,7 +59,8 @@ print("Dans", annees, "ans.")
 </article>
 <script>
 alltests = [ ["16000",""], ["0",""] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

@@ -48,7 +48,8 @@ print("IMC =", imc)
 </article>
 <script>
 alltests = [ ["1.78","72"], ["1.62","56"], ["1.0","100"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

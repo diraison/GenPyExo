@@ -61,7 +61,8 @@ while True:
 </article>
 <script>
 alltests = [ ["seed(1)","47","    print(message)"], ["seed(2)","60","49","    print(message)"], ["seed(3)","30","80","60","    print(message)"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

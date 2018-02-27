@@ -56,7 +56,8 @@ print("f({:.7}) ≈ {:.7}".format(a,f(a)))
 </article>
 <script>
 alltests = [ ["def f(x): return x*x-x-1",""], ["def f(x): return x-4",""], ["def f(x): return x*x-2",""] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

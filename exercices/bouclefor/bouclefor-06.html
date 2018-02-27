@@ -59,7 +59,8 @@ def tracerCarre(x,y,c):
 </article>
 <script>
 alltests = [ ["tracerCarre(0,0,100)","#?"], ["tracerCarre(-30,-30,60)","#?"], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","#?\n#?"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

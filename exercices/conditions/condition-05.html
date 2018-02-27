@@ -53,7 +53,8 @@ alltests = [ ["calculerPrix(10)","s=#?\nprint(s)"],
   ["calculerPrix(50)","s=#?\nprint(s)"],
   ["calculerPrix(51)","s=#?\nprint(s)"],
   ["calculerPrix(100)","s=#?\nprint(s)"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

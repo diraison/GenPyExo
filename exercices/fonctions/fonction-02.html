@@ -45,7 +45,8 @@ alltests = [ ["produit(0,7)",  "P=#?\nprint(P)"],
   ["produit(5,4)",  "P=#?\nprint(P)"],
   ["produit(0,0)",  "P=#?\nprint(P)"],
   ["produit(-8,3)", "P=#?\nprint(P)"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>

@@ -51,7 +51,8 @@ perimetre = 2 * (longueur + largeur)
 alltests = [ ["6.4","5.8","print(perimetre)"],
   ["4.0","0.0","print(perimetre)"],
   ["8.2","6.5","print(perimetre)"] ];
-editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true });
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 editeur.setSize(null, 360);
 </script>
 </body>
