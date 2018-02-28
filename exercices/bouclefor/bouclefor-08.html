@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Boucle for en Python - Exercice 8</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Boucle for en Python</h1></header>
+<article>
+	<h2>Exercice 8</h2>
+	<div class="enonce">Vous devez compléter la fonction <strong>frequenceSix(n)</strong> pour qu'elle retourne la fréquence de 6 obtenus lors de <strong>n</strong> lancers d'un dé.<br>
+Elle s'appuiera sur la fonction <strong>lancerDe()</strong> qui simule le lancer d'un dé, en retournant l'issue obtenue (un nombre entier de 1 à 6).<br><br>
+Remarque : <strong>lancerDe()</strong> utilise la fonction <strong>randint()</strong> du module <strong>random</strong> qui permet de générer des nombres entiers aléatoires (ici entre 1 et 6 inclus).
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">from random import *
+
+#? simule le lancer d'un dé
+def lancerDe(): return randint(1,6)
+
+# fonction à compléter
+def frequenceSix(n):
+    nbsix = 0
+    for i in range(n):
+
+    
+
+print("Pour 100 lancers la fréquence de 6" \
+      " est", frequenceSix(100))
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici une solution
+from random import *
+
+#? simule le lancer d'un dé
+def lancerDe(): return randint(1,6)
+
+#  frequenceSix(n) effectue n lancers en
+#  comptabilisant le nombre de 6 obtenus
+#  et retourne la fréquence de 6 à la fin
+def frequenceSix(n):
+    nbsix = 0                  # nombre de 6
+    for i in range(n):
+        if lancerDe() == 6:    # est-ce un 6 ?
+            nbsix = nbsix + 1  # augmente de 1
+    return nbsix / n           # frequence
+
+print("Pour 100 lancers la fréquence de 6" \
+      " est", frequenceSix(100))
+</pre>
+</article>
+<script>
+alltests = [ ["seed(1234)",""], ["seed(5678)",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>

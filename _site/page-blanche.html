@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Programme à exécuter</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body>
+<article>
+	<div class="travail">
+		<textarea id="code"></textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb">Exécuter</button>
+		<button type="button" onclick="sauverImage()" id="savimgb" style="float: right; right: 3%;">Sauver Image</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:visible">
+		<pre id="sortie" style="font-size: 16pt;"></pre>
+		<div id="dessin"></div>
+	</div>
+</article>
+<script>
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+editeur.setSize(null, 560);
+visibilite = true;
+</script>
+</body>
+</html>

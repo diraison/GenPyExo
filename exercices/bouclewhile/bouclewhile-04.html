@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Boucle while en Python - Exercice 4</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Boucle while en Python</h1></header>
+<article>
+	<h2>Exercice 4</h2>
+	<div class="enonce">Implémentez la <a href="https://fr.wikipedia.org/wiki/M%C3%A9thode_de_dichotomie#Programmation">méthode de dichotomie</a> afin de résoudre l'équation \(x^2-x-1=0\) dans l'intervalle [0;10] et obtenir ainsi une approximation du nombre d'or.
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">def f(x): return x*x-x-1   #? résoudre f(x)≈0
+
+a,b = 0,10                # intervalle [a;b]
+while b-a > 0.00001:      # précision désirée
+
+
+
+print("f({:.7}) ≈ {:.7}".format(a,f(a)))
+
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici la solution
+
+def f(x): return x*x-x-1   #? résoudre f(x)≈0
+
+a,b = 0,10                # intervalle [a;b]
+while b-a > 0.00001:      # précision désirée
+    m = (a+b) / 2         # milieu de [a;b]
+    if f(a) * f(m) <= 0:  # signes différents ?
+        b = m             # solution dans [a;m]
+    else:
+        a = m             # solution dans [m;b]
+
+print("f({:.7}) ≈ {:.7}".format(a,f(a)))
+</pre>
+</article>
+<script>
+alltests = [ ["def f(x): return x*x-x-1",""], ["def f(x): return x-4",""], ["def f(x): return x*x-2",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>

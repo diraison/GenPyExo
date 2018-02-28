@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Boucle while en Python - Exercice 1</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Boucle while en Python</h1></header>
+<article>
+	<h2>Exercice 1</h2>
+	<div class="enonce">Complétez le programme pour obtenir la réponse au problème suivant :<br>
+<p style="margin-left: 60px">Lydia vient d'arrêter la chaudière alors que la température de l'eau était affichée à 64°.<br>
+Elle sait que cette température va baisser de 0,2% à chaque minute qui passe.<br>
+Au bout de combien de minutes la température de l'eau sera-t-elle descendue en-dessous de 30° ?</p>
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">temperature = 64    #? température initiale
+
+duree = 0           # temps écoulé en minute
+
+while   :
+    temperature = 
+    duree = 
+
+print("Dans", duree, "minutes.")
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici la réponse
+
+temperature = 64    #? température initiale
+
+duree = 0           # temps écoulé en minute
+
+while temperature >= 30:
+    # diminution de 0.2 % de la temperature
+    temperature = temperature - (temperature * 0.2/100)
+    # 1 minute de plus
+    duree = duree + 1
+
+print("Dans", duree, "minutes.")
+</pre>
+</article>
+<script>
+alltests = [ ["64",""], ["30.05",""], ["30",""], ["20",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>

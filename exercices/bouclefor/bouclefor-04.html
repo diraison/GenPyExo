@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Boucle for en Python - Exercice 4</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Boucle for en Python</h1></header>
+<article>
+	<h2>Exercice 4</h2>
+	<div class="enonce">Modifiez le programme pour obtenir un escalier qui monte vers la droite et comportant 7 marches, chacune de hauteur 16 et de largeur 24.<br>
+<br>
+Ce programme utilise le module <span style="color:blue;">turtle</span> (<i>tortue</i>)
+qui permet de tracer des figures géométriques à l'aide de fonctions spécialisées :
+<ul>
+<li><strong>forward(50)</strong> pour avancer de 50 pixels</li>
+<li><strong>left(60)</strong> pour tourner à gauche de 60°</li>
+<li><strong>right(45)</strong> pour tourner à droite de 45°</li></ul>
+</div>
+	<br>
+	<div class="travail">
+		<textarea id="code">from turtle import *
+
+for n in range():
+    left(90)
+    forward(16)
+
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici la réponse
+
+from turtle import *  # pour utiliser turtle
+
+for n in range(7):    # 7 marches à tracer
+    left(90)          # tourne à gauche de 90°
+    forward(16)       # monte de 16 pixels
+    right(90)         # tourne à droite de 90°
+    forward(24)       # avance de 24 pixels
+</pre>
+</article>
+<script>
+alltests = [ [ "" ] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+editeur.setSize(null, 360);
+</script>
+</body>
+</html>

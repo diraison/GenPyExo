@@ -1,0 +1,21 @@
+# IMPORTANT: Set this to false.
+demo: false
+
+# Theme customization is done on this file instead of _config.yml so that
+# you don't have to restart Jekyll to see changes.
+
+photo: "images/logo.png"
+name: "GenPyExo"
+copy: "Ce site propose quelques exercices de programmation en Python avec vérification du programme. Ils ont été générés avec GenPyExo, un outil basé sur Skulpt disponible sur GitHub."
+
+# Color scheme based on http://www.materialui.co/colors.
+# Possible values:
+# - default
+# - red
+# - pink
+# - brown
+# - blue
+# - purple
+# - teal
+# - green
+color: blue
