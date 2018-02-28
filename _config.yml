@@ -1,4 +1,4 @@
-baseurl: "GenPyExo" # The subpath of your site. Use "" if you're hosting a blog at the root level.
+baseurl: "/GenPyExo" # The subpath of your site. Use "" if you're hosting a blog at the root level.
 url: "https://diraison.github.io/" # the base hostname & protocol for your site
 
 exclude:
