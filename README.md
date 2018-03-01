@@ -1,6 +1,6 @@
 # GenPyExo
 
-Générateur d'exercices Python avec vérification automatique de la réponse
+Générateur d'exercices Python avec vérification automatique de la réponse.
 
 
 # Utilisation
@@ -15,4 +15,9 @@ Le programme apparaissant dans l'éditeur intégré peut être exécuté (bouton
 # Programmation
 
 L'énoncé, le programme à réaliser et les tests de vérification doivent être intégrés à un fichier (.dat) dont le format est précisé dans le document (misc/format_exercice_dat.txt).
+
+
+# Exemples
+
+Plusieurs exemples sont disponibles sur le site [GenPyExo (GitHub Pages)](https://diraison.github.io/GenPyExo/).
 
