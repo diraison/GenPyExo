@@ -621,10 +621,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
 
     if (this._graphtype === "scatter") {
         var s = this._markersize;
-        if (s === undefined) {
-            s = new Array(y.length).fill(1.0);               // default scatter width
-        } else if (typeof(s) === "number") {
-            s = new Array(y.length).fill(s);
+        if (s === undefined || typeof(s) === "number") {
+            var t = (s === undefined ? 1.0 : s);             // default scatter width 1.0
+            s = new Array(y.length);
+            for (var i = 0; i < s.length; i++)
+                s[i] = t;
         }
         var xys = d3.zip(x, y, s);
         this._scatter = parent_chart.chart.append("svg:g").attr("id", get_scatter_id(this._scatter_id))
@@ -656,10 +657,11 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
     // this adds the bars to the chart
     if (this._graphtype === "bar") {
         var s = this._barwidth;
-        if (s === undefined) {
-            s = new Array(y.length).fill(0.8);               // default bar width
-        } else if (typeof(s) === "number") {
-            s = new Array(y.length).fill(s);
+        if (s === undefined || typeof(s) === "number") {
+            var t = (s === undefined ? 0.8 : s);             // default bar width 0.8
+            s = new Array(y.length);
+            for (var i = 0; i < s.length; i++)
+                s[i] = t;
         }
         var xys = d3.zip(x, y, s);
         this._bar = parent_chart.chart.append("svg:g").attr("id", get_bars_id(this._bar_id))
@@ -1201,8 +1203,10 @@ jsplotlib.plot = function(chart) {
   that.add_hist = function(hist) {
     if (hist) {
       var bins = hist._histbins;
-      var y = new Array(bins).fill(0);
-      var x = new Array(bins).fill(0);
+      var y = new Array(bins);
+      var x = new Array(bins);
+      for (var i = 0; i < y.length; i++)
+          x[i] = y[i] = 0;
       var xmax = d3.max(hist._x);
       var xmin = d3.min(hist._x);
       var h = (xmax - xmin) / bins;
