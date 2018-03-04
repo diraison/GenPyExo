@@ -20,7 +20,7 @@
 	<div class="enonce">Complétez la fonction suivante, sachant qu'elle traduit l'expression mathématique \(f(x) = 5x^2-3x+1\).
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">def f(x):
     y =          # ligne à compléter
     return y
@@ -47,7 +47,8 @@ alltests = [ [ "f(-4)", "z=#?\nprint(z)" ],
   [ "f(2)",  "z=#?\nprint(z)" ] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

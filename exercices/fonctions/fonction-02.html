@@ -20,7 +20,7 @@
 	<div class="enonce">Corrigez la fonction \(produit\) pour qu'elle prenne deux paramètres \(a\) et \(n\) , et retourne leur produit.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">def produit(a):
     return a + a
 </textarea>
@@ -47,7 +47,8 @@ alltests = [ ["produit(0,7)",  "P=#?\nprint(P)"],
   ["produit(-8,3)", "P=#?\nprint(P)"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>
