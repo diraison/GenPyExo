@@ -21,7 +21,7 @@
 Ainsi <textcode>print(supprimerEspaces("Un Deux Trois"))</textcode> affiche <textcode>Un-Deux-Trois</textcode>.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">def supprimerEspaces(phrase):
     s = ""
     for c in phrase:
@@ -60,7 +60,8 @@ print( supprimerEspaces(maphrase) )
 alltests = [ ['"Un Deux Trois"',""], ['"Logique"',""], ['" espacé "',""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

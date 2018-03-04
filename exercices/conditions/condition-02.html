@@ -20,7 +20,7 @@
 	<div class="enonce">Corriger le programme suivant pour qu'une réduction de 5 % soit appliquée à un prix atteignant ou dépassant les 100 €.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">prix = float( input("prix ? ") )
 
 if prix :         # 1ère ligne à corriger
@@ -50,7 +50,8 @@ print("prix réduit :", prix)
 alltests = [ ["80.0",""], ["100.0",""], ["240.0",""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

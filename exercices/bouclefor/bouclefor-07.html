@@ -20,7 +20,7 @@
 	<div class="enonce">Complétez le programme pour obtenir dans <strong>resultat</strong> la chaîne de caractères <strong>mot</strong> écrite dans l'ordre inverse.<br> Ainsi "<i>abc</i>" doit donner "<i>cba</i>" et "<i>lacer</i>" doit donner "<i>recal</i>".
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">mot = "mathematiques"     #? exemple
 
 resultat = ""
@@ -56,7 +56,8 @@ print(resultat)
 alltests = [ ['"mathematiques"',""], ['"recal"',""], ['"kayak"',""], ['"Gagné !"',""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
 </head>
 <body>
 <article>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code"></textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb">Exécuter</button>
@@ -29,7 +29,8 @@
 <script>
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 560);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 560 : hauteurEditeur);
 visibilite = true;
 </script>
 </body>

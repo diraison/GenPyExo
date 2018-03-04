@@ -22,7 +22,7 @@
 <li>\(2x-1\) &nbsp; pour &nbsp; \(x < 5\)</li></ul>
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">x = float( input("x ? ") )
 
 if x :
@@ -56,7 +56,8 @@ print("y =", y)
 alltests = [ ["0.0",""], ["4.0",""], ["4.95",""], ["5.0",""], ["6.0",""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

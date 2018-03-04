@@ -20,7 +20,7 @@
 	<div class="enonce">Complétez le programme suivant pour qu'il calcule l'<a href="https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle">indice de masse corporelle</a> à partir de la masse et de la taille d'un individu.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">taille = float(input("Taille en m ?"))
 masse = float(input("Masse en kg ?"))
 
@@ -50,7 +50,8 @@ print("IMC =", imc)
 alltests = [ ["1.78","72"], ["1.62","56"], ["1.0","100"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>
