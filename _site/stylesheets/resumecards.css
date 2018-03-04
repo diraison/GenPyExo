@@ -650,10 +650,10 @@ pre {
       width: 740px; } }
   @media (min-width: 992px) {
     .container {
-      width: 970px; } }
+      width: 1260px; } }
   @media (min-width: 1200px) {
     .container {
-      width: 970px; } }
+      width: 1260px; } }
 
 .container-fluid {
   margin-right: auto;

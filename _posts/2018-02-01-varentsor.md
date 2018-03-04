@@ -2,7 +2,7 @@
 type: "Variables-Entrées-Sorties"
 ---
 
-[Exercice 1](exercices/variables/var-01.html) : évaluation d'une expression.
+[Exercice 1](exercices/variables/var-01.html) : évaluation d'expression.
 
 [Exercice 2](exercices/variables/var-02.html) : calcul de périmètre.
 
