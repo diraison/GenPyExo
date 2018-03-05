@@ -20,7 +20,7 @@
 	<div class="enonce">Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui retourne le plus grand des ces trois nombres.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">def maximum(a, b, c):
 
 
@@ -56,7 +56,8 @@ print("Le plus grand est", maximum(x,y,z))
 alltests = [ ["8","5","2",""], ["7","9","4",""], ["1","3","6",""], ["4","1","5",""], ["2","7","3",""], ["9","6","8",""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

@@ -24,7 +24,7 @@
 de photocopies à réaliser et retourne le prix à payer en euro pour toutes ces photocopies.
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">def calculerPrix(n):
 </textarea>
 		<pre id="erreur"></pre>
@@ -55,7 +55,8 @@ alltests = [ ["calculerPrix(10)","s=#?\nprint(s)"],
   ["calculerPrix(100)","s=#?\nprint(s)"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>

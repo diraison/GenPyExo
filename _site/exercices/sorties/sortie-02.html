@@ -22,7 +22,7 @@
 <li>Le carré de -3 est 9</li></ul>
 </div>
 	<br>
-	<div class="travail">
+	<div class="travail" id="travail">
 		<textarea id="code">x = 6      #? exemple de valeur
 
 print("Le carré de", x
@@ -46,7 +46,8 @@ print("Le carré de", x, "est", x*x)
 alltests = [ ["6",""], ["4",""], ["-3",""], ["1.5", ""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-editeur.setSize(null, 360);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
 </script>
 </body>
 </html>
