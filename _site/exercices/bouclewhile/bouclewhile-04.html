@@ -29,7 +29,6 @@ while b-a > 0.00001:      # précision désirée
 
 
 print("f({:.7}) ≈ {:.7}".format(a,f(a)))
-
 </textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
@@ -55,7 +54,7 @@ print("f({:.7}) ≈ {:.7}".format(a,f(a)))
 </pre>
 </article>
 <script>
-alltests = [ ["def f(x): return x*x-x-1",""], ["def f(x): return x-5",""], ["def f(x): return x*x-2",""] ];
+alltests = [ ["def f(x): return x*x-x-1",""], ["def f(x): return 2*x-5",""], ["def f(x): return x*x-2",""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
