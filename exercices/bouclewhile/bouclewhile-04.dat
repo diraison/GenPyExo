@@ -18,7 +18,7 @@ while b-a > 0.00001:      # précision désirée
 
 print("f({:.7}) ≈ {:.7}".format(a,f(a)))
 ===============================
-[ ["def f(x): return x*x-x-1",""], ["def f(x): return x-4",""], ["def f(x): return x*x-2",""] ]
+[ ["def f(x): return x*x-x-1",""], ["def f(x): return x-5",""], ["def f(x): return x*x-2",""] ]
 ===============================
 def f(x): return x*x-x-1   #? résoudre f(x)≈0
 
