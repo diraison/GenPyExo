@@ -22,6 +22,22 @@ Sk.externalLibraries = {
 		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'], }
 	};
 
+var etatExec = 0;		// indique l'etat du programme (0 a l'arret, 1 en marche, 2 a stopper)
+
+function changeEtatExec(etat) {
+	var msg = [ "Exécuter", "Arrêter" ];
+	document.getElementById("execfb").innerHTML = (etat === 1 ? msg[1] : msg[0]);
+	etatExec = etat;
+}
+
+function interruptHandler() {
+	if (etatExec == 2) {
+		changeEtatExec(0);
+		throw new Error('Program stopped!');
+	}
+	return null;
+}
+
 function builtinRead(x) {
 	if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
 		throw "File not found: '" + x + "'";
@@ -39,6 +55,12 @@ function sortief(text) {
 
 // execute de le programme rentre par l'utilisateur
 function executer() {
+	if (etatExec === 0) {
+		changeEtatExec(1);
+	} else {
+		changeEtatExec(2);
+		return;
+	}
 	var prog = editeur.getValue()+"\n";
 	var sortie = document.getElementById("sortie");
 	var erreur = document.getElementById("erreur");
@@ -50,19 +72,21 @@ function executer() {
 		dessin.innerHTML = '';
 	Sk.pre = "sortie";
 	Sk.canvas = "dessin";
-	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture});
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
-	});
+	}, {'*': interruptHandler});
 	myPromise.then(function(mod) {
 			document.getElementById("erreur").innerHTML += 'success' + "<br>";
+			changeEtatExec(0);
 			//console.log('success');
 		},
 			function(err) {
 			document.getElementById("erreur").innerHTML = err.toString() + "<br>";
+			changeEtatExec(0);
 			//console.log(err.toString());
 	});
 }
@@ -137,12 +161,19 @@ function sauverImage(image) {
 
 // lance la verification de l'ensemble des tests de alltests[]
 function verifier() {
+	if (etatExec === 0) {
+		changeEtatExec(1);
+	} else {
+		changeEtatExec(2);
+		return;
+	}
 	nbverifications++;
 	document.getElementById("verifb").innerHTML = "Vérifier la réponse ("+nbverifications+")";
 	document.getElementById("resultat").style.visibility = (visibilite ? "visible" : "hidden");
 	if (nbverifications == 10) {
 		editeur.getDoc().setValue(pyresp);
 		alert("Voici une solution possible");
+		changeEtatExec(0);
 		return;
 	}
 	if (alltests.length == 0) {
@@ -170,16 +201,17 @@ function verifierSimple(repl) {
 	erreur.innerHTML = '';
 	Sk.pre = "sortie";
 	Sk.canvas = "dessin";
-	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture});
+	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
-	});
+	}, {'*': interruptHandler});
 	myPromise.then(finVerifierSimple,
 		function(err) {
 			document.getElementById("erreur").innerHTML = err.toString() + "<br>";
+			changeEtatExec(0);
 			//console.log(err.toString());
 	});
 }
@@ -205,6 +237,7 @@ function finVerifierSimple(mod) {
 			document.getElementById("dessin").innerHTML = "";
 			visibilite = true;
 		}
+		changeEtatExec(0);
 		return;
 	}
 
@@ -250,6 +283,8 @@ function finVerifierSimple(mod) {
 	} else {
 		sortie.innerHTML += "Essayez encore, vous pouvez faire mieux.\n\nRapport :" + rapport;
 	}
+
+	changeEtatExec(0);
 }
 
 // cree la liste des bonnes reponses attendues
