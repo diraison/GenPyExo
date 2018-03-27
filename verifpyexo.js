@@ -19,8 +19,16 @@ Sk.externalLibraries = {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/__init__.js' },
 	"matplotlib.pyplot" : {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/pyplot/__init__.js',
-		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'], }
+		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'], },
+	pygal : {
+		path : 'https://cdn.jsdelivr.net/gh/trinketapp/pygal.js@0.1.3/__init__.js',
+		dependencies: ['https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts.js',
+		               'https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts-more.js'] }
 	};
+
+Sk.domOutput = function(html) {
+	return $("#dessin").append(html).children().last();
+};
 
 var etatExec = 0;		// indique l'etat du programme (0 a l'arret, 1 en marche, 2 a stopper)
 
@@ -76,6 +84,8 @@ function executer() {
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
+	Sk.availableWidth  = 520;		// pygal
+	Sk.availableHeight = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
 	}, {'*': interruptHandler});
@@ -129,10 +139,13 @@ function reecrireCode(str, data) {
 function recupererImage(id) {
 	var dessins = document.getElementById(id).children;
 	var image = "";
-	if (dessins.length >= 2 ) {
-		image = dessins[1].toDataURL();			// CANVAS image
+	if (dessins.length >= 2 && dessins[1].nodeName === "CANVAS") {
+		image = dessins[1].toDataURL();				// CANVAS image
 	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
-		image = document.getElementById(id).innerHTML;	// SVG
+		image = document.getElementById(id).innerHTML;		// SVG (pyplot)
+	} else if (dessins.length >= 1 && dessins[0].nodeName === "DIV") {
+		var svg = dessins[0].getElementsByTagName("svg");
+		image = (svg.length == 1 ? svg[0].outerHTML : image);	// SVG (pygal)
 	}
 	return image;
 }
@@ -205,6 +218,8 @@ function verifierSimple(repl) {
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
+	Sk.availableWidth  = 520;		// pygal
+	Sk.availableHeight = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
 			return Sk.importMainWithBody("<stdin>", false, prog, true);
 	}, {'*': interruptHandler});
