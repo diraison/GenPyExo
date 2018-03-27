@@ -61,6 +61,10 @@ ul {
 	margin-top: 0;
 }
 
+#sortie:empty {
+	margin-bottom: 0;
+}
+
 #erreur {
 	background-color: #fcc;
 	color: #880000;
