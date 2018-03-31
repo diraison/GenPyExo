@@ -46,6 +46,14 @@ function interruptHandler() {
 	return null;
 }
 
+function turtleAssets(nomfichier) {
+	if (nomfichier.indexOf("://") !== -1)
+		return nomfichier;
+	var urlpage = "" + window.location;
+	var chemin  = urlpage.substr(0, urlpage.lastIndexOf('/'));
+	return chemin + "/" + nomfichier;
+}
+
 function builtinRead(x) {
 	if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
 		throw "File not found: '" + x + "'";
@@ -82,6 +90,7 @@ function executer() {
 	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	Sk.TurtleGraphics.assets = turtleAssets;
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
 	Sk.availableWidth  = 520;		// pygal
@@ -139,8 +148,8 @@ function reecrireCode(str, data) {
 function recupererImage(id) {
 	var dessins = document.getElementById(id).children;
 	var image = "";
-	if (dessins.length >= 2 && dessins[1].nodeName === "CANVAS") {
-		image = dessins[1].toDataURL();				// CANVAS image
+	if (dessins.length >= 2 && dessins[dessins.length-1].nodeName === "CANVAS") {
+		image = dessins[dessins.length-1].toDataURL();		// CANVAS image
 	} else if (dessins.length == 1 && dessins[0].nodeName === "svg") {
 		image = document.getElementById(id).innerHTML;		// SVG (pyplot)
 	} else if (dessins.length >= 1 && dessins[0].nodeName === "DIV") {
@@ -216,6 +225,7 @@ function verifierSimple(repl) {
 	Sk.canvas = "dessin";
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
+	Sk.TurtleGraphics.assets = turtleAssets;
 	Sk.TurtleGraphics.width  = 500;
 	Sk.TurtleGraphics.height = 400;
 	Sk.availableWidth  = 520;		// pygal
