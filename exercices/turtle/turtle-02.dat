@@ -1,0 +1,36 @@
+Turtle en Python
+===============================
+Exercice 2
+===============================
+Complétez le programme pour tracer le rectangle ABCD sachant que A(-100;150), B(200;150) et C(200;-50).<br>
+Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
+<ul>
+<li><strong>up()</strong> pour lever le crayon et ne rien tracer</li>
+<li><strong>down()</strong> pour baisser le crayon et recommencer à tracer</li>
+<li><strong>goto(-30,70)</strong> pour déplacer le crayon aux coordonnées (-30,70)</li></ul>
+===============================
+# Voici la réponse
+
+from turtle import *
+
+fenetre = Screen()
+fenetre.bgpic("repere")
+                   #? dessin du rectangle
+up()
+goto(-100,150)     # A
+down()
+goto(200,150)      # B
+goto(200,-50)      # C
+goto(-100,-50)     # D
+goto(-100,150)     # A (fermer le rectangle)
+===============================
+[ ["speed(0)", ""] ]
+===============================
+from turtle import *
+
+fenetre = Screen()
+fenetre.bgpic("repere")
+                   #? dessin du rectangle
+up()
+
+down()
