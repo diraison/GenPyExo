@@ -49,6 +49,8 @@ function interruptHandler() {
 function turtleAssets(nomfichier) {
 	if (nomfichier.indexOf("://") !== -1)
 		return nomfichier;
+	if (nomfichier.length <= 10 && nomfichier.indexOf(".") === -1)
+		return "https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/" + nomfichier + ".png";
 	var urlpage = "" + window.location;
 	var chemin  = urlpage.substr(0, urlpage.lastIndexOf('/'));
 	return chemin + "/" + nomfichier;
@@ -91,8 +93,8 @@ function executer() {
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.assets = turtleAssets;
-	Sk.TurtleGraphics.width  = 500;
-	Sk.TurtleGraphics.height = 400;
+	Sk.TurtleGraphics.width  = 501;
+	Sk.TurtleGraphics.height = 401;
 	Sk.availableWidth  = 520;		// pygal
 	Sk.availableHeight = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
@@ -226,8 +228,8 @@ function verifierSimple(repl) {
 	Sk.configure({output:sortief, read:builtinRead, inputfun:entreef_, inputfunTakesPrompt:true, __future__:SkFuture, killableWhile:true, killableFor:true});
 	(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'dessin';
 	Sk.TurtleGraphics.assets = turtleAssets;
-	Sk.TurtleGraphics.width  = 500;
-	Sk.TurtleGraphics.height = 400;
+	Sk.TurtleGraphics.width  = 501;
+	Sk.TurtleGraphics.height = 401;
 	Sk.availableWidth  = 520;		// pygal
 	Sk.availableHeight = 400;
 	var myPromise = Sk.misceval.asyncToPromise(function() {
