@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Fonction en Python - Exercice 5</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Fonction en Python</h1></header>
+<article>
+	<h2>Exercice 5</h2>
+	<div class="enonce">Complétez la fonction <i>convertirFahrenheitEnCelsius</i>() qui permet de convertir une température donnée en degré Fahrenheit en une température en degré Celsius.<br>
+Vous pouvez consulter la page de Wikipedia sur le <a href="https://fr.wikipedia.org/wiki/Degr%C3%A9_Fahrenheit">Degré Fahrenheit</a>.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">def convertirFahrenheitEnCelsius(t):
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici une reponse possible
+
+def convertirFahrenheitEnCelsius(t):
+    return (t - 32) / 1.8
+</pre>
+</article>
+<script>
+alltests = [ ["convertirFahrenheitEnCelsius(68)", "t=#?\nprint(float(t))"],
+  ["convertirFahrenheitEnCelsius(-40)", "t=#?\nprint(float(t))"],
+  ["convertirFahrenheitEnCelsius(32)", "t=#?\nprint(float(t))"] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
+</script>
+</body>
+</html>
