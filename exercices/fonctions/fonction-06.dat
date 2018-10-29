@@ -1,0 +1,33 @@
+Fonction en Python
+===============================
+Exercice 6
+===============================
+Complétez la fonction récursive <code>puissance()</code> de paramètres \(x\) et \(n\) en utilisant la méthode d'<a href="https://fr.wikipedia.org/wiki/Exponentiation_rapide">exponentiation rapide</a> afin d'obtenir rapidement \(x^n\).<br><br>
+Indications : La division entière d'un nombre <code>n</code> par 2 se réalise avec <code>n//2</code>, quant au reste il s'obtient avec <code>n%2</code>.<br>
+Remarque : On considère que <code>n</code> est un entier strictement positif.
+===============================
+# Voici une implémentation possible
+
+def puissance(x,n):
+    if n == 1:
+        return x
+    elif n % 2 == 0:
+        return puissance(x*x, n//2)
+    else:
+        return x * puissance(x*x, n//2)
+
+p = puissance(14,5)     #? ne pas supprimer
+print(p)
+===============================
+[ ["puissance(14,5)",""], ["puissance(23,1)",""], ["puissance(10,6)",""], ["puissance(7,2)",""] ]
+===============================
+def puissance(x,n):
+    if n == 1:
+        return x
+    elif           :
+        return puissance(        )
+    else:
+        return 
+
+p = puissance(14,5)     #? ne pas supprimer
+print(p)

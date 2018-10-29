@@ -1,0 +1,35 @@
+Boucle while en Python
+===============================
+Exercice 5
+===============================
+Implémentez la <a href="https://fr.wikipedia.org/wiki/Technique_de_multiplication_dite_russe">technique de multiplication dite russe</a> afin d'obtenir dans la variable <code>resultat</code> le produit des variables <code>a</code> et <code>b</code>.<br><br>
+Indications : La division entière d'un nombre <code>n</code> par 2 se réalise avec <code>n//2</code>, quant au reste il s'obtient avec <code>n%2</code>.<br>
+Remarque : Ces deux opérations sont aussi réalisables avec <code>n&1</code> et <code>n>>1</code>.
+===============================
+# Voici une implémentation possible
+a = 172    #?
+b = 58     #?
+
+resultat = 0
+while b != 0:
+    if b % 2 == 1:  # si b est impair
+        resultat = resultat + a
+    a = 2 * a
+    b = b // 2
+
+print(resultat)
+===============================
+[ ["172","58",""], ["0","219",""], ["46","0",""], ["329","97",""] ]
+===============================
+a = 172    #? ne pas supprimer
+b = 58     #?
+
+# début de l'algorithme
+resultat = 0
+
+
+
+
+
+# fin de l'algorithme
+print(resultat)
