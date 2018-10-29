@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Fonction en Python - Exercice 6</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Fonction en Python</h1></header>
+<article>
+	<h2>Exercice 6</h2>
+	<div class="enonce">Complétez la fonction récursive <code>puissance()</code> de paramètres \(x\) et \(n\) en utilisant la méthode d'<a href="https://fr.wikipedia.org/wiki/Exponentiation_rapide">exponentiation rapide</a> afin d'obtenir rapidement \(x^n\).<br><br>
+Indications : La division entière d'un nombre <code>n</code> par 2 se réalise avec <code>n//2</code>, quant au reste il s'obtient avec <code>n%2</code>.<br>
+Remarque : On considère que <code>n</code> est un entier strictement positif.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">def puissance(x,n):
+    if n == 1:
+        return x
+    elif           :
+        return puissance(        )
+    else:
+        return 
+
+p = puissance(14,5)     #? ne pas supprimer
+print(p)
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici une implémentation possible
+
+def puissance(x,n):
+    if n == 1:
+        return x
+    elif n % 2 == 0:
+        return puissance(x*x, n//2)
+    else:
+        return x * puissance(x*x, n//2)
+
+p = puissance(14,5)     #? ne pas supprimer
+print(p)
+</pre>
+</article>
+<script>
+alltests = [ ["puissance(14,5)",""], ["puissance(23,1)",""], ["puissance(10,6)",""], ["puissance(7,2)",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
+</script>
+</body>
+</html>

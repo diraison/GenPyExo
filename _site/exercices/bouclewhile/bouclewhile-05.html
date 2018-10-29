@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Boucle while en Python - Exercice 5</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Boucle while en Python</h1></header>
+<article>
+	<h2>Exercice 5</h2>
+	<div class="enonce">Implémentez la <a href="https://fr.wikipedia.org/wiki/Technique_de_multiplication_dite_russe">technique de multiplication dite russe</a> afin d'obtenir dans la variable <code>resultat</code> le produit des variables <code>a</code> et <code>b</code>.<br><br>
+Indications : La division entière d'un nombre <code>n</code> par 2 se réalise avec <code>n//2</code>, quant au reste il s'obtient avec <code>n%2</code>.<br>
+Remarque : Ces deux opérations sont aussi réalisables avec <code>n&1</code> et <code>n>>1</code>.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">a = 172    #? ne pas supprimer
+b = 58     #?
+
+# début de l'algorithme
+resultat = 0
+
+
+
+
+
+# fin de l'algorithme
+print(resultat)
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici une implémentation possible
+a = 172    #?
+b = 58     #?
+
+resultat = 0
+while b != 0:
+    if b % 2 == 1:  # si b est impair
+        resultat = resultat + a
+    a = 2 * a
+    b = b // 2
+
+print(resultat)
+</pre>
+</article>
+<script>
+alltests = [ ["172","58",""], ["0","219",""], ["46","0",""], ["329","97",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
+</script>
+</body>
+</html>
