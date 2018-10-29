@@ -8,3 +8,5 @@ type: "Boucle while"
 [Exercice 3](exercices/bouclewhile/bouclewhile-03.html) : jeu du plus ou moins.
 
 [Exercice 4](exercices/bouclewhile/bouclewhile-04.html) : dichotomie.
+
+[Exercice 5](exercices/bouclewhile/bouclewhile-05.html) : multiplication russe.

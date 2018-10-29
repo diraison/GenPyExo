@@ -10,3 +10,5 @@ type: "Fonctions"
 [Exercice 4](exercices/fonctions/fonction-04.html) : problème tarifaire.
 
 [Exercice 5](exercices/fonctions/fonction-05.html) : conversion d'unité.
+
+[Exercice 6](exercices/fonctions/fonction-06.html) : recursivité.
