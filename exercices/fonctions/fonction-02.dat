@@ -2,7 +2,7 @@ Fonction en Python
 ===============================
 Exercice 2
 ===============================
-Corrigez la fonction \(produit\) pour qu'elle prenne deux paramètres \(a\) et \(n\) , et retourne leur produit.
+Corrigez la fonction \(produit\) pour qu'elle prenne deux paramètres \(a\) et \(n\) , et renvoie leur produit.
 ===============================
 # Une solution simple
 

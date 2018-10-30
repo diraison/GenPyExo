@@ -6,7 +6,7 @@ Une boutique de photocopies propose le tarif suivant :<ul>
 <li>plein tarif : 0,08 € / photocopie, les 50 premières</li>
 <li>tarif réduit : 0,06 € / photocopie, les suivantes</li></ul>
 Écrire une fonction calculerPrix() qui prend en paramètre le nombre <strong>n</strong>
-de photocopies à réaliser et retourne le prix à payer en euro pour toutes ces photocopies.
+de photocopies à réaliser et renvoie le prix à payer en euro pour toutes ces photocopies.
 ===============================
 # Solution de l'exercice
 

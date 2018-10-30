@@ -2,7 +2,7 @@ Fonction en Python
 ===============================
 Exercice 1
 ===============================
-Vous devez créer une fonction \(f\) qui prend en paramètre un nombre \(x\) et qui retourne \(5x-3\).
+Vous devez créer une fonction \(f\) qui prend en paramètre un nombre \(x\) et qui renvoie \(5x-3\).
 ===============================
 # Voici la solution
 

@@ -2,13 +2,13 @@ Boucle for en Python
 ===============================
 Exercice 11
 ===============================
-Complétez la fonction <strong>supprimerEspaces</strong>, de paramètre <strong>phrase</strong>, qui retourne une chaîne dans laquelle tous les espaces " " de <strong>phrase</strong> sont remplacés par des tirets "<strong>-</strong>".<br><br>
+Complétez la fonction <strong>supprimerEspaces</strong>, de paramètre <strong>phrase</strong>, qui renvoie une chaîne dans laquelle tous les espaces " " de <strong>phrase</strong> sont remplacés par des tirets "<strong>-</strong>".<br><br>
 Ainsi <textcode>print(supprimerEspaces("Un Deux Trois"))</textcode> affiche <textcode>Un-Deux-Trois</textcode>.
 ===============================
 # Voici une réponse
 
 def supprimerEspaces(phrase):
-    s = ""              # resultat à retourner
+    s = ""              # resultat à renvoyer
     for c in phrase:    # pour chaque caractère
         if c == " ":    # si c'est un espace
             s = s + "-" # remplacer par un tiret

@@ -2,7 +2,7 @@ Instruction conditionnelle en Python
 ===============================
 Exercice 6
 ===============================
-Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui retourne le plus grand des ces trois nombres.
+Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui renvoie le plus grand des ces trois nombres.
 ===============================
 # Solution de l'exercice
 def maximum(a, b, c):
