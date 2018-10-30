@@ -11,4 +11,4 @@ type: "Fonctions"
 
 [Exercice 5](exercices/fonctions/fonction-05.html) : conversion d'unité.
 
-[Exercice 6](exercices/fonctions/fonction-06.html) : recursivité.
+[Exercice 6](exercices/fonctions/fonction-06.html) : récursivité.
