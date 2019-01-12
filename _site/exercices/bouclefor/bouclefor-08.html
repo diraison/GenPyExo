@@ -17,7 +17,7 @@
 <header><h1>Boucle for en Python</h1></header>
 <article>
 	<h2>Exercice 8</h2>
-	<div class="enonce">Vous devez compléter la fonction <strong>frequenceSix(n)</strong> pour qu'elle retourne la fréquence de 6 obtenus lors de <strong>n</strong> lancers d'un dé.<br>
+	<div class="enonce">Vous devez compléter la fonction <strong>frequenceSix(n)</strong> pour qu'elle renvoie la fréquence de 6 obtenus lors de <strong>n</strong> lancers d'un dé.<br>
 Elle s'appuiera sur la fonction <strong>lancerDe()</strong> qui simule le lancer d'un dé, en retournant l'issue obtenue (un nombre entier de 1 à 6).<br><br>
 Remarque : <strong>lancerDe()</strong> utilise la fonction <strong>randint()</strong> du module <strong>random</strong> qui permet de générer des nombres entiers aléatoires (ici entre 1 et 6 inclus).
 </div>
@@ -54,7 +54,7 @@ def lancerDe(): return randint(1,6)
 
 #  frequenceSix(n) effectue n lancers en
 #  comptabilisant le nombre de 6 obtenus
-#  et retourne la fréquence de 6 à la fin
+#  et renvoie la fréquence de 6 à la fin
 def frequenceSix(n):
     nbsix = 0                  # nombre de 6
     for i in range(n):

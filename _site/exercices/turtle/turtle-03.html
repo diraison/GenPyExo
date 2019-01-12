@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
-	<title>Instruction conditionnelle en Python - Exercice 6</title>
+	<title>Turtle en Python - Exercice 3</title>
 	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
@@ -14,20 +14,27 @@
 	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
 </head>
 <body onload="genererReponses()">
-<header><h1>Instruction conditionnelle en Python</h1></header>
+<header><h1>Turtle en Python</h1></header>
 <article>
-	<h2>Exercice 6</h2>
-	<div class="enonce">Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui renvoie le plus grand des ces trois nombres.
+	<h2>Exercice 3</h2>
+	<div class="enonce">Modifiez le programme pour placer dans le repère : le point de coordonnées (-4;5), le point d'ordonnée -3 et d'abscisse 8, et enfin leur milieu.<br>
+Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
+<ul>
+<li><strong>goto(3,2)</strong> pour déplacer le crayon aux coordonnées (3;2)</li>
+<li><strong>dot()</strong> pour tracer un point à la position courante du crayon</li></ul>
 </div>
 	<br>
 	<div class="travail" id="travail">
-		<textarea id="code">def maximum(a, b, c):
+		<textarea id="code">from turtle import *
 
+fenetre = Screen()
+fenetre.setworldcoordinates(-10,-8,10,8)
+fenetre.bgpic("repereC2")
+penup()
 
-x = float( input("1er nombre ?") )
-y = float( input("2nd nombre ?") )
-z = float( input("3e  nombre ?") )
-print("Le plus grand est", maximum(x,y,z))
+# modifiez le programme à partir d'ici
+goto(3,2)
+dot()
 </textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
@@ -37,23 +44,28 @@ print("Le plus grand est", maximum(x,y,z))
 		<pre id="sortie"></pre>
 		<div id="dessin"></div>
 	</div>
-	<pre id="solution" style="display:none"># Solution de l'exercice
-def maximum(a, b, c):
-    if a > b and a > c:
-        return a
-    if b > a and b > c:
-        return b
-    else:
-        return c
+	<pre id="solution" style="display:none"># Voici une réponse
 
-x = float( input("1er nombre ?") )
-y = float( input("2nd nombre ?") )
-z = float( input("3e  nombre ?") )
-print("Le plus grand est", maximum(x,y,z))
+from turtle import *
+
+fenetre = Screen()
+fenetre.setworldcoordinates(-10,-8,10,8)
+fenetre.bgpic("repereC2")
+hideturtle()
+penup()
+
+goto(-4,5)         # premier point
+dot()
+goto(8,-3)         # second point
+dot()
+xI = (-4 + 8) / 2     # abscisse du milieu
+yI = (5 + (-3)) / 2   # ordonnée du milieu
+goto(xI,yI)
+dot()
 </pre>
 </article>
 <script>
-alltests = [ ["8","5","2",""], ["7","9","4",""], ["1","3","6",""], ["4","1","5",""], ["2","7","3",""], ["9","6","8",""] ];
+alltests = [ [""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
