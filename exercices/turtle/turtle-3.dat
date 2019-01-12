@@ -1,0 +1,41 @@
+Turtle en Python
+===============================
+Exercice 3
+===============================
+Modifiez le programme pour placer dans le repère : le point de coordonnées (-4;5), le point d'ordonnée -3 et d'abscisse 8, et enfin leur milieu.<br>
+Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
+<ul>
+<li><strong>goto(3,2)</strong> pour déplacer le crayon aux coordonnées (3;2)</li>
+<li><strong>dot()</strong> pour tracer un point à la position courante du crayon</li></ul>
+===============================
+# Voici une réponse
+
+from turtle import *
+
+fenetre = Screen()
+fenetre.setworldcoordinates(-10,-8,10,8)
+fenetre.bgpic("repereC2")
+hideturtle()
+penup()
+
+goto(-4,5)         # premier point
+dot()
+goto(8,-3)         # second point
+dot()
+xI = (-4 + 8) / 2     # abscisse du milieu
+yI = (5 + (-3)) / 2   # ordonnée du milieu
+goto(xI,yI)
+dot()
+===============================
+[ [""] ]
+===============================
+from turtle import *
+
+fenetre = Screen()
+fenetre.setworldcoordinates(-10,-8,10,8)
+fenetre.bgpic("repereC2")
+penup()
+
+# modifiez le programme à partir d'ici
+goto(3,2)
+dot()
