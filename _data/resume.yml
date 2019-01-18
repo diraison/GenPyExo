@@ -6,7 +6,7 @@ demo: false
 
 photo: "images/logo.png"
 name: "GenPyExo"
-copy: "Ce site propose quelques exercices de programmation en Python avec vérification du programme. Ils ont été générés avec GenPyExo, un outil basé sur Skulpt et disponible sur GitHub."
+copy: "Ce site propose quelques exercices de programmation en Python avec vérification du programme et proposition de solution après 9 tentatives de vérification. <br>Ils ont été générés avec GenPyExo, un outil basé sur Skulpt et disponible sur GitHub."
 
 # Color scheme based on http://www.materialui.co/colors.
 # Possible values:
