@@ -17,11 +17,11 @@
 <header><h1>Variable en Python</h1></header>
 <article>
 	<h2>Exercice 1</h2>
-	<div class="enonce">Complétez la dernière ligne pour que la variable <strong>z</strong> contienne le résultat de \(\frac{2x-6}{4}\).
+	<div class="enonce">Complétez la dernière ligne pour que la variable <strong>z</strong> contienne toujours le résultat de \(\frac{2x-6}{4}\).
 </div>
 	<br>
 	<div class="travail" id="travail">
-		<textarea id="code">#? Complétez la dernière ligne
+		<textarea id="code">x = 372951   #? valeur changeante
 
 z = 
 </textarea>
@@ -33,15 +33,17 @@ z =
 		<pre id="sortie"></pre>
 		<div id="dessin"></div>
 	</div>
-	<pre id="solution" style="display:none">#? Solution de l'exercice
+	<pre id="solution" style="display:none"># Solution de l'exercice
+
+x = 372951   #? exemple de valeur
 
 z = (2*x-6)/4
 </pre>
 </article>
 <script>
-alltests = [ ["x=3",   "print(z)"],
-  ["x=1",   "print(z)"],
-  ["x=8.5", "print(z)"] ];
+alltests = [ ["3",   "print(z)"],
+  ["1",   "print(z)"],
+  ["8.5", "print(z)"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
