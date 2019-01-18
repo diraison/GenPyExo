@@ -35,6 +35,10 @@ def tracerCarre(x,y,c):
     goto(
     
     for n in range(4):
+
+
+
+tracerCarre(-40,20,80)	#? exemple d'appel
 </textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
@@ -55,10 +59,12 @@ def tracerCarre(x,y,c):
     for n in range(4):   # 4 côtés
         forward(c)       # côté de longueur c
         left(90)         # angle droit
+
+tracerCarre(-40,20,80)   #? exemple d'appel
 </pre>
 </article>
 <script>
-alltests = [ ["tracerCarre(0,0,100)","#?"], ["tracerCarre(-30,-30,60)","#?"], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","#?\n#?"] ];
+alltests = [ ["tracerCarre(0,0,100)",""], ["tracerCarre(-30,-30,60)",""], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","\n#?"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
