@@ -1,0 +1,41 @@
+Programme en Python
+===============================
+Exercice 5
+===============================
+Complétez l'avant dernière ligne du programme pour déchiffrer le texte <strong>msgSecret</strong>.<br>
+Vous utiliserez fonction <strong>chiffrerCesar()</strong>, qui renvoie un message chiffré selon le <a href="https://fr.wikipedia.org/w/index.php?title=Chiffre_de_c%C3%A9sar">Chiffre de César</a>, et dont les deux paramètres sont : la chaîne de caractères à chiffrer et le décalage (compris entre 1 et 25) à appliquer sur chaque lettre de l'alphabet.
+===============================
+# Voici la solution
+
+def chiffrerCesar(msgClair, decalage = 3):
+    ALPHABET = "abcdefghijklmnopqrstuvwxyz" * 2
+    ALPHABET += ALPHABET.upper()
+    msgCode = ""
+    for lettre in msgClair:
+        if lettre in ALPHABET:
+            i = ALPHABET.index(lettre)
+            lettre = ALPHABET[i + decalage]
+        msgCode += lettre
+    return msgCode
+
+msgSecret = "Jxhuuh hw Sdla"        #? exemple
+# reculer de 3 lettres revient à avancer de 23
+msgClair = chiffrerCesar(msgSecret, 23)
+print(msgClair)
+===============================
+[ ['"Vl ylv sdfhp, "',""], ['"sdud ehooxp"',""], ['"Huuduh kxpdqxp hvw"',""], ['"Aa-Dd-Ww-Xx-Zz"',""] ]
+===============================
+def chiffrerCesar(msgClair, decalage = 3):
+    ALPHABET = "abcdefghijklmnopqrstuvwxyz" * 2
+    ALPHABET += ALPHABET.upper()
+    msgCode = ""
+    for lettre in msgClair:
+        if lettre in ALPHABET:
+            i = ALPHABET.index(lettre)
+            lettre = ALPHABET[i + decalage]
+        msgCode += lettre
+    return msgCode
+
+msgSecret = "Jxhuuh hw Sdla"   #? exemple
+msgClair =                 # ligne à compléter
+print(msgClair)
