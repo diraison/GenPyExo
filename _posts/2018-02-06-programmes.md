@@ -8,3 +8,5 @@ type: "Programmes"
 [Exercice 3](exercices/programmes/prog-03.html) : nombre secret.
 
 [Exercice 4](exercices/programmes/prog-04.html) : calculerAire().
+
+[Exercice 5](exercices/programmes/prog-05.html) : déchiffrer César.
