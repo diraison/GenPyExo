@@ -146,6 +146,20 @@ function reecrireCode(str, data) {
 	return tab.join("\n");
 }
 
+// charge le programme passe en argument dans l'URL apres un hashtag
+function chargerProgramme() {
+	var code = window.location.hash.substring(1);
+	document.getElementById("code").innerHTML = decodeURIComponent(code);
+}
+
+// sauvegarde le programme dans l'URL a la suite d'un hashtag
+function sauverProgramme() {
+	var programme = editeur.getValue();
+	var baseURL = window.location.href.split("#")[0];
+	var fullURL = baseURL + "#" + encodeURIComponent(programme);
+	location.assign(fullURL);
+}
+
 // extrait l'image utile du bloc (id) au format png (encode en base64) ou au format svg
 function recupererImage(id) {
 	var dessins = document.getElementById(id).children;
