@@ -19,7 +19,8 @@
 		<textarea id="code"></textarea>
 		<pre id="erreur"></pre>
 		<button type="button" onclick="executer()" id="execfb">Exécuter</button>
-		<button type="button" onclick="sauverImage()" id="savimgb" style="float: right; right: 3%;">Sauver Image</button> 
+		<button type="button" onclick="sauverProgramme()" id="saveprogb" style="float: right; margin-left: 20px;">Sauver URL</button>
+		<button type="button" onclick="sauverImage()" id="savimgb" style="float: right;">Sauver Image</button> 
 	</div>
 	<div class="reponses" id="resultat" style="visibility:visible">
 		<pre id="sortie" style="font-size: 16pt;"></pre>
@@ -27,6 +28,7 @@
 	</div>
 </article>
 <script>
+chargerProgramme();
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
