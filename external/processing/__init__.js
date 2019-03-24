@@ -1651,7 +1651,7 @@ var $builtinmodule = function (name) {
                 return Sk.builtin.assk$(mod.processing.frameCount);
             }
             else if (key === "frameRate") {
-                return Sk.builtin.assk$(mod.processing.frameRate);
+                return Sk.builtin.assk$(mod.processing.__frameRate);
             }
             else if (key === "height") {
                 return Sk.builtin.assk$(mod.processing.height);
