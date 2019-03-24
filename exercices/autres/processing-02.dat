@@ -1,0 +1,22 @@
+Processing en Python
+===============================
+Exemple 2
+===============================
+Executez ce programme qui utilise le module processing (documentation : <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>).
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+def setup():
+    size(512,512)
+    for x in range(512):
+        for y in range(512):
+            r = x / 511
+            g = (x - y + 511) / 1022
+            b = y / 511
+            c = color(255*r, 255*g, 255*b)
+            set(x, y, c)
+
+run()

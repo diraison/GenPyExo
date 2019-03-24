@@ -36,9 +36,6 @@ def keyPressed():
     elif keyboard.key != CODED:     # rajoute le message tapé au clavier
         banderole += keyboard.key
 
-# Lancer le programme    
-run()
-
 # Trace une ligne horizontale au niveau du pointeur de la souris
 def tracerHorizontale():
     stroke(0xffbbbbff)
@@ -60,3 +57,6 @@ def afficherBanderole():
         pos = 800
     fill(0xffffff00)
     text(banderole, pos, 180)
+
+# Lancer le programme    
+run()
