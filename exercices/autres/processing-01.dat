@@ -1,0 +1,62 @@
+Processing en Python
+===============================
+Exemple 1
+===============================
+Executez ce programme qui utilise le module processing (documentation : <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>).
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+from math import *
+
+URL = "http://diraison.github.io/GenPyExo/images/colombe.png"
+
+colombe = None
+banderole = "Processing c'est génial"
+pos = 800
+
+def setup():                        # fonction d'initialisation
+    global colombe
+    size(800,200)
+    textSize(60)
+    colombe = loadImage(URL)
+
+def draw():                         # fonction de dessin
+    global pos                      # appelée régulièrement (60 fps)
+    background(0xff446688)
+    tracerHorizontale()
+    dessinerColombes()
+    afficherBanderole()
+
+def keyPressed():
+    global banderole
+    if keyboard.key == DELETE:      # supprime le texte de la banderole
+        banderole = ""
+    elif keyboard.key != CODED:     # rajoute le message tapé au clavier
+        banderole += keyboard.key
+
+# Lancer le programme    
+run()
+
+# Trace une ligne horizontale au niveau du pointeur de la souris
+def tracerHorizontale():
+    stroke(0xffbbbbff)
+    line(0, mouse.y-10, 800, mouse.y-10)
+
+# Dessine les images de colombes en suivant une sinusoïde
+def dessinerColombes():
+    for i in range(11):
+        x = 15 + 70 * i
+        y = 33 + 30 * sin(environment.frameCount/50. + i)
+        image(colombe, x, y, 64, 64)
+
+# Affiche la banderole en la faisant défiler
+def afficherBanderole():
+    global pos
+    textSize(60)
+    pos -= 1
+    if pos + textWidth(banderole) < 0:
+        pos = 800
+    fill(0xffffff00)
+    text(banderole, pos, 180)
