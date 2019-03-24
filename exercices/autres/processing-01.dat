@@ -58,5 +58,5 @@ def afficherBanderole():
     fill(0xffffff00)
     text(banderole, pos, 180)
 
-# Lancer le programme    
+# Lancer le programme
 run()
