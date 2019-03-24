@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Processing en Python - Exemple 1</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Processing en Python</h1></header>
+<article>
+	<h2>Exemple 1</h2>
+	<div class="enonce">Executez ce programme qui utilise le module processing (documentation : <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>).
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">from processing import *
+from math import *
+
+URL = "http://diraison.github.io/GenPyExo/images/colombe.png"
+
+colombe = None
+banderole = "Processing c'est génial"
+pos = 800
+
+def setup():                        # fonction d'initialisation
+    global colombe
+    size(800,200)
+    textSize(60)
+    colombe = loadImage(URL)
+
+def draw():                         # fonction de dessin
+    global pos                      # appelée régulièrement (60 fps)
+    background(0xff446688)
+    tracerHorizontale()
+    dessinerColombes()
+    afficherBanderole()
+
+def keyPressed():
+    global banderole
+    if keyboard.key == DELETE:      # supprime le texte de la banderole
+        banderole = ""
+    elif keyboard.key != CODED:     # rajoute le message tapé au clavier
+        banderole += keyboard.key
+
+# Trace une ligne horizontale au niveau du pointeur de la souris
+def tracerHorizontale():
+    stroke(0xffbbbbff)
+    line(0, mouse.y-10, 800, mouse.y-10)
+
+# Dessine les images de colombes en suivant une sinusoïde
+def dessinerColombes():
+    for i in range(11):
+        x = 15 + 70 * i
+        y = 33 + 30 * sin(environment.frameCount/50. + i)
+        image(colombe, x, y, 64, 64)
+
+# Affiche la banderole en la faisant défiler
+def afficherBanderole():
+    global pos
+    textSize(60)
+    pos -= 1
+    if pos + textWidth(banderole) < 0:
+        pos = 800
+    fill(0xffffff00)
+    text(banderole, pos, 180)
+
+# Lancer le programme
+run()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"></pre>
+</article>
+<script>
+alltests = [ ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
+editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
+</script>
+</body>
+</html>
