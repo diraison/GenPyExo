@@ -174,6 +174,11 @@ function recupererImage(id) {
 	} else if (dessins.length >= 1 && dessins[0].nodeName === "DIV") {
 		var svg = dessins[0].getElementsByTagName("svg");
 		image = (svg.length == 1 ? svg[0].outerHTML : image);	// SVG (pygal)
+	} else if (dessins.length == 1 && dessins[0].nodeName === "CANVAS") {
+		var canvasId = dessins[0].getAttribute("id");
+		if (canvasId !== null && canvasId.substr(0,12) === "__processing") {
+			image = dessins[0].toDataURL();			// CANVAS image (processing)
+		}
 	}
 	return image;
 }
