@@ -10,7 +10,7 @@ Executez ce programme qui utilise le module processing (documentation : <a href=
 from processing import *
 from math import *
 
-URL = "http://diraison.github.io/GenPyExo/images/colombe.png"
+URL = "https://diraison.github.io/GenPyExo/images/colombe.png"
 
 colombe = None
 banderole = "Processing c'est génial"

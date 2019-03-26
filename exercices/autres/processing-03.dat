@@ -1,0 +1,30 @@
+Processing en Python
+===============================
+Exemple 3
+===============================
+Executez ce programme qui utilise le module processing (documentation : <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>).
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+pix = None
+
+def setup():
+    global pix
+    size(512,512)
+    pix = loadImage("https://diraison.github.io/GenPyExo/images/chat.jpg")
+
+def draw():
+    image(pix, 0, 0, 256, 256)
+    for x in range(256):
+        for y in range(256):
+            c = get(x,y)
+            r, g, b = red(c), green(c), blue(c)
+            set(256+x,     y, color(r,0,0))
+            set(    x, 256+y, color(0,g,0))
+            set(256+x, 256+y, color(0,0,b))
+    noLoop()
+
+run()
