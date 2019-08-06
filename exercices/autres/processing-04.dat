@@ -1,0 +1,69 @@
+Processing en Python
+===============================
+Exemple 4
+===============================
+Simulation d'aquarium réalisée avec <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a> et les images de <a href="https://scratch.mit.edu/">Scratch</a>.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+IMG_URL = "https://diraison.github.io/GenPyExo/images/"
+NB_POISSONS = 15
+poissons = None
+fond = None
+
+################################################
+
+class Poisson:
+
+    def __init__(self, image_path=None):
+        self.x = random(0, environment.width)
+        self.y = random(0, environment.height)
+        self.n = 0
+        self.dx = self.dy = 0
+        self.taille = random(50, 70)
+        self.img = loadImage(image_path)
+
+    def nager(self):
+        if self.n <= 0:
+            x0 = random(0, environment.width)
+            y0 = random(0, environment.height)
+            self.n = int(random(500, 700))
+            self.dx = (x0 - self.x) / self.n
+            self.dy = (y0 - self.y) / self.n
+        self.x += self.dx
+        self.y += self.dy
+        self.n -= 1
+
+    def dessiner(self):
+        #self.tracer_chemin()
+        image(self.img, self.x, self.y, self.taille, self.taille)
+
+    def tracer_chemin(self):
+        fill(0xffffffaa)
+        x0 = self.x + self.n * self.dx
+        y0 = self.y + self.n * self.dy
+        ellipse(self.x, self.y, 10, 10)
+        line(self.x, self.y, x0, y0)
+        ellipse(x0, y0, 8, 8)
+
+################################################
+
+def setup():
+    global fond, poissons
+    size(640, 480)
+    imageMode(CENTER)
+    fond = loadImage(IMG_URL + "fond-corail.jpg")
+    poissons = [ Poisson(IMG_URL + "poisson-{}.png".format(n % 6)) 
+                for n in range(NB_POISSONS) ]
+
+def draw():
+    image(fond, environment.width/2, environment.height/2)
+    #text(environment.frameRate, 5, 15)
+    for poisson in poissons:
+        poisson.nager()
+        poisson.dessiner()
+
+run()
