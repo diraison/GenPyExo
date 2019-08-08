@@ -1,0 +1,149 @@
+Processing en Python
+===============================
+Exemple 5
+===============================
+Jeu d'alunissage réalisé avec <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>. Cliquez sur l'écran de jeu et jouez avec les touches fléchées pour faire alunir le module avec le voyant de vitesse en vert.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+IMG_URL = "https://diraison.github.io/GenPyExo/images/"
+
+################################################
+
+class Lune:
+
+    ZONE_VOL = 1
+    ZONE_POSE = 0
+    ZONE_DETRUIT = -1
+
+    def __init__(self, chemin_lune=None):
+        self.img = loadImage(chemin_lune or IMG_URL + "fond-lune.jpg")
+
+    def dessiner(self):
+        imageMode(CORNER)
+        image(self.img, 0, 0)
+
+    def zone(self, x, y):
+        if 550 < y < 560 and 350 <= x <= 490:   # zone d'alunissage
+            return self.ZONE_POSE
+        elif y >= 560:                          # trop bas
+            return self.ZONE_DETRUIT
+        return self.ZONE_VOL
+
+################################################
+
+class Module:
+
+    MODULE_VOL  = 1
+    MODULE_POSE = 0
+    MODULE_DETRUIT = -1
+
+    def __init__(self, lune=None, chemin_module=None, chemin_explosion=None, g=0.5, carburant=1000):
+        self.lune = lune
+        self.img = loadImage(chemin_module or IMG_URL + "module-marche.png")
+        self.img2 = loadImage(chemin_explosion or IMG_URL + "module-detruit.png")
+        self.x = random(environment.width/5, 4*environment.width/5)
+        self.y = environment.height / 3
+        self.vx = random(-2,2)
+        self.vy = random(-2,2)
+        self.ax = 0
+        self.ay = 0
+        self.g = g
+        self.carburant = carburant
+
+    def deplacer(self):
+        if self.etat() != self.MODULE_VOL:
+            return
+        self.carburant -= abs(self.ax) + abs(self.ay)
+        if self.carburant <= 0:
+            self.carburant = 0
+            self.ax = self.ay = 0
+        self.dt = 0.05
+        self.vx += self.ax * self.dt
+        self.vy += (self.ay + self.g) * self.dt
+        self.x += self.vx * self.dt
+        self.y += self.vy * self.dt
+
+    def dessiner(self):
+        imageMode(CENTER)
+        if self.etat() == self.MODULE_DETRUIT:
+            image(self.img2, self.x, self.y)
+        else:
+            image(self.img, self.x, self.y)
+
+    def pousser(self, direction):
+        if self.carburant <= 0:
+            return
+        if direction == UP:
+            self.ay = max(self.ay - 0.1, -2)
+        elif direction == DOWN:
+            self.ay = min(self.ay + 0.1, 0)
+        elif direction == LEFT:
+            self.ax = max(self.ax - 0.1, -2)
+        elif direction == RIGHT:
+            self.ax = min(self.ax + 0.1, 2)
+        else:
+            self.ax = self.ay = 0
+    
+    def afficher_info(self):
+        fill(255)
+        textAlign(LEFT)
+        textSize(14)
+        text(("x={:0.2f}  vx={:0.2f}  ax={:0.2f}\n" + 
+              "y={:0.2f}  vy={:0.2f}  ay={:0.2f}\n" +
+              "carburant = {:0.1f}").format(
+             self.x, self.vx, self.ax,
+             self.y, self.vy, self.ay,
+             self.carburant),
+             environment.width-210, 20)
+        if self.vitesse_conforme():
+            fill(0xff449966)
+        else:
+            fill(0xffee0000)
+        rect(environment.width - 65, 39, 30, 15)
+    
+    def vitesse_conforme(self):
+        return abs(self.vx) < 2 and abs(self.vy) < 4
+
+    def etat(self):
+        if self.lune is None:
+            return self.MODULE_VOL
+        zone = self.lune.zone(self.x, self.y+32)
+        if zone == self.lune.ZONE_VOL:
+            return self.MODULE_VOL
+        elif zone == self.lune.ZONE_POSE and self.vitesse_conforme():
+            return self.MODULE_POSE
+        return self.MODULE_DETRUIT
+
+################################################
+
+module = None
+lune = None
+
+def setup():
+    global module, lune
+    size(800,600)
+    lune = Lune()
+    module = Module(lune=lune)
+
+def draw():
+    lune.dessiner()
+    module.deplacer()
+    module.dessiner()
+    module.afficher_info()
+    if module.etat() == module.MODULE_POSE:
+        fini()
+
+def keyPressed():
+    module.pousser(keyboard.keyCode)
+
+def fini():
+    fill(0xffffff00)
+    textAlign(CENTER)
+    textSize(48)
+    text("L'aigle s'est posé.", environment.width/2, environment.height/2)
+
+run()
