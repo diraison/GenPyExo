@@ -44,8 +44,8 @@ alltests = [ ["convertirFahrenheitEnCelsius(68)", "t=#?\nprint(float(t))"],
   ["convertirFahrenheitEnCelsius(32)", "t=#?\nprint(float(t))"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
-editeur.setSize(null, hauteurEditeur === undefined ? 360 : hauteurEditeur);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
 </script>
 </body>
 </html>

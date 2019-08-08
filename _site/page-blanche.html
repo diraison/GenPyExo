@@ -31,8 +31,8 @@
 chargerProgramme();
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 120;
-editeur.setSize(null, hauteurEditeur === undefined ? 560 : hauteurEditeur);
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+editeur.setSize(null, hauteurEditeur === undefined ? 570 : hauteurEditeur);
 visibilite = true;
 </script>
 </body>
