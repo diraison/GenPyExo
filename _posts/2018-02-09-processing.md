@@ -10,3 +10,5 @@ subheading: "Exemples divers"
 [Exemple 3](exercices/autres/processing-03.html) : manipulation d'image.
 
 [Exemple 4](exercices/autres/processing-04.html) : simulation d'aquarium.
+
+[Exemple 5](exercices/autres/processing-05.html) : jeu d'alunissage.
