@@ -33,6 +33,7 @@ div.CodeMirror {
 	border-color: #000;
 	border-style: solid;
 	border-width: 1px;
+	font-family: "DejaVu Sans Mono", "Consolas", "Lucida Console", "Droid Sans Mono", monospace;
 	font-size: 16pt;
 	resize: vertical;
 }
