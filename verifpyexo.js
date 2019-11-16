@@ -21,7 +21,7 @@ Sk.externalLibraries = {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/pyplot/__init__.js',
 		dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js'] },
 	pygal : {
-		path: 'https://cdn.jsdelivr.net/gh/trinketapp/pygal.js@0.1.3/__init__.js',
+		path: 'https://cdn.jsdelivr.net/gh/trinketapp/pygal.js@0.1.4/__init__.js',
 		dependencies: ['https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts.js',
 		               'https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts-more.js'] },
 	processing : {
