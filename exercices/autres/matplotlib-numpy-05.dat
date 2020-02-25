@@ -1,6 +1,6 @@
 Les fichiers en Python
 ===============================
-Exemple 1
+Exemple 5
 ===============================
 Executez le programme suivant qui traite les données du fichier <textcode>"iris.csv"</textcode>.<br>
 <textarea id="iris.csv" style="display:inline-block;height:16px;width:590px;min-height:16px;min-width:470px;">Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
