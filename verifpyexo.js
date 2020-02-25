@@ -53,7 +53,7 @@ function turtleAssets(nomfichier) {
 	if (nomfichier.indexOf("://") !== -1)
 		return nomfichier;
 	if (nomfichier.length <= 10 && nomfichier.indexOf(".") === -1)
-		return "https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/" + nomfichier + ".png";
+		return "https://diraison.github.io/GenPyExo/images/" + nomfichier + ".png";
 	var urlpage = "" + window.location;
 	var chemin  = urlpage.substr(0, urlpage.lastIndexOf('/'));
 	return chemin + "/" + nomfichier;
