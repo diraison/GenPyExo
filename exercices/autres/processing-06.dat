@@ -1,0 +1,82 @@
+Processing en Python
+===============================
+Exemple 6
+===============================
+Vous avez 30 s pour ramasser le maximum d'oeufs avant qu'ils ne s'écrasent.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+from random import randint, random
+
+oeufs = [None] * 6
+score = 0
+fin = False
+
+def setup():
+    size(640,480)
+    for n in range(len(oeufs)):
+        oeufs[n] = nouvelOeuf()
+
+def draw():
+    global fin
+    background(0xffbfbfff)
+    fin = environment.frameCount >= 30*60
+    if not fin:
+        deplacerOeufs()
+    dessinerOeufs()
+    dessinerCible()
+    afficherScore()
+
+def nouvelOeuf():
+    return (randint(40,600), -70, 3*random()+1)
+
+def afficherScore():
+    fill(0xffffffff)
+    textSize(32)
+    textAlign(RIGHT, TOP)
+    text(score, 630,2)
+    if fin:
+        fill(0xffdf0000)
+        textSize(80)
+        textAlign(CENTER, CENTER)
+        text("Vous venez\nde sauver\n{} oeufs !".format(score), 320, 240)
+
+def deplacerOeufs():
+    for n, oeuf in enumerate(oeufs):
+        if oeuf[1] > 520:
+            oeufs[n] = nouvelOeuf()
+        else:
+            oeufs[n] = (oeuf[0], oeuf[1]+oeuf[2], oeuf[2])
+
+def dessinerOeufs():
+    for oeuf in oeufs:
+        if oeuf[1] > 475:
+            stroke(0xffffffff)
+            fill(0xffffff00)
+            ellipse(oeuf[0], 480, 40, 20)
+        else:
+            stroke(0xff000000)
+            fill(0xffffbfbf)
+            ellipse(oeuf[0], oeuf[1], 30, 38)
+
+def dessinerCible():
+    stroke(0xffffff00)
+    fill(0x3fffff00)
+    x, y = mouse.x, mouse.y
+    line(x, y-25, x, y+25)
+    line(x-25, y, x+25, y)
+    ellipse(x, y, 40, 40)
+
+def mousePressed():
+    global score
+    if fin:
+        return
+    x, y = mouse.x, mouse.y
+    for n, oeuf in enumerate(oeufs):
+        if dist(x, y, oeuf[0], oeuf[1]) <= 30:
+            oeufs[n] = nouvelOeuf()
+            score += 1
+
+run()
