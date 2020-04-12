@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Processing en Python - Exemple 6</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Processing en Python</h1></header>
+<article>
+	<h2>Exemple 6</h2>
+	<div class="enonce">Vous avez 30 s pour ramasser le maximum d'oeufs avant qu'ils ne s'écrasent.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">from processing import *
+from random import randint, random
+
+oeufs = [None] * 6
+score = 0
+fin = False
+
+def setup():
+    size(640,480)
+    for n in range(len(oeufs)):
+        oeufs[n] = nouvelOeuf()
+
+def draw():
+    global fin
+    background(0xffbfbfff)
+    fin = environment.frameCount >= 30*60
+    if not fin:
+        deplacerOeufs()
+    dessinerOeufs()
+    dessinerCible()
+    afficherScore()
+
+def nouvelOeuf():
+    return (randint(40,600), -70, 3*random()+1)
+
+def afficherScore():
+    fill(0xffffffff)
+    textSize(32)
+    textAlign(RIGHT, TOP)
+    text(score, 630,2)
+    if fin:
+        fill(0xffdf0000)
+        textSize(80)
+        textAlign(CENTER, CENTER)
+        text("Vous venez\nde sauver\n{} oeufs !".format(score), 320, 240)
+
+def deplacerOeufs():
+    for n, oeuf in enumerate(oeufs):
+        if oeuf[1] > 520:
+            oeufs[n] = nouvelOeuf()
+        else:
+            oeufs[n] = (oeuf[0], oeuf[1]+oeuf[2], oeuf[2])
+
+def dessinerOeufs():
+    for oeuf in oeufs:
+        if oeuf[1] > 475:
+            stroke(0xffffffff)
+            fill(0xffffff00)
+            ellipse(oeuf[0], 480, 40, 20)
+        else:
+            stroke(0xff000000)
+            fill(0xffffbfbf)
+            ellipse(oeuf[0], oeuf[1], 30, 38)
+
+def dessinerCible():
+    stroke(0xffffff00)
+    fill(0x3fffff00)
+    x, y = mouse.x, mouse.y
+    line(x, y-25, x, y+25)
+    line(x-25, y, x+25, y)
+    ellipse(x, y, 40, 40)
+
+def mousePressed():
+    global score
+    if fin:
+        return
+    x, y = mouse.x, mouse.y
+    for n, oeuf in enumerate(oeufs):
+        if dist(x, y, oeuf[0], oeuf[1]) <= 30:
+            oeufs[n] = nouvelOeuf()
+            score += 1
+
+run()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"></pre>
+</article>
+<script>
+alltests = [ ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+</script>
+</body>
+</html>
