@@ -8,7 +8,7 @@ var editeur;
 Sk.python3 = true;
 var SkFuture = { print_function: true, division: true, absolute_import: null, unicode_literals: true,
 		 // skulpt specific
-		 set_repr: false, class_repr: false, inherit_from_object: false, super_args: false };
+		 set_repr: false, class_repr: false, inherit_from_object: true, super_args: true };
 Sk.externalLibraries = {
 	numpy : {
 		path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
