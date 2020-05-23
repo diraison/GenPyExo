@@ -1,0 +1,331 @@
+Processing en Python
+===============================
+Exemple 7
+===============================
+Jeu <a href="https://fr.wikipedia.org/wiki/Rush_hour_(casse-t%C3%AAte)">Rush Hour</a> réalisé avec <a href="https://github.com/skulpt/skulpt/wiki/Skulpt-Processing">Skulpt-Processing</a>. Vous devez réussir à sortir la voiture rouge.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+niveau = None
+mode = 0
+
+def setup():
+    global mode, niveau
+    size(700,700)
+    mode = 0
+    niveau = Niveau()
+
+def draw():
+    jouer()
+
+
+def afficherAccueil():
+    background(0xff888888)
+    textSize(70)
+    fill(0xff000088)
+    text("Cliquez  pour\n  commencer", 120, 290)
+
+
+def afficherNiveauFini():
+    textSize(100)
+    fill(0xff000088)
+    text("Gagné !", 210, 360)
+
+
+def afficherJeuFini():
+    noStroke()
+    fill(0xff000088)
+    rect(120, 240, 500, 180)
+    textSize(100)
+    fill(0xffffff44)
+    text("Jeu Fini !", 170, 360)
+
+
+def jouer():
+    global mode
+    if mode == 1:            # execution d'un niveau de jeu
+        niveau.dessiner(int(mouse.x), int(mouse.y))
+        if niveau.estFini():
+            mode = 2
+    elif mode == 2:          # message de niveau reussi 
+        afficherNiveauFini()
+    elif mode == 3:          # passage au niveau suivant
+        if niveau.suivant():
+            mode = 1
+        else:
+            mode = 4
+    elif mode == 4:          # jeu fini si dernier niveau reussi
+        afficherJeuFini()
+    else:                    # ecran d'accueil
+        afficherAccueil()
+
+
+def mousePressed():
+    if mode == 1:
+        niveau.selectionnerVehicule(int(mouse.x), int(mouse.y))
+
+
+def mouseReleased():
+    global mode
+    if mode == 1:
+        niveau.relacherVehicule(int(mouse.x), int(mouse.y))
+    elif mode == 0 or mode == 2:
+        mode += 1
+
+
+###############################################################
+
+class Niveau:
+    niveaux = [
+        [ # Niveau 1 : liste des vehicules
+            # vehicule : ligne, colonne, longueur, direction
+            [1, 2, 0, 2, 0],    # vehicule a faire sortir (rouge 1, ligne 2 et direction 0)
+            [2, 0, 4, 3, 1],
+            [3, 4, 3, 3, 0],
+            [4, 4, 1, 2, 1],
+            [5, 5, 4, 2, 0]    ],
+        [ # Niveau 2
+             [1, 2, 2, 2, 0],
+             [2, 0, 5, 3, 1],
+             [3, 4, 4, 2, 0],
+             [4, 3, 3, 3, 1],
+             [5, 2, 4, 2, 1]    ],
+        [ # Niveau 3
+             [1, 2, 2, 2, 0],
+             [2, 0, 4, 3, 1],
+             [3, 4, 4, 2, 0],
+             [4, 2, 5, 2, 1],
+             [5, 0, 2, 2, 0],
+             [6, 4, 3, 2, 1]    ],
+        [ # Niveau 4
+             [1, 2, 0, 2, 0],
+             [2, 0, 3, 3, 1],
+             [3, 2, 5, 2, 1],
+             [7, 0, 4, 2, 0],
+             [2, 4, 4, 2, 0],
+             [5, 3, 3, 2, 0],
+             [5, 5, 3, 3, 0],
+             [4, 3, 0, 3, 1],    ],
+        [ # Niveau 5
+             [1, 2, 2, 2, 0],
+             [5, 1, 1, 2, 0],
+             [3, 3, 0, 2, 0],
+             [4, 4, 4, 2, 0],
+             [2, 5, 2, 2, 0],
+             [6, 5, 4, 2, 0],
+             [7, 1, 0, 2, 1],
+             [6, 0, 3, 2, 1],
+             [5, 3, 2, 2, 1],
+             [4, 4, 1, 2, 1],
+             [2, 0, 0, 3, 0],
+             [4, 0, 4, 3, 1],
+             [7, 0, 5, 3, 1]    ]
+    ]
+    
+    def initNiveau(self, n):
+        self.niveau = n if 0 <= n < len(self.niveaux) else 0
+        self.parking = Parking(self.niveaux[self.niveau])
+        self.fini = False
+
+
+    def __init__(self, n=0):
+        self.initNiveau(n)
+
+    
+    def suivant(self):
+        if self.niveau+1 >= len(self.niveaux):
+            return False
+        self.initNiveau(self.niveau+1)
+        return True
+
+    
+    def selectionnerVehicule(self, x, y):
+        self.parking.selectionnerVehicule(x, y)
+
+    
+    def relacherVehicule(self, x, y):
+        self.parking.relacherVehicule(x, y)
+        self.fini = self.fini or self.parking.vehiculeEstSorti()
+
+    
+    def estFini(self):
+        return self.fini
+
+    
+    def dessiner(self, x, y):
+        background(0xff444444)
+        textSize(22)
+        fill(0xffffff00)
+        text("Niveau "+str(self.niveau+1), 300, 30)
+        self.parking.dessiner(x, y)
+
+
+###############################################################
+
+class Parking:
+
+    def __init__(self, paramVehicules):
+        self.vehiculeSelectionne = None
+        self.vehiculeSorti = False
+        self.x0 = self.y0 = 0
+        self.vehicules = [ Vehicule(*param) for param in paramVehicules ]
+
+    
+    def vehiculeEstSorti(self):
+        return self.vehiculeSorti
+
+
+    def selectionnerVehicule(self, x, y):
+        self.vehiculeSelectionne = None
+        i = int((y - 50) / 100)
+        j = int((x - 50) / 100)
+        for vehicule in self.vehicules:
+            if vehicule.occupePlace(i, j):
+                self.vehiculeSelectionne = vehicule
+                self.vehiculeSelectionne.etablirLimites(self.vehicules)
+                self.x0 = x;
+                self.y0 = y;
+                return
+
+    
+    def relacherVehicule(self, x, y):
+        di = round((y - self.y0) / 100.)
+        dj = round((x - self.x0) / 100.)
+        if self.vehiculeSelectionne is not None:
+            self.vehiculeSelectionne.deplacer(di, dj);
+            self.vehiculeSorti = self.vehiculeSorti or self.vehiculeSelectionne.occupePlace(2,6)
+            self.vehiculeSelectionne = None
+
+    
+    def dessiner(self, x, y):
+        noStroke()
+        fill(0xff888888)
+        rect(50, 50, 600, 600)
+        fill(0xff222222)
+        rect(100 * 6 + 50, 100 * 2 + 50, 42, 100)
+        textSize(22)
+        fill(0xffffff00)
+        rotate(+HALF_PI)
+        text("SORTIE", 260, -665)
+        rotate(-HALF_PI)
+        stroke(0xff000000)
+        for k in range(7):
+            line(100 * k + 50, 50, 100 * k + 50, 650)
+            line(50, 100 * k + 50, 650, 100 * k + 50)
+        for vehicule in self.vehicules:
+            if vehicule == self.vehiculeSelectionne:
+                vehicule.dessiner(x-self.x0, y-self.y0)
+            else:
+                vehicule.dessiner(0, 0)
+
+
+###############################################################
+
+class Vehicule:
+
+    def __init__(self, couleur, ligne, colonne, longueur, direction):
+        self.i = ligne      # position : ligne
+        self.j = colonne    # position : colonne
+        self.l = longueur   # longueur (voiture = 2, camion = 3)
+        self.d = direction  # direction (vers la droite = 0, vers le bas = 1)
+        self.dmin = -self.j if self.d == 0 else -self.i                    # deplacements maximum autorises
+        self.dmax = 6-self.l-self.j if self.d == 0 else 6-self.l-self.i    # deplacements maximum autorises
+        idFichier = (couleur-1) + self.d * 7 + (self.l-2) * 14
+        nomFichier = getUrl(idFichier)
+        self.img = loadImage(nomFichier)
+
+
+    def occupePlace(self, ligne, colonne):
+        if self.d == 0:
+            return self.i == ligne and self.j <= colonne <= self.j+self.l-1 
+        else:
+            return self.j == colonne and self.i <= ligne <= self.i+self.l-1
+
+
+    def adapterLimites(self, vehicule):
+        if self.d == 0:
+            djmax = 0
+            while self.j+self.l+djmax < 6 and not vehicule.occupePlace(self.i, self.j+self.l+djmax):
+                djmax += 1
+            self.dmax = min(self.dmax, djmax)
+            djmin = 0
+            while self.j+djmin-1 >= 0 and not vehicule.occupePlace(self.i, self.j+djmin-1):
+                djmin -= 1
+            self.dmin = max(self.dmin, djmin)
+        else:
+            dimax = 0
+            while self.i+self.l+dimax < 6 and not vehicule.occupePlace(self.i+self.l+dimax, self.j):
+                dimax += 1
+            self.dmax = min(self.dmax, dimax)
+            dimin = 0
+            while self.i+dimin-1 >= 0 and not vehicule.occupePlace(self.i+dimin-1, self.j):
+                dimin -= 1
+            self.dmin = max(self.dmin, dimin)
+
+
+    def etablirLimites(self, vehicules):
+        self.dmin = -self.j if self.d == 0 else -self.i
+        self.dmax = 6-self.l-self.j if self.d == 0 else 6-self.l-self.i
+        for vehicule in vehicules:
+            if self != vehicule:
+                self.adapterLimites(vehicule)
+        if self.d == 0 and self.i == 2 and self.j+self.l+self.dmax == 6:
+            self.dmax += 2     # permet au vehicule de sortir
+
+
+    def deplacer(self, di, dj):
+        if self.d == 0:
+            di = 0
+            if dj < self.dmin:
+                dj = self.dmin
+            if dj > self.dmax:
+                dj = self.dmax
+        else:
+            dj = 0
+            if di < self.dmin:
+                di = self.dmin
+            if di > self.dmax:
+                di = self.dmax
+        self.i += di
+        self.j += dj
+
+    
+    def dessiner(self, dx, dy):
+        if self.d == 0:
+            dy = 0
+        else:
+            dx = 0
+        x = 100 * self.j + 50 + dx;
+        y = 100 * self.i + 50 + dy;
+        if self.d == 0:
+            xmin = 100 * (self.j+self.dmin) + 50;
+            xmax = 100 * (self.j+self.dmax) + 50;
+            if x < xmin:
+                x = xmin
+            if x > xmax:
+                x = xmax
+        else:
+            ymin = 100 * (self.i+self.dmin) + 50;
+            ymax = 100 * (self.i+self.dmax) + 50;
+            if y < ymin:
+                y = ymin
+            if y > ymax:
+                y = ymax
+        image(self.img, x, y);
+
+
+###############################################################
+
+IMG_URL = "https://diraison.github.io/GenPyExo/images/RushHour"
+
+def getUrl(n):
+    numero = str((n % 7) + 1)
+    orientation = "h" if (n // 7) % 2 == 0 else "v"
+    categorie = "voiture" if n // 14 == 0 else "camion"
+    return "{}/{}_{}_{}.png".format(IMG_URL, categorie, orientation, numero)
+
+
+run()
