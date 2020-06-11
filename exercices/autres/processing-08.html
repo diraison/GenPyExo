@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Processing en Python - Exemple 8</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Processing en Python</h1></header>
+<article>
+	<h2>Exemple 8</h2>
+	<div class="enonce">Simulateur de canon à poudre. Vous devez atteindre la cible au sol en réglant l'angle et la quantité de poudre avec les touches fléchées, et en tirant avec la touche Entrée.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">from processing import *
+from math import cos, sin, radians
+from random import randint
+
+IMG_URL = "https://diraison.github.io/GenPyExo/images/"
+
+def posX(x): return 40 + 4 * x
+def posY(y): return 400 - 4 * y
+
+class Canon:
+    def __init__(self, altitude):
+        self.x = 0
+        self.y = altitude
+        self.angle = 45
+        self.poudre = 70
+        self.img = loadImage(IMG_URL + "canon-64.png")
+        
+    def modifierAngle(self, modif):
+        self.angle += modif
+        self.angle = min(max(-20, self.angle), 90) # entre -20° et 90°
+    
+    def modifierPoudre(self, modif):
+        self.poudre += modif
+        self.poudre = min(max(1, self.poudre), 100) # entre 1 et 100
+    
+    def preparer(self, angle, poudre):
+        self.angle = angle
+        self.poudre = poudre
+    
+    def tirer(self, boulet):
+        angle = radians(self.angle)
+        vitesse = self.poudre * 0.5
+        vx = vitesse * cos(angle)
+        vy = vitesse * sin(angle)
+        boulet.tirer(self.x, self.y, vx, vy)
+    
+    def dessiner(self):
+        image(self.img, posX(self.x)-7, posY(self.y)+6.75, 16, 16)
+        fill(0xffbbbbbb)
+        posy = posY(self.y) + 8 + 6.8
+        rect(0, posy, 64, 399-posy)
+    
+    def __str__(self):
+        return "Angle {}°  -  Poudre {}".format(self.angle, self.poudre)
+
+
+class Boulet:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.vx = 0
+        self.vy = 0
+        self.dt = 0.025
+        self.tire = False
+        self.img = loadImage(IMG_URL + "boulet-16.png")
+    
+    def deplacer(self):
+        if self.tire:
+            self.x += self.vx * self.dt
+            self.y += self.vy * self.dt
+            self.vy -= 9.8 * self.dt
+    
+    def arreter(self):
+        if self.tire:
+            self.y = 0
+            self.tire = False
+    
+    def tirer(self, x, y, vx, vy):
+        self.x = x
+        self.y = y
+        self.vx = vx
+        self.vy = vy
+        self.tire = True
+    
+    def dessiner(self):
+        if self.tire:
+            image(self.img, posX(self.x), posY(self.y), 6, 6)
+    
+    def __str__(self):
+        return "Boulet :  x = {:0.1f}   y = {:0.1f}".format(self.x, self.y)
+
+
+class Cible:
+    def __init__(self, debut, fin):
+        self.debut = debut
+        self.fin = fin
+        self.court = 0
+        self.touche = 0
+        self.long = 0
+    
+    def dessiner(self):
+        fill(0xff6666ff)
+        x0, x1 = posX(self.debut), posX(self.fin)
+        y = posY(1)
+        rect(x0, y, x1-x0, 399-y)
+    
+    def evaluer(self, boulet):
+        if boulet.y >= 0 or not boulet.tire:
+            return False
+        boulet.arreter()
+        if boulet.x < self.debut:
+            self.court += 1
+        elif boulet.x > self.fin:
+            self.long += 1
+        else:
+            self.touche += 1
+        return True
+    
+    def __str__(self):
+        return "court {} - touche {} - long {}".format(self.court, self.touche, self.long)
+
+########################################
+
+def afficherInfo():
+    fill(0xffffffff)
+    text(str(canon), 10, 16)
+    text(str(cible), 10, 32)
+    text(str(boulet), 10, 48)
+    fill(0xffffff00)
+    textSize(24)
+    text("Utilisez les touches Fléchées et la touche Entrée", 180, 36)
+
+
+def setup():
+    global canon, cible, boulet
+    imageMode(CENTER)
+    size(800,400)
+    cible = Cible(75,125)    # cible entre 75m et 125m
+    canon = Canon(30)        # canon à 30 m de haut
+    boulet = Boulet()        # boulet à tirer
+
+def draw():
+    background(0xff448866)
+    cible.dessiner()
+    canon.dessiner()
+    boulet.dessiner()
+    boulet.deplacer()
+    cible.evaluer(boulet)
+    afficherInfo()
+
+def keyPressed():
+    var = {UP:(1,0), DOWN:(-1,0), LEFT:(0,-1), RIGHT:(0,1)}
+    if keyboard.key == CODED:
+        keyCode = keyboard.keyCode
+        if keyCode in var:
+            canon.modifierAngle(var[keyCode][0])
+            canon.modifierPoudre(var[keyCode][1])
+    elif keyboard.key == ENTER:
+        canon.tirer(boulet)
+    elif keyboard.key == " ":
+        noLoop()
+
+run()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"></pre>
+</article>
+<script>
+alltests = [ ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+</script>
+</body>
+</html>
