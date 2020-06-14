@@ -1,0 +1,122 @@
+Processing en Python
+===============================
+Exemple 9
+===============================
+Jeu Tout Éteint (<a href="https://en.wikipedia.org/wiki/Lights_Out_(game)">Lights Out</a>). Avec le bouton gauche de la souris, vous devez éteindre toutes les cases pour gagner. Le bouton droit affiche une solution, tandis que le bouton central génère une nouvelle grille de jeu.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+grille = [[False] * 5 for _ in range(5)]
+solution = [[False] * 5 for _ in range(5)]
+
+montrer_solution = False
+
+def setup():
+    size(300,300)
+    initialiser_grille(grille)
+    rafraichir_affichage(grille)
+
+def draw():
+    pass
+
+def mousePressed():
+    global montrer_solution
+    if mouse.button == LEFT:                # cliquer sur une case
+        i = mouse.x // 60
+        j = mouse.y // 60
+        cliquer_case(i, j, grille)
+    elif mouse.button == RIGHT:             # afficher une solution
+        montrer_solution = not montrer_solution
+    elif mouse.button == CENTER:            # nouvelle grille
+        initialiser_grille(grille)
+    rafraichir_affichage(grille)
+    if montrer_solution:
+        resoudre_grille(grille, solution)
+        afficher_solution(solution)
+
+##################################
+
+def initialiser_grille(grille):
+    for i in range(5):
+        for j in range(5):
+            if random() > 0.5:
+                cliquer_case(i, j, grille)
+
+def rafraichir_affichage(grille):
+    dessiner_grille(grille)
+    if tester_fin(grille):
+        afficher_fin()
+
+def dessiner_grille(grille):
+    stroke(0xff888888)
+    strokeWeight(1)
+    for i in range(5):
+        for j in range(5):
+            if grille[i][j]:
+                fill(0xff77bbdd)
+            else:
+                fill(0xff444444)
+            rect(60*i, 60*j, 60, 60)
+
+def cliquer_case(i, j, grille):
+    inverser_case(i-1, j, grille)
+    inverser_case(i, j-1, grille)
+    inverser_case(i, j, grille)
+    inverser_case(i, j+1, grille)
+    inverser_case(i+1, j, grille)
+
+def inverser_case(i, j, grille):
+    if 0 <= i < 5 and 0 <= j < 5:
+        grille[i][j] = not grille[i][j]
+
+def tester_fin(grille):
+    for i in range(5):
+        for j in range(5):
+            if grille[i][j]:
+                return False
+    return True
+
+def afficher_fin():
+    textSize(60)
+    textAlign(CENTER,CENTER)
+    fill(0xffffff00)
+    text("Gagné !", 150, 150)
+
+##################################
+
+def afficher_solution(solution):
+    stroke(0xffffff00)
+    strokeWeight(2)
+    noFill()
+    for i in range(5):
+        for j in range(5):
+            if solution[i][j]:
+                ellipse(60 * i + 30, 60 * j + 30, 20, 20)
+
+def reduire_grille(grille, solution):
+    for i in range(4):
+        for j in range(5):
+            if grille[i][j]:
+                inverser_case(i+1, j, solution)
+                cliquer_case(i+1, j, grille)
+
+def resoudre_grille(grille, solution):
+    for n in range(32):
+        g = [grille[i][:] for i in range(5)]  # copie
+        for i in range(5):
+            solution[i] = [False] * 5         # réinitialisation
+        for j in range(5):                    # utilisation de n
+            if n & (1 << j) != 0:             #   comme combinaison
+                inverser_case(0, j, solution) #   pour la première
+                cliquer_case(0, j, g)         #   ligne de la grille
+        reduire_grille(g, solution)  # éteint les 4 premières lignes
+        if g[4] == [False] * 5:      # dernière ligne éteinte ?
+            return True
+    return False
+
+##################################
+
+run()
