@@ -1,0 +1,25 @@
+Tableaux en Python
+===============================
+Exercice 15
+===============================
+Vous devez créer une fonction <strong>rechercher(elem, tab)</strong> de paramètres <strong>tab</strong> un tableau et <strong>elem</strong> un nombre, qui renvoie l'indice de <strong>elem</strong> dans <strong>tab</strong> et None si <strong>elem</strong> est absent de <strong>tab</strong>.<br>
+Ainsi <strong>rechercher(9,[7,4,5,9,2])</strong> renvoie <strong>3</strong> car 9 est positionné à l'indice 3.
+===============================
+#? Voici une solution
+
+def rechercher(elem, tab):
+    for i in range(len(tab)):
+        if elem == tab[i]:
+            return i
+    return None
+===============================
+[ ["", "rechercher(9,[7,4,5,9,2])", "r=#?\nprint(r)"],
+  ["", "rechercher(4,[4,3,6,8,1])", "r=#?\nprint(r)"],
+  ["", "rechercher(1,[0,0,0,0,1])", "r=#?\nprint(r)"],
+  ["", "rechercher(3,[8,7,6,5,4])", "r=#?\nprint(r)"] ]
+===============================
+def rechercher(elem, tab):
+    ...
+
+
+print(rechercher(9,[7,4,5,9,2])) #?

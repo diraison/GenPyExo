@@ -1,0 +1,25 @@
+Tableaux en Python
+===============================
+Exercice 16
+===============================
+Vous devez créer une fonction <strong>rechercher_fin(elem, tab)</strong> de paramètres <strong>tab</strong> un tableau et <strong>elem</strong> un nombre, qui renvoie l'indice de la dernière occurrence de <strong>elem</strong> dans <strong>tab</strong> et None si <strong>elem</strong> est absent de <strong>tab</strong>.<br>
+Ainsi <strong>rechercher_fin(5,[5,3,5,4])</strong> renvoie <strong>2</strong> car le dernier 5 apparait à l'indice 2.
+===============================
+#? Voici une solution
+
+def rechercher_fin(elem, tab):
+    for i in range(len(tab)-1,-1,-1):
+        if elem == tab[i]:
+            return i
+    return None
+===============================
+[ ["", "rechercher_fin(5,[5,3,5,4])", "r=#?\nprint(r)"],
+  ["", "rechercher_fin(3,[4,1,4,3])", "r=#?\nprint(r)"],
+  ["", "rechercher_fin(1,[1,1,1,1,1])", "r=#?\nprint(r)"],
+  ["", "rechercher_fin(0,[8,4,2,1])", "r=#?\nprint(r)"] ]
+===============================
+def rechercher(elem, tab):
+    ...
+
+
+print(rechercher_fin(5,[5,3,5,4])) #?

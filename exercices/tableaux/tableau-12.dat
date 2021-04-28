@@ -1,0 +1,27 @@
+Tableaux en Python
+===============================
+Exercice 12
+===============================
+Vous devez créer une fonction <strong>denombrer(elem,tab)</strong> de paramètres <strong>elem</strong> un entier et <strong>tab</strong> un tableau d'entiers, qui renvoie le nombre d'occurrences de <strong>elem</strong> dans <strong>tab</strong>.<br>
+Ainsi <strong>denombrer(5,[1,5,5,2,5])</strong> renvoie <strong>3</strong> (le tableau contient 3 fois l'entier 5).
+===============================
+#? Voici une solution
+
+def denombrer(elem, tab):
+    n = 0
+    for x in tab:
+        if elem == x:
+            n += 1
+    return n
+===============================
+[ ["", "denombrer(5,[1,5,5,2,5])", "r=#?\nprint(r)"],
+  ["", "denombrer(3,[1,2,4,8])", "r=#?\nprint(r)"],
+  ["", "denombrer(7,[7,7,7,7,7])", "r=#?\nprint(r)"],
+  ["", "denombrer(0,[0,1,2,3,0]])", "r=#?\nprint(r)"],
+  ["", "denombrer(1,[]])", "r=#?\nprint(r)"] ]
+===============================
+def denombrer(elem, tab):
+    ...
+
+
+print(denombrer(5,[1,5,5,2,5])) #?

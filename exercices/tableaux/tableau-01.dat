@@ -1,0 +1,26 @@
+Tableaux en Python
+===============================
+Exercice 1
+===============================
+Vous devez créer une fonction <strong>maximum(tab)</strong> dont le paramètre <strong>tab</strong> est un tableau (non vide) d'entiers et qui renvoie le plus grand nombre de ce tableau.<br>
+Ainsi <strong>maximum([10,30,15,22])</strong> renvoie <strong>30</strong>.
+===============================
+#? Voici une solution
+
+def maximum(tab):
+    xmax = tab[0]
+    for x in tab:
+        if x > xmax:
+            xmax = x
+    return xmax
+===============================
+[ ["", "maximum([10,30,15,22])", "r=#?\nprint(r)"],
+  ["", "maximum([20,30,40])", "r=#?\nprint(r)"],
+  ["", "maximum([9,8,7,6])", "r=#?\nprint(r)"],
+  ["", "maximum([0])", "r=#?\nprint(r)"] ]
+===============================
+def maximum(tab):
+    ...
+
+
+print(maximum([10,30,15,22])) #?

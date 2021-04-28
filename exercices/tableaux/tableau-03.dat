@@ -1,0 +1,26 @@
+Tableaux en Python
+===============================
+Exercice 3
+===============================
+Vous devez créer une fonction <strong>max_indice(tableau)</strong> dont le paramètre <strong>tableau</strong> est un tableau (non vide) d'entiers et qui renvoie l'indice du plus grand nombre dans ce tableau.<br>
+Ainsi <strong>max_indice([20,30,50,40])</strong> renvoie <strong>2</strong> qui est l'indice de <strong>50</strong>.
+===============================
+#? Voici une solution
+
+def max_indice(tableau):
+    imax = 0
+    for i in range(1, len(tableau)):
+        if tableau[i] > tableau[imax]:
+            imax = i
+    return tableau[imax]
+===============================
+[ ["", "max_indice([20,30,50,40])", "r=#?\nprint(r)"],
+  ["", "max_indice([5,6,7,8,9])", "r=#?\nprint(r)"],
+  ["", "max_indice([4,3,2,1,0])", "r=#?\nprint(r)"],
+  ["", "max_indice([-100])", "r=#?\nprint(r)"] ]
+===============================
+def max_indice(tableau):
+    ...
+
+
+print(max_indice([20,30,50,40])) #?

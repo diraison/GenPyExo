@@ -1,0 +1,27 @@
+Tableaux en Python
+===============================
+Exercice 11
+===============================
+Vous devez créer une fonction <strong>compter_impairs(liste)</strong> dont le paramètre <strong>liste</strong> est un tableau d'entiers et qui renvoie le nombre d'élements impairs dans ce tableau.<br>
+Ainsi <strong>compter_impairs([9,4,5,6,8])</strong> renvoie <strong>2</strong> (car 9 et 5 sont impairs).
+===============================
+#? Voici une solution
+
+def compter_impairs(liste):
+    nimpairs = 0
+    for element in T:
+        if element % 2 == 1:
+            nimpairs += 1
+    return nimpairs
+===============================
+[ ["", "compter_impairs([9,4,5,6,8])", "r=#?\nprint(r)"],
+  ["", "compter_impairs([5,9,6,4,1])", "r=#?\nprint(r)"],
+  ["", "compter_impairs([15,3,11,7])", "r=#?\nprint(r)"],
+  ["", "compter_impairs([6,12,18,2])", "r=#?\nprint(r)"],
+  ["", "compter_impairs([])", "r=#?\nprint(r)"] ]
+===============================
+def compter_impairs(liste):
+    ...
+
+
+print(compter_impairs([9,4,5,6,8])) #?

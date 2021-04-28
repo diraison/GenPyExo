@@ -1,0 +1,25 @@
+Tableaux en Python
+===============================
+Exercice 4
+===============================
+Vous devez créer une fonction <strong>min_indice(t)</strong> dont le paramètre <strong>t</strong> est un tableau (non vide) d'entiers et qui renvoie l'indice du plus petit nombre dans ce tableau.<br>
+Ainsi <strong>min_indice([40,70,80,10,60])</strong> renvoie <strong>3</strong> qui est l'indice de <strong>10</strong>.
+===============================
+#? Voici une solution
+
+def min_indice(t):
+    imin = 0
+    for i in range(1, len(t)):
+        if t[i] < t[imin]:
+            imin = i
+    return tableau[imin]
+===============================
+[ ["", "min_indice([40,70,80,10,60])", "r=#?\nprint(r)"],
+  ["", "min_indice([2,3,4,5,6])", "r=#?\nprint(r)"],
+  ["", "min_indice([9,7,5,3,1])", "r=#?\nprint(r)"],
+  ["", "min_indice([2021])", "r=#?\nprint(r)"] ]
+===============================
+def min_indice
+
+
+print(min_indice([40,70,80,10,60])) #?

@@ -1,0 +1,25 @@
+Tableaux en Python
+===============================
+Exercice 14
+===============================
+Vous devez créer une fonction <strong>contient(tab,elem)</strong> de paramètres <strong>tab</strong> un tableau et <strong>elem</strong> un nombre, qui renvoie True si <strong>elem</strong> est dans <strong>tab</strong> et False sinon.<br>
+Ainsi <strong>contient([5,9,8,3],7)</strong> renvoie <strong>False</strong> car 7 n'est pas présent dans le tableau.
+===============================
+#? Voici une solution
+
+def contient(tab, elem):
+    for x in tab:
+        if elem == x:
+            return True
+    return False
+===============================
+[ ["", "contient([5,9,8,6],7)", "r=#?\nprint(r)"],
+  ["", "contient([4,8,3,1],3)", "r=#?\nprint(r)"],
+  ["", "contient([9,2,6,4],4)", "r=#?\nprint(r)"],
+  ["", "contient([],1)", "r=#?\nprint(r)"] ]
+===============================
+def contient(tab, elem):
+    ...
+
+
+print(contient([5,9,8,3],7)) #?

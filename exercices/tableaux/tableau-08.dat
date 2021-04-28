@@ -1,0 +1,26 @@
+Tableaux en Python
+===============================
+Exercice 8
+===============================
+Vous devez créer une fonction <strong>compter_positifs(T)</strong> dont le paramètre <strong>T</strong> est un tableau (non vide) d'entiers ou de flottants et qui renvoie le nombre d'élements positifs ou nuls dans ce tableau.<br>
+Ainsi <strong>compter_positifs([4,-2,7,5,-1])</strong> renvoie <strong>3</strong>.
+===============================
+#? Voici une solution
+
+def compter_positifs(T):
+    npos = 0
+    for element in T:
+        if element >= 0:
+            npos += 1
+    return npos
+===============================
+[ ["", "compter_positifs([4,-2,7,5,-1])", "r=#?\nprint(r)"],
+  ["", "compter_positifs([9,3,1,5])", "r=#?\nprint(r)"],
+  ["", "compter_positifs([-10,25,18,-14])", "r=#?\nprint(r)"],
+  ["", "compter_positifs([0,-1,0,1,0])", "r=#?\nprint(r)"] ]
+===============================
+def compter_positifs(T):
+    ...
+
+
+print(compter_positifs([4,-2,7,5,-1])) #?

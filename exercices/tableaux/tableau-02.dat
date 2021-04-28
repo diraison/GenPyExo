@@ -1,0 +1,26 @@
+Tableaux en Python
+===============================
+Exercice 2
+===============================
+Vous devez créer une fonction <strong>minimum(tab)</strong> dont le paramètre <strong>tab</strong> est un tableau (non vide) d'entiers et qui renvoie le plus petit nombre de ce tableau.<br>
+Ainsi <strong>minimum([12,25,10,17])</strong> renvoie <strong>10</strong>.
+===============================
+#? Voici une solution
+
+def minimum(tab):
+    xmin = tab[0]
+    for x in tab:
+        if x < xmin:
+            xmin = x
+    return xmin
+===============================
+[ ["", "minimum([12,25,10,17])", "r=#?\nprint(r)"],
+  ["", "minimum([10,20,30])", "r=#?\nprint(r)"],
+  ["", "minimum([7,6,5])", "r=#?\nprint(r)"],
+  ["", "minimum([1])", "r=#?\nprint(r)"] ]
+===============================
+def minimum(tab):
+    ...
+
+
+print(minimum([12,25,10,17])) #?

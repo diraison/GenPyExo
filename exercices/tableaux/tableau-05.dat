@@ -1,0 +1,25 @@
+Tableaux en Python
+===============================
+Exercice 5
+===============================
+Vous devez créer une fonction <strong>somme(tab)</strong> dont le paramètre <strong>tab</strong> est un tableau (non vide) d'entiers et qui renvoie la somme des éléments de ce tableau.
+Ainsi <strong>somme([3,8,5,2])</strong> renvoie <strong>18</strong> car 3+8+5+2=18.
+===============================
+#? Voici une solution
+
+def somme(tab):
+    total = 0
+    for x in tab:
+        total += x
+    return total
+===============================
+[ ["", "somme([3,8,5,2])", "r=#?\nprint(r)"],
+  ["", "somme([10,30,60])", "r=#?\nprint(r)"],
+  ["", "somme([2,7,-9])", "r=#?\nprint(r)"],
+  ["", "somme([20])", "r=#?\nprint(r)"] ]
+===============================
+def somme(tab):
+    ...
+
+
+print(somme([3,8,5,2])) #?
