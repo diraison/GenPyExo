@@ -1,0 +1,37 @@
+Tableaux en Python
+===============================
+Exercice 19
+===============================
+Créez une procédure <strong>inserer(v,i,tab)</strong> qui insère la valeur <strong>v</strong> à l'indice <strong>i</strong> dans le tableau <strong>tab</strong> en décallant les éléments suivants vers la droite.<br>
+Ainsi, si <strong>t = [9,8,6,7]</strong> alors l'appel <strong>inserer(5,1,t)</strong> donne <strong>t = [9,5,8,6]</strong> : les éléments 8 et 6 sont décalés pour laisser place au 5 à l'indice 1 (le 7 disparaît).
+===============================
+# Voici une solution
+
+def inserer(v, i, tab):
+    j = len(tab) - 1
+    while j > i:
+        tab[j] = tab[j - 1]
+        j -= 1
+    tab[i] = v
+
+v = 5
+i = 1
+tab = [9, 8, 6, 7]
+inserer(v, i, tab)  #? ne pas
+print(tab)          #? retirer
+===============================
+[ ["v=5", "i=1", "tab=[9,8,6,7]", "try:\n    inserer(v,i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["v=5", "i=0", "tab=[9,8,6,7]", "try:\n    inserer(v,i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["v=5", "i=3", "tab=[9,8,6,7]", "try:\n    inserer(v,i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["v=8", "i=1", "tab=[0,1,2]",   "try:\n    inserer(v,i,tab)\n    print(tab)\nexcept:\n    print('exception')"] ]
+===============================
+def inserer(v, i, tab):
+    ...
+
+v = 5
+i = 1
+tab = [9, 8, 6, 7]
+inserer(v, i, tab)  #? ne pas
+print(tab)          #? retirer
+===============================
+Il faut commencer par décaler les éléments suivant les indices décroissants, pour ne pas écraser les valeurs déjà copiées.

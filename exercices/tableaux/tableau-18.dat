@@ -1,0 +1,34 @@
+Tableaux en Python
+===============================
+Exercice 18
+===============================
+Créez une procédure <strong>retirer(i,tab)</strong> qui retirer l'élément d'indice <strong>i</strong> dans le tableau <strong>tab</strong> en décallant les éléments suivants vers la gauche et en faisant apparaître un zéro en fin de tableau.<br>
+Ainsi, si <strong>t = [4,5,6,7]</strong> alors l'appel <strong>retirer(1,t)</strong> donne <strong>t = [4,6,7,0]</strong> : les éléments 6 et 7 sont décalés et un 0 apparaît en fin de tableau.
+===============================
+# Voici une solution
+
+def retirer(i, tab):
+    while i < len(tab) - 1:
+        tab[i] = tab[i + 1]
+        i += 1
+    tab[i] = 0    # i vaut len(tab)-1
+
+i = 1
+tab = [4, 5, 6, 7]
+retirer(i, tab)      #? ne pas
+print(tab)           #? retirer
+===============================
+[ ["i=1", "tab=[4,5,6,7]", "try:\n    retirer(i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["i=0", "tab=[4,5,6,7]", "try:\n    retirer(i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["i=3", "tab=[4,5,6,7]", "try:\n    retirer(i,tab)\n    print(tab)\nexcept:\n    print('exception')"],
+  ["i=1", "tab=[1,2,3]",   "try:\n    retirer(i,tab)\n    print(tab)\nexcept:\n    print('exception')"] ]
+===============================
+def retirer(i, tab):
+    ...
+
+i = 1
+tab = [4, 5, 6, 7]
+retirer(i, tab)      #? ne pas
+print(tab)           #? retirer
+===============================
+Il faut commencer par décaler les éléments suivant les indices croissants, puis rajouter le zéro dans le tableau.
