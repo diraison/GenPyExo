@@ -136,7 +136,13 @@ function entreef_(prompt) {
 
 function reecrireCode(str, data) {
 	var tab = str.split("\n");
+	var passer = false;
 	for (var i = 0; i < tab.length; i++) {
+                if (tab[i].indexOf("#!") != -1) {	// coupure du code si presence de #!
+			passer = !passer;
+		} else if (passer) {
+			tab[i] = "";
+		}
 		if (tab[i].indexOf("#?") == -1)		// aucune modification a apporter si absence de #?
 			continue;
 		if (tab[i].indexOf("=") != -1) {	// remplacer ce qui suit le signe = s'il existe
@@ -343,5 +349,73 @@ function genererReponses() {
 	visibilite = false;
 	pyresp = document.getElementById("solution").textContent;
 	verifier();
+}
+
+// integration de l'exercice complet dans l'URL
+// utilise la compression inflate de la bibliotheque pako
+// <script src="https://cdn.jsdelivr.net/npm/pako/dist/pako_inflate.min.js"></script>
+
+function get_exercice_from_url() {
+	var parsedUrl = new URL(window.location.href);
+	var exo = parsedUrl.searchParams.get("exo");
+	if (exo !== null) {
+		exob64 = exo.replace(/_/g,"/").replace(/-/g,"+");
+		var exobytes = atob(exob64).split("").map(function (x) { return x.charCodeAt(0); });
+		exo = pako.inflate(new Uint8Array(exobytes), { to: "string" });
+	}
+	return exo;
+}
+
+function clear_elements_from_url() {
+	var parsedUrl = new URL(window.location.href);
+	var args = parsedUrl.searchParams.get("clear");
+	if (args != null) {
+		var elements = args.split(":");
+		for (var i = 0; i < elements.length; i++) {
+			var id = elements[i];
+			document.getElementById(id).innerHTML = "";
+		}
+	}
+}
+
+function extraire_exercice(exo) {
+	var resultat = new Array();
+	var lignes = exo.split("\n");
+	var partie = "";
+	for (var i = 0; i < lignes.length; i++) {
+		if (lignes[i].substr(0,3) === "===") {
+			resultat.push(partie);
+			partie = "";
+		} else {
+			partie += (partie == "" ? "" : "\n") + lignes[i];
+		}
+	}
+	resultat.push(partie);
+	if (resultat.length >= 6) {
+		return {
+			"titre": (resultat[0] != "" || resultat[1] != "" ? resultat[0] + " - " + resultat[1] : ""),
+			"titre1": resultat[0],
+			"titre2": resultat[1],
+			"enonce": resultat[2],
+			"solution": resultat[3],
+			"tests": resultat[4],
+			"code": resultat[5]};
+	} else {
+		return {};
+	}
+}
+
+function initialiser_exercice(exo) {
+	var config = extraire_exercice(exo);
+	var cles = Object.keys(config);
+	for (var i = 0; i < cles.length; i++) {
+		var nom = cles[i];
+		var valeur = config[nom];
+		valeur = (valeur == "\n" ? "" : valeur);
+		if (nom == "titre1" && valeur != "") {
+			valeur = "<h1>" + valeur + "</h1>";
+		}
+		document.getElementById(nom).innerHTML = valeur;
+	}
 }
 
