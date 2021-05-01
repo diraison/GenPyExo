@@ -1,0 +1,25 @@
+Compréhension en Python
+===============================
+Exercice 1
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui reprend les valeurs de la liste <strong>T</strong> en les multipliant chacune par 2.<br>
+Ainsi pour <strong>T = [1,2,3,4]</strong> on obtient une liste <strong>L</strong> égale à <strong>[2,4,6,8]</strong>.
+===============================
+# Voici une solution
+
+T = [1, 2, 3, 4]   #? exemple
+
+L = [2*x for x in T]
+
+print(L)
+===============================
+[ ["[1,2,3,4]", ""],
+  ["[1,10,100,1000]", ""],
+  ["[0,1,0]",   ""],
+  ["[]",        ""] ]
+===============================
+T = [1, 2, 3, 4]   #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)

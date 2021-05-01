@@ -1,0 +1,25 @@
+Compréhension en Python
+===============================
+Exercice 4
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui reprend les valeurs de la liste <strong>T</strong> qui sont uniquement comprises entre 0 (inclus) et 10 (exclu).<br>
+Ainsi pour <strong>T = [10,9,-4,3,35,0,7]</strong> on obtient une liste <strong>L</strong> égale à <strong>[9,3,0,7]</strong>.
+===============================
+# Voici une solution
+
+T = [10, 9, -4, 3, 35, 0, 7]   #? exemple
+
+L = [x for x in T if 0 <= x < 10]
+
+print(L)
+===============================
+[ ["[10,9,-4,3,35,0,7]", ""],
+  ["[-10,0,2,5,10,15]", ""],
+  ["[-1,0,1,2,3,100]", ""],
+  ["[0,10,20,30,40]",     ""] ]
+===============================
+T = [10, 9, -4, 3, 35, 0, 7]   #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)

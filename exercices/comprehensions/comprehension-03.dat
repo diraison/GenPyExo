@@ -1,0 +1,25 @@
+Compréhension en Python
+===============================
+Exercice 3
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui reprend les valeurs de la liste <strong>T</strong> qui sont uniquement positives ou nulles.<br>
+Ainsi pour <strong>T = [1,-2,0,3,-5]</strong> on obtient une liste <strong>L</strong> égale à <strong>[1,0,3]</strong>.
+===============================
+# Voici une solution
+
+T = [1, -2, 0, 3, -5]   #? exemple
+
+L = [x for x in T if x >= 0]
+
+print(L)
+===============================
+[ ["[1,-2,0,3,-5]", ""],
+  ["[-1,0,-1,0,1]", ""],
+  ["[-4,-3,-2,-1]", ""],
+  ["[7,7,7,7]",     ""] ]
+===============================
+T = [1, -2, 0, 3, -5]   #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)

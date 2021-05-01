@@ -13,18 +13,23 @@ def rechercher_fin(elem, tab):
             return i
     return None
 
-print(rechercher_fin(5,[5,3,5,4])) #?
+
+#! exemple
+
+print(rechercher_fin(5,[5,3,5,4]))
 ===============================
-[ ["5, [5,3,5,4]", "print(rechercher_fin(5,[5,3,5,4]))"],
-  ["3, [4,1,4,3]", "print(rechercher_fin(3,[4,1,4,3]))"],
-  ["1, [1,1,1,1,1]", "print(rechercher_fin(1,[1,1,1,1,1]))"],
-  ["0, [8,4,2,1]", "print(rechercher_fin(0,[8,4,2,1]))"] ]
+[ ["5", "[5,3,5,4]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher_fin(elem,tab))\nexcept:\n    print('exception')"],
+  ["3", "[4,1,4,3]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher_fin(elem,tab))\nexcept:\n    print('exception')"],
+  ["1", "[1,1,1,1,1]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher_fin(elem,tab))\nexcept:\n    print('exception')"],
+  ["0", "[8,4,2,1]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher_fin(elem,tab))\nexcept:\n    print('exception')"] ]
 ===============================
 def rechercher_fin(elem, tab):
     ...
 
 
-print(rechercher_fin(5,[5,3,5,4])) #?
+#! exemple
+
+print(rechercher_fin(5,[5,3,5,4]))
 ===============================
 Effectuer un parcours par indice décroissant à l'aide de la fonction <strong>range(debut,fin,pas)</strong>.
 ===============================

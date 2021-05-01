@@ -13,15 +13,20 @@ def rechercher(elem, tab):
             return i
     return None
 
-print(rechercher(9,[7,4,5,9,2])) #?
+
+#! exemple
+
+print(rechercher(9,[7,4,5,9,2]))
 ===============================
-[ ["9,[7,4,5,9,2]", "print(rechercher(9,[7,4,5,9,2]))"],
-  ["4,[4,3,6,8,1]", "print(rechercher(4,[4,3,6,8,1]))"],
-  ["1,[0,0,0,0,1]", "print(rechercher(1,[0,0,0,0,1]))"],
-  ["3,[8,7,6,5,4]", "print(rechercher(3,[8,7,6,5,4]))"] ]
+[ ["9", "[7,4,5,9,2]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher(elem,tab))\nexcept:\n    print('exception')"],
+  ["4", "[4,3,6,8,1]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher(elem,tab))\nexcept:\n    print('exception')"],
+  ["1", "[0,0,0,0,1]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher(elem,tab))\nexcept:\n    print('exception')"],
+  ["3", "[8,7,6,5,4]", "#!\nelem=#?\ntab=#?\ntry:\n    print(rechercher(elem,tab))\nexcept:\n    print('exception')"] ]
 ===============================
 def rechercher(elem, tab):
     ...
 
 
-print(rechercher(9,[7,4,5,9,2])) #?
+#! exemple
+
+print(rechercher(9,[7,4,5,9,2]))

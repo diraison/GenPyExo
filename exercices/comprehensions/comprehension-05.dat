@@ -1,0 +1,27 @@
+Compréhension en Python
+===============================
+Exercice 5
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui reprend les chaînes de caractères commençant par un "a" dans la liste <strong>T</strong> pour mettre l'initiale en majuscule à l'aide de la méthode <strong>capitalize()</strong>.<br>
+Ainsi pour <strong>T = ["alice","cyril","pierre","alain"]</strong> on obtient une liste <strong>L</strong> égale à <strong>["Alice","Alain"]</strong>.
+===============================
+# Voici une solution
+
+T = ["alice", "cyril", "pierre", "alain"] #? exemple
+
+L = [s.capitalize() for s in T if s[0] == "a"]
+
+print(L)
+===============================
+[ ["['alice','cyril','pierre','alain']", ""],
+  ["['a','a','b','b,'c']", ""],
+  ["['aéroport','avion',aile']", ""],
+  ["[]", ""] ]
+===============================
+T = ["alice", "cyril", "pierre", "alain"] #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)
+===============================
+<strong>s.capitalize()</strong> copie la chaîne <strong>s</strong> en mettant la première lettre en majuscule.

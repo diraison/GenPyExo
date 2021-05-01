@@ -5,22 +5,29 @@ Exercice 13
 Vous devez créer une fonction <strong>compter_multiples(n,tab)</strong> de paramètres <strong>n</strong> un entier non nul et <strong>tab</strong> un tableau d'entiers, qui renvoie le nombre de multiples de <strong>n</strong> dans <strong>tab</strong>.<br>
 Ainsi <strong>compter_multiples(10,[50,17,20,35])</strong> renvoie <strong>2</strong> (50 et 20 sont les 2 multiples de 10).
 ===============================
-#? Voici une solution
+# Voici une solution
 
-def compter_multiples(n,tab):
+def compter_multiples(n, tab):
     nmult = 0
     for entier in tab:
         if entier % n == 0:
             nmult += 1
     return nmult
+
+
+#! exemple
+
+print(compter_multiples(10,[50,17,20,35]))
 ===============================
-[ ["", "compter_multiples(10,[50,17,20,35])", "r=#?\nprint(r)"],
-  ["", "compter_multiples(3,[9,3,15,12])", "r=#?\nprint(r)"],
-  ["", "compter_multiples(7,[1,2,3,4,5])", "r=#?\nprint(r)"],
-  ["", "compter_multiples(1,[3,5,9,4,2]])", "r=#?\nprint(r)"] ]
+[ ["10, [50,17,20,35]", "#!\nn,tab=#?\ntry:\n    print(compter_multiples(n,tab))\nexcept:\n    print('exception')"],
+  ["3, [9,3,15,12]",    "#!\nn,tab=#?\ntry:\n    print(compter_multiples(n,tab))\nexcept:\n    print('exception')"],
+  ["7, [1,2,3,4,5]",    "#!\nn,tab=#?\ntry:\n    print(compter_multiples(n,tab))\nexcept:\n    print('exception')"],
+  ["1, [3,5,9,4,2]",    "#!\nn,tab=#?\ntry:\n    print(compter_multiples(n,tab))\nexcept:\n    print('exception')"] ]
 ===============================
 def compter_multiples(n, tab):
     ...
 
 
-print(compter_multiples(10,[50,17,20,35])) #?
+#! exemple
+
+print(compter_multiples(10,[50,17,20,35]))

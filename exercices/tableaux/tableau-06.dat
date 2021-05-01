@@ -5,21 +5,27 @@ Exercice 6
 Vous devez créer une fonction <strong>moyenne(nombres)</strong> dont le paramètre <strong>nombres</strong> est un tableau (non vide) d'entiers ou de flottants et qui renvoie la moyenne des nombres de ce tableau.
 Ainsi <strong>moyenne([10,12,13,7])</strong> renvoie <strong>10.5</strong> car (10+12+13+7)÷4=10.5.
 ===============================
-#? Voici une solution
+# Voici une solution
 
 def moyenne(nombres):
     somme = 0
     for x in nombres:
         somme += x
     return somme / len(nombres)
+
+#! exemple
+
+print(moyenne([10,12,13,7]))
 ===============================
-[ ["", "moyenne([10,12,13,7])", "r=#?\nprint(r)"],
-  ["", "moyenne([10,20,40,50])", "r=#?\nprint(r)"],
-  ["", "moyenne([3,5])", "r=#?\nprint(r)"],
-  ["", "moyenne([20])", "r=#?\nprint(r)"] ]
+[ ["moyenne([10,12,13,7])", "#!\nr=#?\nprint(r)"],
+  ["moyenne([10,20,40,50])", "#!\nr=#?\nprint(r)"],
+  ["moyenne([3,5])", "#!\nr=#?\nprint(r)"],
+  ["moyenne([20])", "#!\nr=#?\nprint(r)"] ]
 ===============================
 def moyenne(nombres):
     ...
 
 
-print(moyenne([10,12,13,7])) #?
+#! exemple
+
+print(moyenne([10,12,13,7]))

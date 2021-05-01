@@ -1,0 +1,25 @@
+Compréhension en Python
+===============================
+Exercice 2
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui reprend les valeurs de la liste <strong>T</strong> en les incrémentant.<br>
+Ainsi pour <strong>T = [4,7,5,8]</strong> on obtient une liste <strong>L</strong> égale à <strong>[5,8,6,9]</strong>.
+===============================
+# Voici une solution
+
+T = [4, 7, 5, 8]   #? exemple
+
+L = [x+1 for x in T]
+
+print(L)
+===============================
+[ ["[4,7,5,9]", ""],
+  ["[0,1,2,3]", ""],
+  ["[-1,0,-1]", ""],
+  ["[]",        ""] ]
+===============================
+T = [4, 7, 5, 8]   #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)

@@ -1,0 +1,31 @@
+Compréhension en Python
+===============================
+Exercice 6
+===============================
+Complétez la ligne <strong>L</strong> en écrivant une compréhension de liste qui pour chaque entier de la liste <strong>T</strong> associe la lettre correspondante dans l'alphabet en considérant que "a" correspond au 1, ... et "z" au 26.<br>
+Ainsi pour <strong>T = [3,9,5,12]</strong> on obtient une liste <strong>L</strong> égale à <strong>['c','i','e','l']</strong>.
+===============================
+# Voici une solution
+
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+T = [3, 9, 5, 12]   #? exemple
+
+L = [alphabet[i-1] for i in T]
+
+print(L)
+===============================
+[ ["[3,9,5,12]",     ""],
+  ["[12,9,22,18,5]", ""],
+  ["[15,3,5,1,14]",  ""],
+  ["[5,1,21]",       ""] ]
+===============================
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+T = []   #? exemple
+
+L = [ ... ]  # ligne à compléter
+
+print(L)
+===============================
+Il faut penser à décaler les indice car la première lettre d'une chaîne de caractères est située à l'indice 0.

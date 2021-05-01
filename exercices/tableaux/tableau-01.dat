@@ -5,7 +5,7 @@ Exercice 1
 Vous devez créer une fonction <strong>maximum(tab)</strong> dont le paramètre <strong>tab</strong> est un tableau (non vide) d'entiers et qui renvoie le plus grand nombre de ce tableau.<br>
 Ainsi <strong>maximum([10,30,15,22])</strong> renvoie <strong>30</strong>.
 ===============================
-#? Voici une solution
+# Voici une solution
 
 def maximum(tab):
     xmax = tab[0]
@@ -13,14 +13,21 @@ def maximum(tab):
         if x > xmax:
             xmax = x
     return xmax
+
+
+#! exemple
+
+print(maximum([10,30,15,22]))
 ===============================
-[ ["", "maximum([10,30,15,22])", "r=#?\nprint(r)"],
-  ["", "maximum([20,30,40])", "r=#?\nprint(r)"],
-  ["", "maximum([9,8,7,6])", "r=#?\nprint(r)"],
-  ["", "maximum([0])", "r=#?\nprint(r)"] ]
+[ ["maximum([10,30,15,22])", "#!\nr=#?\nprint(r)"],
+  ["maximum([20,30,40])", "#!\nr=#?\nprint(r)"],
+  ["maximum([9,8,7,6])", "#!\nr=#?\nprint(r)"],
+  ["maximum([0])", "#!\nr=#?\nprint(r)"] ]
 ===============================
 def maximum(tab):
     ...
 
 
-print(maximum([10,30,15,22])) #?
+#! exemple
+
+print(maximum([10,30,15,22]))

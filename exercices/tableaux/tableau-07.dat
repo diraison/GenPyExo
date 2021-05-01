@@ -3,9 +3,9 @@ Tableaux en Python
 Exercice 7
 ===============================
 Vous devez créer une fonction <strong>amplitude(temperatures)</strong> dont le paramètre <strong>temperatures</strong> est un tableau (non vide) d'entiers ou de flottants et qui renvoie l'amplitude des nombres de ce tableau, c'est à dire la différence entre la plus grande (maximum) et la plus petite valeur (minimum).<br>
-Ainsi <strong>amplitude([18,35,24,10,29])</strong> renvoie <strong>25</strong> car 35-10=25.
+Ainsi <strong>amplitude([18,35,24,10])</strong> renvoie <strong>25</strong> car 35-10=25.
 ===============================
-#? Voici une solution
+# Voici une solution
 
 def amplitude(temperatures):
     tmax = temperatures[0]
@@ -16,15 +16,22 @@ def amplitude(temperatures):
         if t < tmin:
             tmin = t
     return tmax - tmin
+
+
+#! exemple
+
+print(amplitude([18,35,24,10]))
 ===============================
-[ ["", "amplitude([18,35,24,10,29])", "r=#?\nprint(r)"],
-  ["", "amplitude([-5,12,5,-8,9])", "r=#?\nprint(r)"],
-  ["", "amplitude([10,11,12,13])", "r=#?\nprint(r)"],
-  ["", "amplitude([23,18,15,13])", "r=#?\nprint(r)"],
-  ["", "amplitude([15])", "r=#?\nprint(r)"] ]
+[ ["amplitude([18,35,24,10])", "#!\nr=#?\nprint(r)"],
+  ["amplitude([-5,12,5,-8,9])", "#!\nr=#?\nprint(r)"],
+  ["amplitude([10,11,12,13])", "#!\nr=#?\nprint(r)"],
+  ["amplitude([23,18,15,13])", "#!\nr=#?\nprint(r)"],
+  ["amplitude([15])", "#!\nr=#?\nprint(r)"] ]
 ===============================
 def amplitude(temperatures):
     ...
 
 
-print(amplitude([18,35,24,10,29])) #?
+#! exemple
+
+print(amplitude([18,35,24,10]))

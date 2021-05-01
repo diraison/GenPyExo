@@ -1,0 +1,36 @@
+Tableaux en Python
+===============================
+Exercice 20
+===============================
+Créez une fonction <strong>lister_positifs(tab)</strong> qui renvoie une liste formée par les éléments strictements positifs du tableau de nombres <strong>tab</strong> au moyen de la méthode <strong>append()</strong> du type <strong>list</strong>.<br>
+Ainsi l'appel <strong>lister_positifs([4,-2,7,3,-1])</strong> renvoie <strong>[4,7,3]</strong>.
+===============================
+# Voici une solution
+
+def lister_positifs(tab):
+    positifs = []
+    for x in tab:
+        if x > 0:
+            positifs.append(x)
+    return positifs
+
+
+#! exemple
+
+print(lister_positifs([4,-2,7,3,-1]))
+===============================
+[ ["[4,-2,7,3,-1]",    "#!\nt=#?\ntry:\n    print(lister_positifs(t))\nexcept:\n    print('exception')"],
+  ["[-1,9,-5,2,-7,6]", "#!\nt=#?\ntry:\n    print(lister_positifs(t))\nexcept:\n    print('exception')"],
+  ["[0,1,2,3,4]",      "#!\nt=#?\ntry:\n    print(lister_positifs(t))\nexcept:\n    print('exception')"],
+  ["[-1,-2,-3,-4]",    "#!\nt=#?\ntry:\n    print(lister_positifs(t))\nexcept:\n    print('exception')"] ]
+===============================
+def lister_positifs(tab):
+    ...
+
+
+#! exemple
+
+print(lister_positifs([4,-2,7,3,-1]))
+===============================
+<ol><li>Commencez par créer une liste vide ; puis en parcourant le tableau à l'aide d'une boucle for, testez si le nombre courant doit être ajouté ou non à la liste.</li>
+<li>N'oubliez pas de renvoyer la liste à l'aide du mot clé <strong>return</strong>.</li></ol>

@@ -18,22 +18,25 @@ def copier(src, dst):
     for i in range(taille):
         dst[i] = src[i]
 
-s = [4, 3, 9, 5]
+#! exemple
+
 d = [0, 0, 0]
-copier(s, d)      #? ne pas
-print(d)          #? retirer
+copier([4, 3, 9, 5], d)
+print(d)
 ===============================
-[ ["src=[4,3,9,5]", "dst=[0,0,0]",   "try:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
-  ["src=[2,8,3]",   "dst=[0,0,0]",   "try:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
-  ["src=[1,6]",     "dst=[0,0,0,0]", "try:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
-  ["src=[7,0,1]",   "dst=[]",        "try:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"] ]
+[ ["[4,3,9,5]", "[0,0,0]", "#!\nsrc=#?\ndst=#?\ntry:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
+  ["[2,8,3]",   "[0,0,0]", "#!\nsrc=#?\ndst=#?\ntry:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
+  ["[1,6]",   "[0,0,0,0]", "#!\nsrc=#?\ndst=#?\ntry:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"],
+  ["[7,0,1]",        "[]", "#!\nsrc=#?\ndst=#?\ntry:\n    copier(src,dst)\n    print(dst)\nexcept:\n    print('exception')"] ]
 ===============================
 def copier(src, dst):
     ...
 
-s = [4, 3, 9, 5]
+
+#! exemple
+
 d = [0, 0, 0]
-copier(s, d)      #? ne pas
-print(d)          #? retirer
+copier([4, 3, 9, 5], d)
+print(d)
 ===============================
 Il faut veiller à ne pas dépasser la taille du tableau <strong>src</strong> ni celle de <strong>dst</strong> lors de la recopie des éléments.

@@ -5,23 +5,30 @@ Exercice 10
 Vous devez créer une fonction <strong>compter_pairs(liste)</strong> dont le paramètre <strong>liste</strong> est un tableau d'entiers et qui renvoie le nombre d'élements pairs dans ce tableau.<br>
 Ainsi <strong>compter_pairs([8,13,6,18])</strong> renvoie <strong>3</strong> (car 8, 6 et 18 sont pairs).
 ===============================
-#? Voici une solution
+# Voici une solution
 
 def compter_pairs(liste):
     npairs = 0
-    for element in T:
+    for element in liste:
         if element % 2 == 0:
             npairs += 1
     return npairs
+
+
+#! exemple
+
+print(compter_pairs([8,13,6,18]))
 ===============================
-[ ["", "compter_pairs([8,13,6,18])", "r=#?\nprint(r)"],
-  ["", "compter_pairs([7,9,8,4,2])", "r=#?\nprint(r)"],
-  ["", "compter_pairs([14,0,16,2])", "r=#?\nprint(r)"],
-  ["", "compter_pairs([7,13,15,1])", "r=#?\nprint(r)"],
-  ["", "compter_pairs([])", "r=#?\nprint(r)"] ]
+[ ["[8,13,6,18]", "#!\nt=#?\ntry:\n    print(compter_pairs(t))\nexcept:\n    print('exception')"],
+  ["[7,9,8,4,2]", "#!\nt=#?\ntry:\n    print(compter_pairs(t))\nexcept:\n    print('exception')"],
+  ["[14,0,16,2]", "#!\nt=#?\ntry:\n    print(compter_pairs(t))\nexcept:\n    print('exception')"],
+  ["[7,13,15,1]", "#!\nt=#?\ntry:\n    print(compter_pairs(t))\nexcept:\n    print('exception')"],
+  ["[]",          "#!\nt=#?\ntry:\n    print(compter_pairs(t))\nexcept:\n    print('exception')"] ]
 ===============================
 def compter_pairs(liste):
     ...
 
 
-print(compter_pairs([8,13,6,18])) #?
+#! exemple
+
+print(compter_pairs([8,13,6,18]))
