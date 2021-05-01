@@ -22,7 +22,7 @@ print(L)
 ===============================
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-T = []   #? exemple
+T = [3, 9, 5, 12]   #? exemple
 
 L = [ ... ]  # ligne à compléter
 

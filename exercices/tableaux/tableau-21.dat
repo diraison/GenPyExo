@@ -1,0 +1,36 @@
+Tableaux en Python
+===============================
+Exercice 21
+===============================
+Créez une fonction <strong>lister_negatifs(tab)</strong> qui renvoie une liste formée par les éléments négatifs ou nuls du tableau de nombres <strong>tab</strong> au moyen de la méthode <strong>append()</strong> du type <strong>list</strong>.<br>
+Ainsi l'appel <strong>lister_negatifs([5,-3,6,-2,8])</strong> renvoie <strong>[-3,-2]</strong>.
+===============================
+# Voici une solution
+
+def lister_negatifs(tab):
+    negatifs = []
+    for x in tab:
+        if x > 0:
+            negatifs.append(x)
+    return negatifs
+
+
+#! exemple
+
+print(lister_negatifs([5,-3,6,-2,8]))
+===============================
+[ ["[5,-3,6,-2,8]",  "#!\nt=#?\ntry:\n    print(lister_negatifs(t))\nexcept:\n    print('exception')"],
+  ["[-1,9,-5,2,-7]", "#!\nt=#?\ntry:\n    print(lister_negatifs(t))\nexcept:\n    print('exception')"],
+  ["[-1,-2,-3,-4]",  "#!\nt=#?\ntry:\n    print(lister_negatifs(t))\nexcept:\n    print('exception')"],
+  ["[0,1,2,3,4]",    "#!\nt=#?\ntry:\n    print(lister_negatifs(t))\nexcept:\n    print('exception')"] ]
+===============================
+def lister_negatifs(tab):
+    ...
+
+
+#! exemple
+
+print(lister_negatifs([5,-3,6,-2,8]))
+===============================
+<ol><li>Commencez par créer une liste vide ; puis en parcourant le tableau à l'aide d'une boucle for, testez si le nombre courant doit être ajouté ou non à la liste.</li>
+<li>N'oubliez pas de renvoyer la liste à l'aide du mot clé <strong>return</strong>.</li></ol>

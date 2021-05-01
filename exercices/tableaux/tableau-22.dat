@@ -1,0 +1,36 @@
+Tableaux en Python
+===============================
+Exercice 22
+===============================
+Créez une fonction <strong>lister_pairs(tab)</strong> qui renvoie une liste formée par les entiers pairs du tableau <strong>tab</strong> au moyen de la méthode <strong>append()</strong> du type <strong>list</strong>.<br>
+Ainsi l'appel <strong>lister_pairs([5,8,2,3,4])</strong> renvoie <strong>[8,2,4]</strong>.
+===============================
+# Voici une solution
+
+def lister_pairs(tab):
+    pairs = []
+    for n in tab:
+        if n % 2 == 0:
+            pairs.append(n)
+    return pairs
+
+
+#! exemple
+
+print(lister_pairs([5,8,2,3,4]))
+===============================
+[ ["[5,8,2,3,4]","#!\nt=#?\ntry:\n    print(lister_pairs(t))\nexcept:\n    print('exception')"],
+  ["[4,-2,9,7]", "#!\nt=#?\ntry:\n    print(lister_pairs(t))\nexcept:\n    print('exception')"],
+  ["[8,2,6,0]",  "#!\nt=#?\ntry:\n    print(lister_pairs(t))\nexcept:\n    print('exception')"],
+  ["[7,9,1,3]",  "#!\nt=#?\ntry:\n    print(lister_pairs(t))\nexcept:\n    print('exception')"] ]
+===============================
+def lister_pairs(tab):
+    ...
+
+
+#! exemple
+
+print(lister_pairs([5,8,2,3,4]))
+===============================
+<ol><li>Commencez par créer une liste vide ; puis en parcourant le tableau à l'aide d'une boucle for, testez si le nombre courant doit être ajouté ou non à la liste.</li>
+<li>N'oubliez pas de renvoyer la liste à l'aide du mot clé <strong>return</strong>.</li></ol>

@@ -14,8 +14,8 @@ L = [s.capitalize() for s in T if s[0] == "a"]
 print(L)
 ===============================
 [ ["['alice','cyril','pierre','alain']", ""],
-  ["['a','a','b','b,'c']", ""],
-  ["['aéroport','avion',aile']", ""],
+  ["['a','a','b','b','c']", ""],
+  ["['aéroport','avion','aile']", ""],
   ["[]", ""] ]
 ===============================
 T = ["alice", "cyril", "pierre", "alain"] #? exemple
