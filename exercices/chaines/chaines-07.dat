@@ -1,0 +1,38 @@
+Chaînes de caractères en Python
+===============================
+Exercice 7
+===============================
+Complétez la procédure <strong>carre(n)</strong> qui affiche un carré vide dont le bord est formé de hashtag <strong>"#"</strong> de côté <strong>n</strong> entier positif.
+<pre>                           n=4 ####
+                 n=3 ###       #  #
+        n=2 ##       # #       #  #
+n=1 #       ##       ###       ####</pre>
+===============================
+# Voici une solution
+
+def carre(n):
+    print("#" * n)
+    for i in range(n-2):
+        print("#" + " " * (n-2) + "#")
+    if n > 1:
+        print("#" * n)
+
+
+#! exemple
+
+carre(4)
+===============================
+[ ["1", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["2", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["3", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["4", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"] ]
+===============================
+def carre(n):
+    ...
+
+
+#! exemple
+
+carre(4)
+===============================
+Pour rappel, <strong>"a" + "b" * 3 + "c"</strong> donne la chaîne <strong>"abbbc"</strong>.

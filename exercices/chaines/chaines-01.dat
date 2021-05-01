@@ -1,0 +1,33 @@
+Chaînes de caractères en Python
+===============================
+Exercice 1
+===============================
+Complétez la fonction <strong>longueur(mot)</strong> qui renvoie le nombre de lettres de la chaîne de caractères <strong>mot</strong> ; sans utiliser la fonction <strong>len()</strong>.<br>
+Ainsi <strong>longueur("algorithme")</strong> renvoie <strong>10</strong>.
+===============================
+# Voici une solution
+
+def longueur(mot):
+    compteur = 0
+    for lettre in mot:
+        compteur += 1
+    return compteur
+
+#! exemple
+
+print(longueur("algorithme"))
+===============================
+[ ["\"algorithme\"",   "#!\ns=#?\ntry:\n    print(longueur(s))\nexcept:\n    print('exception')"],
+  ["\"informatique\"", "#!\ns=#?\ntry:\n    print(longueur(s))\nexcept:\n    print('exception')"],
+  ["\"réseau\"",       "#!\ns=#?\ntry:\n    print(longueur(s))\nexcept:\n    print('exception')"],
+  ["\"\"",             "#!\ns=#?\ntry:\n    print(longueur(s))\nexcept:\n    print('exception')"] ]
+===============================
+def longueur(mot):
+    ...
+
+
+#! exemple
+
+print(longueur("algorithme"))
+===============================
+Utilisez une variable comme compteur, et parcourez <strong>mot</strong> avec une boucle <strong>for</strong> en mettant à jour ce compteur.

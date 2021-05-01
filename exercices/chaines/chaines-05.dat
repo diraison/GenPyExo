@@ -1,0 +1,39 @@
+Chaînes de caractères en Python
+===============================
+Exercice 5
+===============================
+Complétez la fonction <strong>binaire(n)</strong> qui renvoie la chaîne de caractères représentant l'entier strictement positif <strong>n</strong> en base 2 ; sans utiliser la fonction <strong>bin()</strong>.<br>
+Ainsi <strong>binaire(53)</strong> renvoie la chaîne <strong>"110101"</strong>.
+===============================
+# Voici une solution
+
+def binaire(n):
+    s = ""
+    while n > 0:
+        if n % 2 == 1:
+            s = "1" + s
+        else:
+            s = "0" + s
+        n = n // 2
+    return s
+
+#! exemple
+
+print(binaire(53))
+===============================
+[ ["53",  "#!\ns=#?\ntry:\n    print(binaire(s))\nexcept:\n    print('exception')"],
+  ["255", "#!\ns=#?\ntry:\n    print(binaire(s))\nexcept:\n    print('exception')"],
+  ["16",  "#!\ns=#?\ntry:\n    print(binaire(s))\nexcept:\n    print('exception')"],
+  ["1",   "#!\ns=#?\ntry:\n    print(binaire(s))\nexcept:\n    print('exception')"] ]
+===============================
+def binaire(n):
+    s = ""
+    ...
+    return s
+
+
+#! exemple
+
+print(binaire(53))
+===============================
+On procède par division successives par <strong>2</strong> et suivant le reste on insère un <strong>0</strong> ou un <strong>1</strong> dans la chaîne <strong>s</strong>.

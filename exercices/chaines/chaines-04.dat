@@ -1,0 +1,36 @@
+Chaînes de caractères en Python
+===============================
+Exercice 4
+===============================
+Complétez la fonction <strong>reverser(mot)</strong> qui renvoie la chaîne de caractères <strong>mot</strong> réécrite dans le sens inverse de la lecture.<br>
+Ainsi <strong>renverser("NSI")</strong> renvoie la chaîne <strong>"ISN"</strong>.
+===============================
+# Voici une solution
+
+def renverser(mot):
+    chaine = ""
+    for lettre in mot:
+        chaine = lettre + chaine
+    return chaine
+
+
+#! exemple
+
+print(renverser("NSI"))
+===============================
+[ ["\"NSI\"",        "#!\ns=#?\ntry:\n    print(renverser(s))\nexcept:\n    print('exception')"],
+  ["\"kayak\"",      "#!\ns=#?\ntry:\n    print(renverser(s))\nexcept:\n    print('exception')"],
+  ["\"super soda\"", "#!\ns=#?\ntry:\n    print(renverser(s))\nexcept:\n    print('exception')"],
+  ["\"\"",           "#!\ns=#?\ntry:\n    print(renverser(s))\nexcept:\n    print('exception')"] ]
+===============================
+def renverser(mot):
+    chaine = ""
+    ...
+    return chaine
+
+
+#! exemple
+
+print(renverser("NSI"))
+===============================
+Si on parcourt <strong>mot</strong> lettre après lettre dans le sens de la lecture pour compléter <strong>chaine</strong>, quelle opération faut-il faire avec la deuxième lettre pour compléter <strong>chaine</strong> ?

@@ -1,0 +1,36 @@
+Chaînes de caractères en Python
+===============================
+Exercice 3
+===============================
+Complétez la fonction <strong>supprimer(lettre,mot)</strong> qui renvoie la chaîne de caractères <strong>mot</strong> dans laquelle tous les caractères <strong>lettre</strong> ont été supprimés.<br>
+Ainsi <strong>supprimer("l","baille)</strong> renvoie <strong>"baie"</strong>.
+===============================
+# Voici une solution
+
+def supprimer(lettre, mot):
+    s = ""
+    for caractere in mot:
+        if caractere != lettre:
+            s += caractere
+    return s
+
+
+#! exemple
+
+print(supprimer("l","baille"))
+===============================
+[ ["\"l\", \"baille\"",  "#!\nl,m=#?\ntry:\n    print(supprimer(l,m))\nexcept:\n    print('exception')"],
+  ["\"u\", \"poule\"",   "#!\nl,m=#?\ntry:\n    print(supprimer(l,m))\nexcept:\n    print('exception')"],
+  ["\"f\", \"affres\"",  "#!\nl,m=#?\ntry:\n    print(supprimer(l,m))\nexcept:\n    print('exception')"],
+  ["\" \", \"1 2 3 4\"", "#!\nl,m=#?\ntry:\n    print(supprimer(l,m))\nexcept:\n    print('exception')"],
+  ["\"a\", \"soleil\"",  "#!\nl,m=#?\ntry:\n    print(supprimer(l,m))\nexcept:\n    print('exception')"] ]
+===============================
+def supprimer(lettre, mot):
+    ...
+
+
+#! exemple
+
+print(supprimer("l","baille"))
+===============================
+Parcourez <strong>mot</strong> avec une boucle <strong>for</strong> en comparant le caractère courant avec <strong>lettre</strong> pour ajouter, quand il le faut, le caractère courant à la réponse.

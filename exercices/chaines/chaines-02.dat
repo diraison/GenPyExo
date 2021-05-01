@@ -1,0 +1,35 @@
+Chaînes de caractères en Python
+===============================
+Exercice 2
+===============================
+Complétez la fonction <strong>compter(lettre,mot)</strong> qui renvoie le nombre de caractère <strong>lettre</strong> que l'on trouve dans la chaîne de caractères <strong>mot</strong> ; sans utiliser la méthode <strong>count()</strong>.<br>
+Ainsi <strong>compter("a","animal")</strong> renvoie <strong>2</strong> car il y a 2 <strong>"a"</strong> dans <strong>"animal"</strong>.
+===============================
+# Voici une solution
+
+def compter(lettre, mot):
+    compteur = 0
+    for caractere in mot:
+        if caractere == lettre:
+            compteur += 1
+    return compteur
+
+
+#! exemple
+
+print(compter("a","animal"))
+===============================
+[ ["\"a\", \"animal\"",  "#!\nl,m=#?\ntry:\n    print(compter(l,m))\nexcept:\n    print('exception')"],
+  ["\"o\", \"zoo\"",     "#!\nl,m=#?\ntry:\n    print(compter(l,m))\nexcept:\n    print('exception')"],
+  ["\"m\", \"plus\"",    "#!\nl,m=#?\ntry:\n    print(compter(l,m))\nexcept:\n    print('exception')"],
+  ["\" \", \"1 2 3 4\"", "#!\nl,m=#?\ntry:\n    print(compter(l,m))\nexcept:\n    print('exception')"] ]
+===============================
+def compter(lettre, mot):
+    ...
+
+
+#! exemple
+
+print(compter("a","animal"))
+===============================
+Utilisez une variable comme compteur, et parcourez <strong>mot</strong> avec une boucle <strong>for</strong> en comparant le caractère courant avec <strong>lettre</strong> pour mettre à jour ce compteur.

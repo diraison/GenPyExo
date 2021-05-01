@@ -1,0 +1,34 @@
+Chaînes de caractères en Python
+===============================
+Exercice 6
+===============================
+Complétez la procédure <strong>carre(n)</strong> qui affiche un carré remplit d'étoiles <strong>"*"</strong> de côté <strong>n</strong> un entier positif.
+<pre>                           n=4 ****
+                 n=3 ***       ****
+        n=2 **       ***       ****
+n=1 *       **       ***       ****</pre>
+===============================
+# Voici une solution
+
+def carre(n):
+    for i in range(n):
+        print("*" * n)
+
+#! exemple
+
+carre(4)
+===============================
+[ ["1", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["2", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["3", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"],
+  ["4", "#!\ns=#?\ntry:\n    print(':');carre(s)\nexcept:\n    print('exception')"] ]
+===============================
+def carre(n):
+    ...
+
+
+#! exemple
+
+carre(4)
+===============================
+Pour rappel, <strong>"*" * 5</strong> donne la chaîne <strong>"*****"</strong>.

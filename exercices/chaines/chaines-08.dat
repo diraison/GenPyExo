@@ -1,0 +1,39 @@
+Chaînes de caractères en Python
+===============================
+Exercice 8
+===============================
+Complétez la procédure <strong>triangle(n)</strong> qui affiche un triangle isocèle de hauteur <strong>n</strong> entier positif et formé de <strong>"*"</strong>, en utilisant le minimum de caractères espace <strong>" "</strong>.
+<pre>                           n=4   *
+                 n=3   *        ***
+        n=2  *        ***      *****
+n=1 *       ***      *****    *******</pre>
+===============================
+# Voici une solution
+
+def triangle(n):
+    for i in range(n):
+        print(" " * (n-i-1) + "*" * (2*i+1))
+
+
+#! exemple
+
+triangle(4)
+===============================
+[ ["1", "#!\ns=#?\ntry:\n    print(':');triangle(s)\nexcept:\n    print('exception')"],
+  ["2", "#!\ns=#?\ntry:\n    print(':');triangle(s)\nexcept:\n    print('exception')"],
+  ["3", "#!\ns=#?\ntry:\n    print(':');triangle(s)\nexcept:\n    print('exception')"],
+  ["4", "#!\ns=#?\ntry:\n    print(':');triangle(s)\nexcept:\n    print('exception')"] ]
+===============================
+def triangle(n):
+    ...
+
+
+#! exemple
+
+triangle(4)
+===============================
+Si on considère le cas où <strong>n = 4</strong>.<ol>
+<li>Combien y a-t-il d'espaces sur la première ligne avant l'étoile ?</li>
+<li>Combien y a-t-il d'espaces sur la deuxième ligne, et combien y a-t-il d'étoiles ?</li>
+<li>Combien y a-t-il d'espaces sur la troisième ligne, et combien y a-t-il d'étoiles ?</li>
+<li>Combien y a-t-il d'espaces sur la quatrième ligne, et combien y a-t-il d'étoiles ?</li></ol>
