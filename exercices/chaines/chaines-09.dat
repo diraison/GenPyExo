@@ -1,0 +1,40 @@
+Chaînes de caractères en Python
+===============================
+Exercice 9
+===============================
+Complétez la fonction <strong>entier(bits)</strong> qui renvoie l'entier écrit en base 2 dans la chaîne de caractères <strong>bits</strong> ; sans utiliser la fonction <strong>int()</strong>.<br>
+Ainsi <strong>entier("101011")</strong> renvoie le nombre entier <strong>43</strong>.
+===============================
+# Voici une solution
+
+def entier(bits):
+    n = 0
+    for chiffre in bits:
+        if chiffre == "1":
+            n = 2 * n + 1
+        else:
+            n = 2 * n
+    return n
+
+
+#! exemple
+
+print(entier("101011"))
+===============================
+[ ["\"101011\"",    "#!\ns=#?\ntry:\n    print(entier(s))\nexcept:\n    print('exception')"],
+  ["\"100000000\"", "#!\ns=#?\ntry:\n    print(entier(s))\nexcept:\n    print('exception')"],
+  ["\"1111\"",      "#!\ns=#?\ntry:\n    print(entier(s))\nexcept:\n    print('exception')"],
+  ["\"1\"",         "#!\ns=#?\ntry:\n    print(entier(s))\nexcept:\n    print('exception')"],
+  ["\"0\"",         "#!\ns=#?\ntry:\n    print(entier(s))\nexcept:\n    print('exception')"] ]
+===============================
+def entier(bits):
+    n = 0
+    ...
+    return n
+
+
+#! exemple
+
+print(entier("101011"))
+===============================
+Commencez par examiner le cas d'un nombre écrit en base 10 comme 8576. Quelles sont les opérations à effectuer sur l'entier <strong>n</strong> pour reconstituer 8576, lorsqu'on examine ses chiffres les uns après les autres, c'est à dire 8, puis 5, puis 7 et enfin 6 ?
