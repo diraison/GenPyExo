@@ -1,0 +1,43 @@
+Programmation dynamique
+===============================
+Exercice 2
+===============================
+Complétez la fonction <strong>compter_mots(phrase)</strong> pour qu'elle renvoie le nombre de mots dans la chaîne de caractères <strong>phrase</strong> en considérant qu'un mot est une succession ininterrompue d'une ou plusieurs lettres de l'alphabet. On pourra utiliser l'opérateur <strong>in</strong> et on ignorera les lettres accentuées.<br>
+Ainsi <strong>compter_mots("c'est super")</strong> renvoie <strong>3</strong> (les mots étant "c", "est" et "super").
+===============================
+# Voici une solution
+
+def compter_mots(phrase):
+    alphabet = "abcdefghijklmnopqrstuvwxyz" + \
+               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    compteur = 0
+    precedent = "."
+    for caractere in phrase:
+        if precedent not in alphabet \
+        and caractere in alphabet:
+            compteur += 1
+        precedent = caractere
+    return compteur
+
+
+#! exemple
+print(compter_mots("c'est super"))
+===============================
+[ ["\"c'est super\"",   "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"],
+  ["\"Que dire ?\"",    "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"],
+  ["\" Oh !!! \"",      "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"],
+  ["\"Informatique\"",  "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"],
+  ["\"a b c d e f g\"", "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"],
+  ["\"\"",              "#!\ns=#?\ntry:\n    print(compter_mots(s))\nexcept:\n    print('exception')"] ]
+===============================
+def compter_mots(phrase):
+    alphabet = "abcdefghijklmnopqrstuvwxyz" + \
+               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    compteur = 0
+    ...
+
+
+#! exemple
+print(compter_mots("c'est super"))
+===============================
+Compter un mot, c'est déterminer quand ce mot débute ; autrement dit cela revient à établir si le caractère courant est une lettre de l'alphabet alors que le caractères précédent n'en est pas une.

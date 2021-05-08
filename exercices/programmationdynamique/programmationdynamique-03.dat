@@ -1,0 +1,42 @@
+Programmation dynamique
+===============================
+Exercice 3
+===============================
+Complétez la fonction <strong>max_suite_1(binaire)</strong> pour qu'elle renvoie la longueur de la plus grande succession de caractères <strong>"1"</strong> dans la chaîne de caractères <strong>binaire</strong>.<br>
+Ainsi <strong>max_suite_1("0110111101")</strong> renvoie <strong>4</strong> car on trouve au plus 4 caractères "1" qui se suivent.
+===============================
+# Voici une solution
+
+def max_suite_1(binaire):
+    courante = 0  # longueur de la suite actuelle de 1
+    maximale = 0  # longueur de la plus grande suite de 1
+    for chiffre in binaire:
+        if chiffre == "1":
+            courante += 1
+            maximale = max(maximale, courante)
+        else:
+            courante = 0
+    return maximale
+
+
+#! exemple
+print(max_suite_1("0110111101"))
+===============================
+[ ["\"0110111101\"", "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"0101010101\"", "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"1101100111\"", "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"11111110\"",   "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"00011111\"",   "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"11111111\"",   "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"],
+  ["\"\"",           "#!\ns=#?\ntry:\n    print(max_suite_1(s))\nexcept:\n    print('exception')"] ]
+===============================
+def max_suite_1(binaire):
+    courante = 0     # longueur de la suite actuelle de 1
+    maximale = 0     # longueur de la plus longue suite de 1
+    ...
+
+
+#! exemple
+print(max_suite_1("0110111101"))
+===============================
+À l'occasion du parcours de la chaine <strong>binaire</strong> caractère par caractère, lorsqu'on rencontre un "1" on considère qu'on prolonge une succession de 1 (qui peut être vide) auquel cas on actualise la longueur maximale, et lorsqu'on rencontre un "0" on considère qu'on passe à une nouvelle suite de "1" vide.

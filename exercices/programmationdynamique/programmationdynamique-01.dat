@@ -1,0 +1,42 @@
+Programmation dynamique
+===============================
+Exercice 1
+===============================
+Complétez la fonction <strong>mode_ae(chaine)</strong> qui renvoie la lettre "a" ou "e" qui apparaît le plus souvent dans la chaîne de caractères <strong>chaine</strong>. On considèrera que "a" est prioritaire sur "e" quand elles apparaîssent autant l'une que l'autre.<br>
+Ainsi <strong>mode_ae("ballade")</strong> renvoie <strong>"a"</strong> car elle apparaît 2 fois dans <strong>chaine</strong> alors que "e" n'apparaît qu'une fois.
+===============================
+# Voici une solution
+
+def mode_ae(chaine):
+    ecart = 0    # entre le nombre de "a" et de "e"
+    for lettre in chaine:
+        if lettre == "a":
+            ecart += 1
+        elif lettre == "e":
+            ecart -= 1
+    if ecart >= 0:  # y a-t-il plus de "a" ?
+        return "a"
+    else:
+        return "e"
+
+
+#! exemple
+print(mode_ae("ballade"))
+===============================
+[ ["\"ballade\"",      "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"],
+  ["\"mathematique\"", "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"],
+  ["\"table\"",        "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"],
+  ["\"une epee\"",     "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"],
+  ["\"elance\"",       "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"],
+  ["\"usb\"",          "#!\ns=#?\ntry:\n    print(mode_ae(s))\nexcept:\n    print('exception')"] ]
+===============================
+def mode_ae(chaine):
+    ...
+
+
+#! exemple
+print(mode_ae("ballade"))
+===============================
+Deux solutions sont possibles lors du parcours de la chaine de caractères <strong>chaine</strong> :
+<ul><li>Dénombrer les "a" et les "e", c'est à dire compter leur nombre.</li>
+<li>Calculer l'écart entre le nombre de "a" et le nombre de "e".</li></ul>

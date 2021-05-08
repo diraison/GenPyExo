@@ -1,0 +1,37 @@
+Chaînes de caractères en Python
+===============================
+Exercice 10
+===============================
+Créer la fonction <strong>separer(chaine)</strong> qui renvoie la chaîne obtenue en séparant les caractères de <strong>chaine</strong> par des tirets <strong>"-"</strong>.<br>
+Ainsi <strong>separer("abc")</strong> renvoie la chaîne <strong>"a-b-c"</strong>.
+===============================
+# Voici une solution
+
+def separer(chaine):
+    s = ""
+    for caractere in chaine:
+        if s == "":
+            s = caractere   # 1ere fois
+        else:
+            s = s + "-" + caractere
+    return s
+
+
+#! exemple
+
+print(separer("abc"))
+===============================
+[ ["\"abc\"",    "#!\ns=#?\ntry:\n    print(separer(s))\nexcept:\n    print('exception')"],
+  ["\"souris\"", "#!\ns=#?\ntry:\n    print(separer(s))\nexcept:\n    print('exception')"],
+  ["\"ko\"",     "#!\ns=#?\ntry:\n    print(separer(s))\nexcept:\n    print('exception')"],
+  ["\"A\"",      "#!\ns=#?\ntry:\n    print(separer(s))\nexcept:\n    print('exception')"],
+  ["\"\"",       "#!\ns=#?\ntry:\n    print(separer(s))\nexcept:\n    print('exception')"] ]
+===============================
+...
+
+
+#! exemple
+
+print(separer("abc"))
+===============================
+Pourqu'il n'y ait pas de tiret en trop, on peut n'ajouter des tirets qu'à partir du deuxième caractère de la chaîne.
