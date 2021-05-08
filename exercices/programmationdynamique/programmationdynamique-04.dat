@@ -1,0 +1,42 @@
+Programmation dynamique
+===============================
+Exercice 4
+===============================
+Complétez la fonction <strong>max_long_mot(phrase)</strong> pour qu'elle renvoie la longueur du plus grand mot de la chaîne de caractères <strong>phrase</strong> en considérant qu'un mot est une succession ininterrompue d'une ou plusieurs lettres de l'alphabet. On pourra utiliser l'opérateur <strong>in</strong> et on ignorera les lettres accentuées.<br>
+Ainsi <strong>max_long_mot("as dame roi")</strong> renvoie <strong>4</strong> qui est la longueur du mot "dame".
+===============================
+# Voici une solution
+
+def max_long_mot(phrase):
+    alphabet = "abcdefghijklmnopqrstuvwxyz" + \
+               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    taille, taille_max = 0, 0
+    for caractere in phrase:
+        if caractere in alphabet:
+            taille += 1
+        else:
+            taille_max = max(taille_max, taille)
+            taille = 0
+    return max(taille_max, taille) # dernier mot
+
+
+#! exemple
+print(max_long_mot("as dame roi"))
+===============================
+[ ["\"as dame roi\"",   "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"],
+  ["\"Un Exercice\"",   "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"],
+  ["\" Zut ! \"",       "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"],
+  ["\"a aa aaa aaaa\"", "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"],
+  ["\"zzzz zzz zz z\"", "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"],
+  ["\"\"",              "#!\ns=#?\ntry:\n    print(max_long_mot(s))\nexcept:\n    print('exception')"] ]
+===============================
+def max_long_mot(phrase):
+    alphabet = "abcdefghijklmnopqrstuvwxyz" + \
+               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    ...
+
+
+#! exemple
+print(max_long_mot("as dame roi"))
+===============================
+Lors du parcours de la chaine, si le caractère courant est une lettre de l'alphabet alors il augmente la taille du mot en cours de formation, sinon on repart sur un nouveau mot de taille nulle. Parallèlement on doit veiller à actualiser la taille maximale aux bons moments.
