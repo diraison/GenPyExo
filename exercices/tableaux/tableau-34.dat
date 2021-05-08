@@ -1,0 +1,21 @@
+Tableaux en Python
+===============================
+Exercice 34
+===============================
+Créer en une ligne, un tableau <strong>tab</strong> contenant <strong>100</strong> fois la chaîne de caractères <strong>"informatique"</strong>.
+===============================
+# Voici deux solutions possibles
+
+tab = ["informatique" for n in range(100)]
+
+tab = ["informatique"] * 100   #! seconde
+
+
+===============================
+[ ["#!\ntry:\n    if tab == ['informatique']*100:\n        print('le bon tableau')\nexcept:\n    pass"] ]
+===============================
+...    #! à compléter
+
+
+===============================
+Vous pouvez utiliser une compréhension ou la multiplication d'un tableau par un entier.

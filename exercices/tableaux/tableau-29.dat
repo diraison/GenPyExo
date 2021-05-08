@@ -1,0 +1,34 @@
+Tableaux en Python
+===============================
+Exercice 29
+===============================
+Créer une fonction <strong>remplir(L,v)</strong> qui rempli entièrement le tableau <strong>L</strong> de valeurs <strong>v</strong> dans la limite de ce qu'il peut contenir. Pour obtenir la longueur du tableau <strong>L</strong> vous utiliserez <strong>len(L)</strong>.<br>
+Ainsi, si <strong>L = [4, 1, 7]</strong> alors l'appel <strong>remplir(L,5)</strong> modifie le contenu du tableau L en <strong>[5, 5, 5]</strong> (notez que <strong>len(L)</strong> renvoie <strong>3</strong>).
+===============================
+# Voici une solution
+
+def remplir(L, v):
+    for i in range(len(L)):
+        L[i] = v
+
+
+#! exemple
+
+L = [3, 1, 7]
+remplir(L, 5)
+print(L)
+===============================
+[ ["[3,1,7]",   "5", "#!\nL=#?\nv=#?\ntry:\n    remplir(L,v)\n    print(L)\nexcept:\n    print('exception')"],
+  ["[5,4]",     "0", "#!\nL=#?\nv=#?\ntry:\n    remplir(L,v)\n    print(L)\nexcept:\n    print('exception')"],
+  ["[1,1,1,1]", "2", "#!\nL=#?\nv=#?\ntry:\n    remplir(L,v)\n    print(L)\nexcept:\n    print('exception')"],
+  ["[9]",       "0", "#!\nL=#?\nv=#?\ntry:\n    remplir(L,v)\n    print(L)\nexcept:\n    print('exception')"] ]
+===============================
+def remplir(L, v):
+    ...
+
+
+#! exemple
+
+L = [3, 1, 7]
+remplir(L, 5)
+print(L)

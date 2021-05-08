@@ -1,0 +1,33 @@
+Tableaux en Python
+===============================
+Exercice 28
+===============================
+Créer une fonction <strong>zero(n)</strong> qui renvoie un tableau rempli de <strong>n</strong> zéros.<br>
+Ainsi l'appel <strong>zero(5)</strong> doit renvoyer le tableau <strong>[0, 0, 0, 0, 0]</strong>.
+===============================
+# Voici une solution
+
+def zero(n):
+    tableau = []
+    for i in range(n):
+        tableau.append(0)
+    return tableau
+
+
+#! exemple
+print(zero(5)) 
+===============================
+[ ["zero(5)", "#!\nt=#?\ntry:\n    print(t)\nexcept:\n    print('exception')"],
+  ["zero(1)", "#!\nt=#?\ntry:\n    print(t)\nexcept:\n    print('exception')"],
+  ["zero(2)", "#!\nt=#?\ntry:\n    print(t)\nexcept:\n    print('exception')"],
+  ["zero(0)", "#!\nt=#?\ntry:\n    print(t)\nexcept:\n    print('exception')"] ]
+===============================
+def ...
+
+
+
+#! exemple
+
+print(zero(5))
+===============================
+N'oubliez pas d'utiliser le mot clé <strong>return</strong> pour renvoyer le tableau créé dans la fonction <strong>zero(n)</strong>.

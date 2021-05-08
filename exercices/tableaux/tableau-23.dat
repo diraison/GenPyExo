@@ -1,0 +1,38 @@
+Tableaux en Python
+===============================
+Exercice 23
+===============================
+Complétez le tableau <strong>T</strong>, par extension, pour qu'il contienne à la fin <strong>N</strong> éléments, tous égaux à <strong>valeur</strong>.<br>
+Ainsi pour <strong>N = 4</strong> et <strong>valeur = 9</strong> on doit obtenir un tableau <strong>T</strong> égal à <strong>[9, 9, 9, 9]</strong>.
+===============================
+# Voici une solution
+
+N = 4         #? exemple
+valeur = 9    #? exemple
+
+T = []
+
+for i in range(N):
+    T.append(valeur)
+
+
+#! voir le résultat
+print(T)
+===============================
+[ ["N=4", "valeur=9",   "#!\ntry:\n    print(T)\nexcept:\n    print('exception')"],
+  ["N=2", "valeur='a'", "#!\ntry:\n    print(T)\nexcept:\n    print('exception')"],
+  ["N=5", "valeur=0",   "#!\ntry:\n    print(T)\nexcept:\n    print('exception')"],
+  ["N=0", "valeur=1",   "#!\ntry:\n    print(T)\nexcept:\n    print('exception')"] ]
+===============================
+N = 4         #?
+valeur = 9    #?
+
+T = []
+
+...
+
+
+#! voir le résultat
+print(T)
+===============================
+Invoquez la méthode <strong>append()</strong> sur la liste Python <strong>T</strong> en faisant <strong>T.append(valeur)</strong>.

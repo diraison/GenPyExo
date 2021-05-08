@@ -1,0 +1,29 @@
+Tableaux en Python
+===============================
+Exercice 27
+===============================
+Complétez le tableau <strong>T</strong> par extension, pour qu'il contienne à la fin <strong>5</strong> flottants égaux à <strong>6.3</strong>.<br>
+===============================
+# Voici une solution
+
+T = []
+
+for i in range(5):
+    T.append(6.3)
+
+
+#! voir le résultat
+print(T)
+===============================
+[ ["#!\nprint(T)"] ]
+===============================
+
+T = []
+
+...
+
+
+#! voir le résultat
+print(T)
+===============================
+Invoquez la méthode <strong>append()</strong> sur le tableau <strong>T</strong> en faisant <strong>T.append(<i>élément à ajouter</i>)</strong>.

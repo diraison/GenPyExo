@@ -1,0 +1,39 @@
+Tableaux en Python
+===============================
+Exercice 32
+===============================
+Échangez les éléments d'indices 1 et 2 dans le tableau <strong>tab</strong>.<br>
+Ainsi en partant du tableau <strong>[3,8,5,4]</strong> on obtient le tableau <strong>[3,5,8,4]</strong>.
+===============================
+# Voici une solution en 3 étapes
+
+tab = [3, 8, 5, 4]   #? exemple
+
+# on sauvegarde l'élément d'indice 1
+x = tab[1]   # variable x temporaire
+
+# on copie l'élément d'indice 2 en 1
+tab[1] = tab[2]
+
+# on reporte l'élément sauvegardé en 2
+tab[2] = x
+
+# autre solution : la double affectation
+# tab[1], tab[2] = tab[2], tab[1]
+
+#! affichage du résultat
+print(tab)
+===============================
+[ ["[8,1,5,7]", "#!\nprint(tab)"],
+  ["[4,4,4,4]", "#!\nprint(tab)"],
+  ["[3,2,1]",   "#!\nprint(tab)"] ]
+===============================
+tab = [3, 8, 5, 4]   #? exemple
+
+...
+
+
+#! affichage du résultat
+print(tab)
+===============================
+En précédant en plusieurs étapes, on commence par utiliser une nouvelle variable pour enregistrer l'élément que l'on va remplacer (écraser) en premier.

@@ -1,0 +1,33 @@
+Tableaux en Python
+===============================
+Exercice 24
+===============================
+Complétez la ligne pour créer, par compréhension, un tableau <strong>L</strong> contenant <strong>n</strong> éléments tous égaux à <strong>x</strong>.<br>
+Ainsi pour <strong>n = 3</strong> et <strong>x = 'z'</strong> on doit obtenir un tableau <strong>L</strong> égal à <strong>['z', 'z', 'z']</strong>.
+===============================
+# Voici une solution
+
+n = 3         #? exemple
+x = 'z'       #? exemple
+
+L = [x for i in range(n)]
+
+#! voir le résultat
+print(L)
+===============================
+[ ["n=3", "x='z'", "#!\ntry:\n    print(L)\nexcept:\n    print('exception')"],
+  ["n=6", "x=1",   "#!\ntry:\n    print(L)\nexcept:\n    print('exception')"],
+  ["n=2", "x='a'", "#!\ntry:\n    print(L)\nexcept:\n    print('exception')"],
+  ["n=1", "x=0",   "#!\ntry:\n    print(L)\nexcept:\n    print('exception')"] ]
+===============================
+n = 3         #? exemple
+x = 'z'       #? exemple
+
+
+L = [...]     # ligne à compléter
+
+
+#! voir le résultat
+print(L)
+===============================
+Une compréhensien est une boucle <strong>for</strong> précédée des éléments à créer et écrite à l'intérieur du tableau à générer, comme l'expression <strong>[5*i for i in range(10)]</strong> qui correspond à la table de 5 de 5×0 à 5×9.

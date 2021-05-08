@@ -1,0 +1,33 @@
+Tableaux en Python
+===============================
+Exercice 31
+===============================
+Décrémentez (diminuez de 1) l'élément d'indice 2 du tableau <strong>T</strong>.<br>
+Ainsi en partant du tableau <strong>[8,1,5,7]</strong> on doit obtenir le tableau <strong>[8,1,4,7]</strong> dans lequel <strong>5</strong> est devenu <strong>4</strong>.
+===============================
+# Voici une solution
+
+T = [8, 1, 5, 7]   #? exemple
+
+T[2] = T[2] - 1
+
+# on peut aussi écrire :
+# T[2] -= 1
+
+
+#! affichage du résultat
+print(T)
+===============================
+[ ["[8,1,5,7]", "#!\nprint(T)"],
+  ["[4,4,4,4]", "#!\nprint(T)"],
+  ["[3,2,1]",   "#!\nprint(T)"] ]
+===============================
+T = [8, 1, 5, 7]   #? exemple
+
+...
+
+
+#! affichage du résultat
+print(T)
+===============================
+On accède à l'élément d'indice <strong>4</strong> d'un tableau <strong>L</strong>, aussi bien en lecture qu'en écriture, au moyen de la notation crochets <strong>L[4]</strong>.

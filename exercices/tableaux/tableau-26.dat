@@ -1,0 +1,24 @@
+Tableaux en Python
+===============================
+Exercice 26
+===============================
+Créer en une ligne, un tableau <strong>lettres</strong> contenant <strong>6</strong> fois la chaîne de caractères <strong>"a"</strong>.
+===============================
+# Voici une solution
+
+lettres = ["a", "a", "a", "a", "a", "a"]
+
+
+#! ou avec une compréhension
+
+lettres = ["a" for n in range(6)]
+
+
+===============================
+[ ["#!\ntry:\n    if lettres == ['a']*6:\n        print('le bon tableau')\nexcept:\n    pass"] ]
+===============================
+...       #! à compléter
+
+
+===============================
+N'oubliez pas d'affecter le tableau à la variables <strong>lettres</strong>.

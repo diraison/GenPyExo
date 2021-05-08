@@ -1,0 +1,29 @@
+Tableaux en Python
+===============================
+Exercice 25
+===============================
+Créer en une ligne, un tableau <strong>T</strong> contenant <strong>7</strong> nombres entiers <strong>1</strong>.
+===============================
+# Voici 3 solutions différentes
+
+A = [1, 1, 1, 1, 1, 1, 1]
+
+A = [1] * 7
+
+A = [1 for n in range(7)]
+
+
+#! voir le résultat
+
+print(A)
+===============================
+[ ["#!\ntry:\n    if A == [1]*7:\n        print('le bon tableau')\nexcept:\n    pass"] ]
+===============================
+A = ...      # à compléter
+
+
+#! voir le résultat
+
+print(A)
+===============================
+On définit un tableau en écrivant ses éléménts séparés par des vigules, entre un crochet ouvrant et un crochet fermant.

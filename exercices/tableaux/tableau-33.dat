@@ -1,0 +1,36 @@
+Tableaux en Python
+===============================
+Exercice 33
+===============================
+Échangez le premier et le dernier élément dans le tableau <strong>M</strong>.<br>
+Ainsi en partant du tableau <strong>[0,1,2,3,4]</strong> on obtient le tableau <strong>[4,1,2,3,0]</strong>.
+===============================
+# Voici une solution
+
+M = [0, 1, 2, 3, 4]   #? exemple
+
+# l'indice négatif -1 pour le dernier
+M[0], M[-1] = M[-1], M[0]
+
+# une autre solution en 3 étapes
+# x = M[0]
+# M[0] = M[len(M)-1]
+# M[len(M)-1] = x
+
+
+#! affichage du résultat
+print(M)
+===============================
+[ ["[0,1,2,3,4]", "#!\nprint(M)"],
+  ["[-2,0,2]",    "#!\nprint(M)"],
+  ["[1,2,3,1]",   "#!\nprint(M)"] ]
+===============================
+M = [0, 1, 2, 3, 4]   #? exemple
+
+...
+
+
+#! affichage du résultat
+print(M)
+===============================
+Comme la numérotation des indices commence à zéro, le dernier élément a pour indice <strong>len(M)-1</strong> qu'on peut aussi remplacer par <strong>-1</strong> en Python.

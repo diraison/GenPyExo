@@ -1,0 +1,21 @@
+Tableaux en Python
+===============================
+Exercice 30
+===============================
+Affichez l'élément d'indice 3 du tableau <strong>tab</strong> au moyen de la fonction <strong>print()</strong>.
+===============================
+# Voici une solution
+
+tab = [7, 9, 1, 5, 8]   #? exemple
+
+print(tab[3])
+===============================
+[ ["[7,9,1,5,8]",   ""],
+  ["[8,6,2,4,0]",   ""],
+  ["[0,1,2,3,4,5]", ""] ]
+===============================
+tab = [7, 9, 1, 5, 8]   #? exemple
+
+...
+===============================
+On accède à l'élément d'indice <strong>4</strong> d'un tableau <strong>L</strong> au moyen de la notation crochets <strong>L[4]</strong>.
