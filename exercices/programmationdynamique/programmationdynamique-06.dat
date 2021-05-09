@@ -1,0 +1,34 @@
+Programmation dynamique
+===============================
+Exercice 6
+===============================
+Créez la fonction <strong>max_elem(tab)</strong> qui renvoie le plus grand élément du tableau d'entiers <strong>tab</strong> non vide.<br>
+Ainsi <strong>max_elem([3,7,1,2,5])</strong> renvoie <strong>7</strong>.
+===============================
+# Voici une solution
+
+def max_elem(tab):
+    maximum = tab[0]
+    for x in tab:
+        if x > maximum:
+            maximum = x
+    return maximum
+
+
+#! exemple
+print(max_elem([3,7,1,2,5]))
+===============================
+[ ["[3,7,1,2,5]",   "#!\nt=#?\ntry:\n    print(max_elem(t))\nexcept:\n    print('exception')"],
+  ["[-9,-5,-4,-8]", "#!\nt=#?\ntry:\n    print(max_elem(t))\nexcept:\n    print('exception')"],
+  ["[31,24,16,28]", "#!\nt=#?\ntry:\n    print(max_elem(t))\nexcept:\n    print('exception')"],
+  ["[43,10,37,52]", "#!\nt=#?\ntry:\n    print(max_elem(t))\nexcept:\n    print('exception')"],
+  ["[1,1,1,1]",     "#!\nt=#?\ntry:\n    print(max_elem(t))\nexcept:\n    print('exception')"] ]
+===============================
+...
+
+
+
+#! exemple
+print(max_elem([3,7,1,2,5]))
+===============================
+On parcourt les éléments du tableau <strong>tab</strong> en mettant à jour la valeur maximale trouvée jusque là.

@@ -1,0 +1,35 @@
+Programmation dynamique
+===============================
+Exercice 7
+===============================
+Créez la fonction <strong>max_duo(tab)</strong> qui renvoie la plus grande somme de deux éléments consécutifs du tableau d'entiers <strong>tab</strong> de plus de 2 éléments.<br>
+Ainsi <strong>max_duo([1,8,5,3,9,2])</strong> renvoie <strong>13</strong> qui est la somme obtenue avec 8 et 5 qui se suivent dans le tableau.
+===============================
+# Voici une solution
+
+def max_duo(tab):
+    somme_max = tab[0] + tab[1]
+    for i in range(2, len(tab)):
+        somme = tab[i] + tab[i-1]
+        if somme > somme_max:
+            somme_max = somme
+    return somme_max
+
+
+#! exemple
+print(max_duo([1,8,5,3,9,2]))
+===============================
+[ ["[1,8,5,3,9,2]",     "#!\nt=#?\ntry:\n    print(max_duo(t))\nexcept:\n    print('exception')"],
+  ["[-9,7,-5,3,1,-4]",  "#!\nt=#?\ntry:\n    print(max_duo(t))\nexcept:\n    print('exception')"],
+  ["[1000,100,10,1,0]", "#!\nt=#?\ntry:\n    print(max_duo(t))\nexcept:\n    print('exception')"],
+  ["[10,20,40,80,160]", "#!\nt=#?\ntry:\n    print(max_duo(t))\nexcept:\n    print('exception')"],
+  ["[1,1,1,1,1,1,1,1]", "#!\nt=#?\ntry:\n    print(max_duo(t))\nexcept:\n    print('exception')"] ]
+===============================
+...
+
+
+
+#! exemple
+print(max_duo([1,8,5,3,9,2]))
+===============================
+On parcourt les éléments du tableau <strong>tab</strong> pour calculer les sommes de deux éléments consécutifs et actualiser la somme maximale trouvée jusque là.
