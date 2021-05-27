@@ -7,7 +7,7 @@ Ainsi <strong>compter_negatifs([7,-3,6,-8,0])</strong> renvoie <strong>-2</stron
 ===============================
 # Voici une solution
 
-def compter_positifs(T):
+def compter_negatifs(T):
     npos = 0
     for element in T:
         if element < 0:
