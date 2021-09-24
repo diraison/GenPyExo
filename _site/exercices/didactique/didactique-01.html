@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Didactique et Python - Exercice 1</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Didactique et Python</h1></header>
+<article>
+	<h2>Exercice 1</h2>
+	<div class="enonce">Avant de l'exécuter, demandez-vous ce que doit afficher ce programme.<br>
+Vérifiez votre réponse en exécutant ce programme.<br>
+Corrigez maintenant ce programme pour qu'il fonctionne correctement.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">def donner_euro(n):
+    print(n)
+
+argent = donner_euro(100)     #? ne pas modifier
+print("J'ai obtenu", argent, "euros.")
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># La fonction donner_euro(n) affiche
+# à l'écran la valeur de n mais ne
+# renvoie rien (None) au programme
+# principal.
+# Il faut remplacer print(n) par
+# return n.
+
+def donner_euro(n):
+    return n
+
+argent = donner_euro(100)     #? ne pas modifier
+print("J'ai obtenu", argent, "euros.")
+</pre>
+</article>
+<script>
+alltests = [ ["donner_euro(100)", ""], ["donner_euro(0)", ""], ["donner_euro(25)", ""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+</script>
+</body>
+</html>
