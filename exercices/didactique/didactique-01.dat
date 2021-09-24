@@ -1,0 +1,28 @@
+Didactique et Python
+===============================
+Exercice 1
+===============================
+Avant de l'exécuter, demandez-vous ce que doit afficher ce programme.<br>
+Vérifiez votre réponse en exécutant ce programme.<br>
+Corrigez maintenant ce programme pour qu'il fonctionne correctement.
+===============================
+# La fonction donner_euro(n) affiche
+# à l'écran la valeur de n mais ne
+# renvoie rien (None) au programme
+# principal.
+# Il faut remplacer print(n) par
+# return n.
+
+def donner_euro(n):
+    return n
+
+argent = donner_euro(100)     #? ne pas modifier
+print("J'ai obtenu", argent, "euros.")
+===============================
+[ ["donner_euro(100)", ""], ["donner_euro(0)", ""], ["donner_euro(25)", ""] ]
+===============================
+def donner_euro(n):
+    print(n)
+
+argent = donner_euro(100)     #? ne pas modifier
+print("J'ai obtenu", argent, "euros.")
