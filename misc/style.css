@@ -130,3 +130,17 @@ textcode {
 div.highcharts-container {
 	margin-bottom: 10px;
 }
+
+@media screen and (orientation:portrait) {
+
+div.travail {
+	float: none;
+	width: 100%;
+}
+
+div.reponses {
+	float: none;
+	width: 97%;
+}
+
+}
