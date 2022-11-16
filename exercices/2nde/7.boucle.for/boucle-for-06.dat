@@ -1,0 +1,40 @@
+Boucle for en Python
+===============================
+Exercice 6
+===============================
+Complétez la fonction <strong>tracerCarre()</strong> ayant trois paramètres : <strong>x</strong>, <strong>y</strong> les coordonnées du sommet inférieur gauche et <strong>c</strong> le côté du carré à tracer.<br>
+Vous utiliserez les fonctions suivantes du module <span style="color:blue;">turtle</span> :
+<ul>
+<li><strong>up()</strong> pour lever le crayon et ne rien tracer</li>
+<li><strong>down()</strong> pour baisser le crayon et recommencer à tracer</li>
+<li><strong>goto(-30,70)</strong> pour déplacer le crayon aux coordonnées (-30,70)</li>
+<li><strong>forward(50)</strong> pour avancer de 50 pixels</li>
+<li><strong>left(60)</strong> pour tourner à gauche de 60°</li></ul>
+===============================
+# Voici la réponse
+
+from turtle import *
+
+def tracerCarre(x,y,c):
+    up()                 # lever le crayon
+    goto(x,y)            # se déplacer en (x,y)
+    down()               # abaisser le crayon
+    for n in range(4):   # 4 côtés
+        forward(c)       # côté de longueur c
+        left(90)         # angle droit
+
+tracerCarre(-40,20,80)   #? exemple d'appel
+===============================
+[ ["tracerCarre(0,0,100)",""], ["tracerCarre(-30,-30,60)",""], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","\n#?"] ]
+===============================
+from turtle import *
+
+def tracerCarre(x,y,c):
+    up()
+    goto(
+    
+    for n in range(4):
+
+
+
+tracerCarre(-40,20,80)	#? exemple d'appel

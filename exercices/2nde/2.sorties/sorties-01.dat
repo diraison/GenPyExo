@@ -1,0 +1,15 @@
+Les sorties en Python
+====================
+Exercice 1
+====================
+Modifier la dernière ligne pour afficher le contenu de la variable <strong>x</strong> même si celui-ci doit changer.
+====================
+# Solution de l'exercice
+
+x = 27    #?
+print(x)
+====================
+[ ["27",""], ["'test'",""], ["-6.30",""], ["5/2",""] ]
+====================
+x = 27    #?
+print(

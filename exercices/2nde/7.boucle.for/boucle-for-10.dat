@@ -1,0 +1,34 @@
+Boucle for en Python
+===============================
+Exercice 10
+===============================
+Vous devez compléter la fonction <strong>compter</strong> qui a deux paramètres <strong>phrase</strong> et <strong>lettre</strong>
+et qui renvoie le nombre de fois que le caractère <strong>lettre</strong> apparait dans la chaîne <strong>phrase</strong>.<br><br>
+Ainsi <textcode>print(compter("Coucou Toto","o"))</textcode> affiche <textcode>4</textcode>, car il y 4 caractères <textcode>o</textcode> dans la chaîne "<textcode>Coucou Toto</textcode>".
+===============================
+# Voici une solution
+
+def compter(phrase, lettre):
+    n = 0               # initialise le compteur
+    for c in phrase:    # pour chaque caractère
+        if c == lettre: # s'il y a correspondance
+            n = n + 1   # incrémente le compteur
+    return n
+
+maphrase = "Coucou Toto"    #? exemple
+malettre = "o"              #? exemple
+
+print( compter(maphrase,malettre) )
+===============================
+[ ['"Coucou Toto"','"o"',""], ['"Mathematiques"','"x"',""], ['"Géometrie"','"e"',""], ['"Calcul"','"C"',""] ]
+===============================
+def compter(phrase, lettre):
+    n = 0
+
+
+
+
+maphrase = "Coucou Toto"    #? exemple
+malettre = "o"              #? exemple
+
+print( compter(maphrase, malettre) )

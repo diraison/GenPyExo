@@ -1,0 +1,26 @@
+Premiers programmes en Python
+====================
+Exercice 2
+====================
+Complétez les ... du programme pour qu'il calcule l'aire du rectangle de périmètre et de longueur donnés, dans tous les cas.
+====================
+# Solution de l'exercice
+perimetre = 36   #?
+longueur  = 5    #?
+
+largeur = perimetre / 2 - longueur
+
+aire    = longueur * largeur
+
+print("L'aire du rectangle est", aire)
+====================
+[ ["36","5",""], ["20","6",""], ["16.4","3.8",""] ]
+====================
+perimetre = 36   #? ne pas modifier cette ligne
+longueur  = 5    #? ne pas modifier cette ligne
+
+largeur = ...
+
+aire    = ...
+
+print("L'aire du rectangle est", aire)

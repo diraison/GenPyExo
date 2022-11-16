@@ -1,0 +1,25 @@
+Instruction conditionnelle en Python
+===============================
+Exercice 1
+===============================
+Corriger le programme suivant pour qu'il affiche :<ul style="margin: 0;">
+<li>"<i>La porte s'ouvre...</i>" lorsqu'on répond <em>Sésame</em></li>
+<li>"<i>La porte reste fermée !</i>" dans le cas contraire</li></ul>
+===============================
+# Voici une réponse possible
+
+mdp = input("Mot de passe, SVP ? ")
+
+if mdp == "Sésame":
+    print("La porte s'ouvre...")
+else:
+    print("La porte reste fermée !")
+===============================
+[ ["Toto",""], ["Sésame",""], ["sésame",""], ["Sesame",""], ["sesame",""] ]
+===============================
+mdp = input("Mot de passe, SVP ? ")
+
+if mdp :
+    print("La porte s'ouvre...")
+
+print("La porte reste fermée !")

@@ -1,0 +1,20 @@
+Variable en Python
+====================
+Exercice 5
+====================
+Compléter le programme suivant pour que la variable <strong>aire</strong> contienne l'aire du triangle de <strong>base</strong> et de <strong>hauteur</strong> données.
+====================
+# Solution de l'exercice
+
+base    = 5.4      #?
+hauteur = 3.6      #?
+
+aire    = base * hauteur / 2
+====================
+[ ["5.4", "3.6", "print(aire)"],
+  ["15.0", "8.0", "print(aire)"],
+  ["0.0", "8.2", "print(aire)"] ]
+====================
+base    = 5.4      #?
+hauteur = 3.6      #?
+aire    = 

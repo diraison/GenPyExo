@@ -1,0 +1,17 @@
+Variable en Python
+====================
+Exercice 1
+====================
+Compléter le programme suivant pour que la variable \(y\) contienne le résultat de \(-7x+9\).
+====================
+#? Solution de l'exercice
+
+y = -7 * x + 9
+====================
+[ ["x = 8.4", "print('y =',y)"],
+  ["x = 0.0", "print('y =',y)"],
+  ["x = -2.5", "print('y =',y)"] ]
+====================
+#? ne rien écrire sur cette ligne
+
+y = 

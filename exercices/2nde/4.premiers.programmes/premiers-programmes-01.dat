@@ -1,0 +1,22 @@
+Premiers programmes en Python
+====================
+Exercice 1
+====================
+Complétez les ... du programme suivant pour qu'il calcule et affiche la moyenne des deux notes (note1 et note2) dans tous les cas.
+====================
+# Solution de l'exercice
+note1 = 17       #?
+note2 = 14       #?
+
+moyenne = (note1 + note2) / 2
+
+print("La moyenne est", moyenne )
+====================
+[ ["17","14",""], ["10","16",""], ["13","8.5",""] ]
+====================
+note1 = 17       #? ne pas modifier cette ligne
+note2 = 14       #? ne pas modifier cette ligne
+
+moyenne = ...
+
+print("La moyenne est", ... )

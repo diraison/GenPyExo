@@ -1,0 +1,18 @@
+Variable en Python
+====================
+Exercice 3
+====================
+Compléter la dernière ligne pour que la variable \(u\) contienne le résultat de \(3t^2-1\).
+====================
+#? Solution de l'exercice
+
+u = 3 * t**2 - 1
+====================
+[ ["t = 5.0", "print('u =',u)"],
+  ["t = 0.0", "print('u =',u)"],
+  ["t = -3.0", "print('u =',u)"],
+  ["t = 2.4", "print('u =',u)"] ]
+====================
+#? ne rien écrire sur cette ligne
+
+u = 

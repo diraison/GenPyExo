@@ -1,0 +1,16 @@
+Les entrées en Python
+====================
+Exercice 2
+====================
+Complétez les ... de la première ligne pour que le programme :<ul><li>demande votre âge</li><li>affiche le message correct à la fin</li></ul>
+====================
+# Solution de l'exercice
+age = int(input("Quel est votre âge ?"))
+
+print("L'année dernière vous aviez", age-1, "ans")
+====================
+[ ["16",""], ["12",""], ["3",""] ]
+====================
+age = ...
+
+print("L'année dernière vous aviez", age-1, "ans")

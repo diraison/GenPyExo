@@ -1,0 +1,17 @@
+Variable en Python
+====================
+Exercice 2
+====================
+Compléter la dernière ligne pour que la variable \(z\) contienne le résultat de \(\frac{2x-6}{4}\).
+====================
+#? Solution de l'exercice
+
+z = (2 * x - 6) / 4
+====================
+[ ["x = 3.0", "print('z =',z)"],
+  ["x = 1.0", "print('z =',z)"],
+  ["x = 8.0", "print('z =',z)"] ]
+====================
+#? ne rien écrire sur cette ligne
+
+z = 

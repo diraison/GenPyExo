@@ -1,0 +1,21 @@
+Boucle for en Python
+===============================
+Exercice 2
+===============================
+Complétez le programme pour qu'il affiche la somme de tous les entiers de 1 à 100 inclus.
+===============================
+# Voici une solution
+
+total = 0
+for n in range(1,101):   # de 1 à 100 inclus
+    total = total + n    # on ajoute n à total
+
+print("1 + 2 + 3 + ... + 100 =", total)
+===============================
+[ [ "" ] ]
+===============================
+total = 0
+for n in range():
+    total =
+
+print("1 + 2 + 3 + ... + 100 =", total)

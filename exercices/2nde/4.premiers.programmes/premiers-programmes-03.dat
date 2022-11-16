@@ -1,0 +1,20 @@
+Premiers programmes en Python
+====================
+Exercice 3
+====================
+Complétez les ... du programme pour calculer le prix d'un article soldé bénéficiant d'un rabais de 35 % sur son prix de vente habituel.
+====================
+# Solution de l'exercice
+prix = float(input("Prix de vente habituel ?"))
+
+solde = prix - prix * 35 / 100
+
+print("Cet article en solde coûte", solde, "€")
+====================
+[ ["48",""], ["32",""], ["106",""] ]
+====================
+prix = float(input("Prix de vente habituel ?"))
+
+solde = ...
+
+print("Cet article en solde coûte", solde, "€")

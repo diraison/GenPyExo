@@ -1,0 +1,22 @@
+Instruction conditionnelle en Python
+====================
+Exercice 4
+====================
+Vous devez réaliser un programme qui :<ol style="margin: 0;"><li>Demande l'âge du client.</li><li>Affiche le message approprié :<br><ul style="margin: 0;"><li>"<i>Vous bénéficiez du tarif enfant.</i>", lorsque l'âge est inférieur à 12 ans.</li><li>"<i>Vous bénéficiez du tarif ado.</i>", lorsque l'âge est entre 12 inclus et 18 ans exclu.</li><li>"<i>Vous bénéficiez du tarif adulte.</i>", lorsque l'âge est supérieur ou égal à 18 ans.</li></ul></li></ol>
+====================
+# Une solution possible
+
+age = int(input("Quel est votre âge ?"))
+
+if age < 12:
+    print("Vous bénéficiez du tarif enfant.")
+elif age < 18:     # le test 12 <= age est inutile
+    print("Vous bénéficiez du tarif ado.")
+else:
+    print("Vous bénéficiez du tarif adulte.")
+====================
+[ [5,""], [12,""], [15,""], [16,""], [17,""], [18,""], [20,""] ]
+====================
+age = int(input())
+
+if age

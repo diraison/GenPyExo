@@ -1,0 +1,25 @@
+Variable en Python
+====================
+Exercice 6
+====================
+Compléter le programme suivant pour qu'il calcule le périmètre d'un rectangle de longueur et de largeur données.
+====================
+# Solution de l'exercice
+
+longueur  = 6.4        #?
+largeur   = 5.8        #?
+
+# une première bonne réponse est
+perimetre = 2 * (longueur + largeur)
+
+# une autre bonne réponse possible est
+perimetre = 2 * longueur + 2 * largeur
+====================
+[ ["6.4", "5.8", "print(perimetre)"],
+  ["4.0", "0.0", "print(perimetre)"],
+  ["8.2", "6.5", "print(perimetre)"] ]
+====================
+longueur  = 6.4        #?
+largeur   = 5.8        #?
+
+perimetre = 

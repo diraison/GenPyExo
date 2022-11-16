@@ -1,0 +1,36 @@
+Boucle while en Python
+===============================
+Exercice 3
+===============================
+Complétez le programme pour réaliser le jeu du plus ou moins afin de trouver le nombre secret.
+===============================
+# Voici la réponse
+from random import *
+#?
+secret = randint(10,100)
+message = "Quel est mon nombre secret ?"
+while True:
+    n = int(input(message))
+    if secret > n:
+        message = "C'est plus..."
+    elif secret < n:
+        message = "C'est moins..."
+    else:
+        print("Gagné c'est", secret)
+        break
+===============================
+[ ["seed(1)","47","    print(message)"], ["seed(2)","60","49","    print(message)"], ["seed(3)","30","80","60","    print(message)"] ]
+===============================
+from random import *
+#?
+secret = randint(10,100)
+message = "Quel est mon nombre secret ?"
+while :
+    n = int(input(    ))
+    if :
+        message = "C'est plus..."
+    elif :
+        message = "C'est moins..."
+    else:
+        print("Gagné c'est", secret)
+        break

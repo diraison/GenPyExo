@@ -1,0 +1,18 @@
+Variable en Python
+====================
+Exercice 4
+====================
+Compléter le programme suivant pour que la variable \(r\) contienne le résultat de \(2(5-x)^2+1\).
+====================
+# Solution de l'exercice
+
+x = 1       #?
+
+r = 2 * (5-x)**2 + 1
+====================
+[ ["1.0", "print(r)"],
+  ["5.0", "print(r)"],
+  ["-2.0", "print(r)"],
+  ["3.5", "print(r)"] ]
+====================
+x = 1       #?

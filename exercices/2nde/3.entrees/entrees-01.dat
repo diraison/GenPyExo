@@ -1,0 +1,15 @@
+Les entrées en Python
+====================
+Exercice 1
+====================
+Corriger la première ligne du programme afin d'obtenir dans la variable <strong>x</strong> un nombre à virgule flottante (type float).
+====================
+# Solution de l'exercice
+
+x = float(input("?"))
+print("Le nombre", x, "est un flottant")
+====================
+[ ["5.10",""], ["7",""], ["-0.69",""], ["3.14159",""] ]
+====================
+x = input("?")
+print("Le nombre", x, "est un flottant")

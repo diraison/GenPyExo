@@ -1,0 +1,17 @@
+Fonction en Python
+====================
+Exercice 2
+====================
+Écrire en Python la fonction d'expression mathématique \(g(x) = (x+5)(x-7)\).
+====================
+# Voici la réponse
+
+def g(x):
+    return (x + 5) * (x - 7)
+====================
+[ [ "g(0)", "z=#?\nprint(z)" ],
+  [ "g(3)",  "z=#?\nprint(z)" ],
+  [ "g(-5)",  "z=#?\nprint(z)" ],
+  [ "g(7)",  "z=#?\nprint(z)" ] ]
+====================
+

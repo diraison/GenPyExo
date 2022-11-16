@@ -1,0 +1,17 @@
+Variable en Python
+====================
+Exercice 8
+====================
+Eloïse a un choisi un nombre secret <strong>n</strong> puis elle a appliqué l'algorithme suivant :<ul><li>J'ai soustrait 5 à mon nombre</li><li>J'ai ensuite multiplié le total par 4</li><li>Et pour finir, j'ai soustrait mon nombre au résultat</li></ul>Elle a noté <strong>x</strong> le nouveau nombre obtenu.<br>Votre défi consiste à écrire la formule permettant de retrouver le nombre secret <strong>n</strong> à partir de <strong>x</strong>.
+====================
+#? Solution de l'exercice
+
+n = (x + 20) / 3
+====================
+[ ["x = 1.0", "print('n =',n)"],
+  ["x = 4.0", "print('n =',n)"],
+  ["x = 10.0", "print('n =',n)"] ]
+====================
+#? x est le nombre calculé et donné par Eloïse
+
+n = 

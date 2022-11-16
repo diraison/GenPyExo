@@ -1,0 +1,17 @@
+Fonction en Python
+====================
+Exercice 4
+====================
+Corrigez la fonction <i>aire</i> qui calcule et retourne l'aire d'un trapèze. Elle aura pour paramètres : <i>B</i>, <i>b</i> et <i>h</i> qui représentent respectivement la grande base, la petite base et la hauteur.
+====================
+# Voici la réponse
+
+def aire(B, b, h):
+    return (B + b) * h / 2
+====================
+[ [ "aire(5,3,4)", "z=#?\nprint(z)" ],
+  [ "aire(3,3,3)",  "z=#?\nprint(z)" ],
+  [ "aire(8,2,0)",  "z=#?\nprint(z)" ] ]
+====================
+def aire(B,H):
+    return B+h/2

@@ -1,0 +1,20 @@
+Fonction en Python
+===============================
+Exercice 3
+===============================
+Corrigez la fonction \(produit\) pour qu'elle prenne deux paramètres \(a\) et \(n\) , et renvoie leur produit.
+===============================
+# Une solution simple
+
+def produit(a,n):    return a * n
+
+# le produit de deux nombres est le
+# résultat de leur multiplication
+===============================
+[ ["produit(0,7)",  "P=#?\nprint(P)"],
+  ["produit(5,4)",  "P=#?\nprint(P)"],
+  ["produit(0,0)",  "P=#?\nprint(P)"],
+  ["produit(-8,3)", "P=#?\nprint(P)"] ]
+===============================
+def produit(a):
+    return a + a
