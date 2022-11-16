@@ -140,6 +140,7 @@ div.travail {
 
 div.reponses {
 	float: none;
+	margin-top: 1em;
 	width: 97%;
 }
 
