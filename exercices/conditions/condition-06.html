@@ -56,7 +56,11 @@ print("Le plus grand est", maximum(x,y,z))
 alltests = [ ["8","5","2",""], ["7","9","4",""], ["1","3","6",""], ["4","1","5",""], ["2","7","3",""], ["9","6","8",""], ["4","4","1",""], ["1","6","6",""], ["5","1","5",""] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+    var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+} else {
+    var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+}
 editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
 </script>
 </body>

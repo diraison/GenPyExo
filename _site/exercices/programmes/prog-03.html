@@ -57,7 +57,11 @@ n = ( x + 20 ) / 3
 alltests = [ ["x = 1.0", "print(n)"], ["x = 4.0", "print(n)"], ["x = 10.0", "print(n)"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+    var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+} else {
+    var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+}
 editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
 </script>
 </body>
