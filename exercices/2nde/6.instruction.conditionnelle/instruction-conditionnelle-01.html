@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>L'instruction conditionnelle en Python - Exercice 1</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>L'instruction conditionnelle en Python</h1></header>
+<article>
+	<h2>Exercice 1</h2>
+	<div class="enonce">Corriger le programme suivant pour qu'il affiche :<ul style="margin: 0;">
+<li>"<i>La porte s'ouvre...</i>" lorsqu'on répond <em>Sésame</em></li>
+<li>"<i>La porte reste fermée !</i>" dans le cas contraire</li></ul>
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">mdp = input("Mot de passe, SVP ? ")
+
+if mdp :
+    print("La porte s'ouvre...")
+
+print("La porte reste fermée !")
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Voici une réponse possible
+
+mdp = input("Mot de passe, SVP ? ")
+
+if mdp == "Sésame":
+    print("La porte s'ouvre...")
+else:
+    print("La porte reste fermée !")
+</pre>
+</article>
+<script>
+alltests = [ ["Toto",""], ["Sésame",""], ["sésame",""], ["Sesame",""], ["sesame",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+    var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+} else {
+    var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+}
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+</script>
+</body>
+</html>

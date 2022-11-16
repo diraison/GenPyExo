@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>L'instruction conditionnelle en Python - Exercice 7</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>L'instruction conditionnelle en Python</h1></header>
+<article>
+	<h2>Exercice 7</h2>
+	<div class="enonce">Complétez le programme suivant en écrivant la fonction <strong>maximum()</strong> dont les paramètres sont trois nombres <strong>a</strong>, <strong>b</strong>, <strong>c</strong> et qui renvoie le plus grand des ces trois nombres.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">def maximum(a, b, c):
+
+
+x = float( input("1er nombre ?") )
+y = float( input("2nd nombre ?") )
+z = float( input("3e  nombre ?") )
+print("Le plus grand est", maximum(x,y,z))
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"># Solution de l'exercice
+def maximum(a, b, c):
+    if a > b and a > c:
+        return a
+    if b > c:           # le maximum est b ou c
+        return b
+    else:
+        return c
+
+x = float( input("1er nombre ?") )
+y = float( input("2nd nombre ?") )
+z = float( input("3e  nombre ?") )
+print("Le plus grand est", maximum(x,y,z))
+</pre>
+</article>
+<script>
+alltests = [ ["8","5","2",""], ["7","9","4",""], ["1","3","6",""], ["4","1","5",""], ["2","7","3",""], ["9","6","8",""], ["4","4","1",""], ["1","6","6",""], ["5","1","5",""] ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+    var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+} else {
+    var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+}
+editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+</script>
+</body>
+</html>
