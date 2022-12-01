@@ -131,7 +131,7 @@ div.highcharts-container {
 	margin-bottom: 10px;
 }
 
-@media screen and (max-device-aspect-ratio: 1/1) {
+@media screen and (max-aspect-ratio: 1/1) {
 
 div.travail {
 	float: none;
