@@ -67,12 +67,16 @@ tracerCarre(-40,20,80)   #? exemple d'appel
 alltests = [ ["tracerCarre(0,0,100)",""], ["tracerCarre(-30,-30,60)",""], ["tracerCarre(-20,-20,60)","tracerCarre(10,10,50)","\n#?"] ];
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
-if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-    var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
-} else {
-    var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+function autoresize(event) {
+    if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+        var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+    } else {
+        var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+    }
+    editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
 }
-editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+window.addEventListener('resize', autoresize);
+autoresize(null);
 </script>
 </body>
 </html>
