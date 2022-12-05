@@ -48,7 +48,7 @@ alltests = [ ["prix(4,0)", "t=#?\nprint(float(t))"],
 CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
 editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
 function autoresize(event) {
-    if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+    if (1.2 * document.documentElement.clientHeight > document.documentElement.clientWidth) {
         var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
     } else {
         var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
