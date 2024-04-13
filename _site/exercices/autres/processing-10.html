@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Processing en Python - Exemple 10</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Processing en Python</h1></header>
+<article>
+	<h2>Exemple 10</h2>
+	<div class="enonce">Dans ce jeu du saute moutons, vous devez amener les trois moutons blancs à droite et les moutons noirs à gauche. En cliquant sur un mouton vous pouvez le faire avancer ou sauter par dessus un mouton de couleur différente à condition que la place soit libre.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">from processing import *
+
+moutons = ["B","B","B","-","N","N","N",None,None]
+dessins = {}
+
+def setup():
+    size(700,100)
+    dessins["N"] = loadImage("images/mouton-noir.png")
+    dessins["B"] = loadImage("images/mouton-blanc.png")
+
+def draw():
+    noLoop()
+    background(0xffbbddff)
+    for n in range(7):
+        x, y = 100*n, 0
+        m = moutons[n]
+        if m == "B" or m == "N":
+            image(dessins[m], x, y, 100, 100)
+
+def mouseClicked():
+    n = mouse.x // 100
+    if moutons[n:n+2] == ["B","-"]:
+        moutons[n:n+2] = ["-","B"]
+    elif moutons[n:n+3] == ["B","N","-"]:
+        moutons[n:n+3] = ["-","N","B"]
+    elif moutons[n-1:n+1] == ["-","N"]:
+        moutons[n-1:n+1] = ["N","-"]
+    elif moutons[n-2:n+1] == ["-","B","N"]:
+        moutons[n-2:n+1] = ["N","B","-"]
+    draw()
+
+run()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"></pre>
+</article>
+<script>
+alltests = [ ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+function autoresize(event) {
+    if (1.2 * document.documentElement.clientHeight > document.documentElement.clientWidth) {
+        var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+    } else {
+        var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+    }
+    editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+}
+window.addEventListener('resize', autoresize);
+autoresize(null);
+</script>
+</body>
+</html>
