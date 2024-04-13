@@ -28,8 +28,9 @@ dessins = {}
 
 def setup():
     size(700,100)
-    dessins["N"] = loadImage("images/mouton-noir.png")
-    dessins["B"] = loadImage("images/mouton-blanc.png")
+    URL = "/GenPyExo/images/"
+    dessins["N"] = loadImage(URL + "mouton-noir.png")
+    dessins["B"] = loadImage(URL + "mouton-blanc.png")
 
 def draw():
     noLoop()
