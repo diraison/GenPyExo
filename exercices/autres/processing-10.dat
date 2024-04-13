@@ -1,0 +1,41 @@
+Processing en Python
+===============================
+Exemple 10
+===============================
+Dans ce jeu du saute moutons, vous devez amener les trois moutons blancs à droite et les moutons noirs à gauche. En cliquant sur un mouton vous pouvez le faire avancer ou sauter par dessus un mouton de couleur différente à condition que la place soit libre.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+
+moutons = ["B","B","B","-","N","N","N",None,None]
+dessins = {}
+
+def setup():
+    size(700,100)
+    dessins["N"] = loadImage("images/mouton-noir.png")
+    dessins["B"] = loadImage("images/mouton-blanc.png")
+
+def draw():
+    noLoop()
+    background(0xffbbddff)
+    for n in range(7):
+        x, y = 100*n, 0
+        m = moutons[n]
+        if m == "B" or m == "N":
+            image(dessins[m], x, y, 100, 100)
+
+def mouseClicked():
+    n = mouse.x // 100
+    if moutons[n:n+2] == ["B","-"]:
+        moutons[n:n+2] = ["-","B"]
+    elif moutons[n:n+3] == ["B","N","-"]:
+        moutons[n:n+3] = ["-","N","B"]
+    elif moutons[n-1:n+1] == ["-","N"]:
+        moutons[n-1:n+1] = ["N","-"]
+    elif moutons[n-2:n+1] == ["-","B","N"]:
+        moutons[n-2:n+1] = ["N","B","-"]
+    draw()
+
+run()
