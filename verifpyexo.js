@@ -157,16 +157,13 @@ function reecrireCode(str, data) {
 
 // charge le programme passe en argument dans l'URL apres un hashtag
 function chargerProgramme() {
-	var code = window.location.hash.substring(1);
-	document.getElementById("code").innerHTML = decodeURIComponent(code);
+	document.getElementById("code").innerHTML = get_source_from_url();
 }
 
 // sauvegarde le programme dans l'URL a la suite d'un hashtag
 function sauverProgramme() {
 	var programme = editeur.getValue();
-	var baseURL = window.location.href.split("#")[0];
-	var fullURL = baseURL + "#" + encodeURIComponent(programme);
-	location.assign(fullURL);
+	set_source_to_url(programme);
 }
 
 // extrait l'image utile du bloc (id) au format png (encode en base64) ou au format svg
@@ -353,17 +350,48 @@ function genererReponses() {
 
 // integration de l'exercice complet dans l'URL
 // utilise la compression inflate de la bibliotheque pako
-// <script src="https://cdn.jsdelivr.net/npm/pako/dist/pako_inflate.min.js"></script>
+// <script src="https://cdn.jsdelivr.net/npm/pako/dist/pako.min.js"></script>
+
+function get_source_from_url() {
+	var data = window.location.hash.substring(1);
+	if (data === null || data === "") {
+		return "";
+	}
+	if (data.startsWith("src=")) {
+		return base64_to_unpacked_text(data.slice(4));
+	} else {
+		return decodeURIComponent(data);
+	}
+}
+
+function set_source_to_url(source) {
+	if (source !== null && source !== "") {
+		try {
+			var baseURL = window.location.href.split("#")[0];
+			var fullURL = baseURL + "#src=" + text_to_packed_base64(source);
+			location.assign(fullURL);
+		} catch (erreur) {
+			console.error("Echec de la compression", erreur);
+		}
+	}
+}
+
+function text_to_packed_base64(text) {
+	var text_bytes = new TextEncoder().encode(text);
+	var data = pako.deflate(text_bytes);
+	return data.toBase64().replace(/\//g,"_").replace(/\+/g,"-");
+}
+
+function base64_to_unpacked_text(data) {
+	var data_b64 = data.replace(/_/g,"/").replace(/-/g,"+");
+	var data_bytes = atob(data_b64).split("").map(function (x) { return x.charCodeAt(0); });
+	return pako.inflate(new Uint8Array(data_bytes), { to: "string" });
+}
 
 function get_exercice_from_url() {
 	var parsedUrl = new URL(window.location.href);
 	var exo = parsedUrl.searchParams.get("exo");
-	if (exo !== null) {
-		exob64 = exo.replace(/_/g,"/").replace(/-/g,"+");
-		var exobytes = atob(exob64).split("").map(function (x) { return x.charCodeAt(0); });
-		exo = pako.inflate(new Uint8Array(exobytes), { to: "string" });
-	}
-	return exo;
+	return (exo !== null) ? base64_to_unpacked_text(exo) : exo;
 }
 
 function clear_elements_from_url() {
