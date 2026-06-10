@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Processing en Python - Exemple 11</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
+	<link  href="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/lib/codemirror.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.33.0/mode/python/python.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+	<script src="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/verifpyexo.js"></script>
+	<link  href="https://cdn.jsdelivr.net/gh/diraison/GenPyExo/misc/style.css" rel="stylesheet">
+</head>
+<body onload="genererReponses()">
+<header><h1>Processing en Python</h1></header>
+<article>
+	<h2>Exemple 11</h2>
+	<div class="enonce">Le jeu <a href="https://fr.wikipedia.org/wiki/Isola_(jeu)">Isola</a> consiste à bloquer l'adversaire en vous déplaçant sur les cases adjacentes à votre position et en construisant un mur sur une autre case quelconque.
+</div>
+	<br>
+	<div class="travail" id="travail">
+		<textarea id="code">from processing import *
+from random import seed, randint, shuffle
+
+CASE_LIBRE = 0
+CASE_JOUEUR1 = 1
+CASE_JOUEUR2 = 2
+CASE_SUPPRIMEE = 3
+
+ACTION_DEPLACER = 0
+ACTION_SUPPRIMER = 1
+
+MESSAGES = ["C'est au joueur bleu de jouer.", "C'est au joueur rouge de jouer.",
+			"Cliquez sur une case voisine.", "Supprimez sur une case libre.",
+			"Le joueur rouge a gagné !", "Le joueur bleu a gagné !"]
+
+jeu = {"grille":None, "joueur":None, "action":None}
+
+
+
+def setup():
+	size(351,420)
+	frameRate(2)
+	initialiserJeu(jeu)
+	afficherJeu(jeu)
+
+def draw():
+	if jeu["joueur"] == 2:
+		jouerIA(jeu)
+		afficherJeu(jeu)
+
+def mousePressed():
+	if mouse.button == LEFT:
+		i, j = mouse.y // 50, mouse.x // 50
+		jouer(jeu, i, j)
+	if mouse.button == RIGHT:
+		initialiserJeu(jeu)
+	afficherJeu(jeu)
+
+
+
+def afficherJeu(jeu):
+	grille = jeu["grille"]
+	afficherGrille(grille)
+	joueur = jeu["joueur"]
+	action = jeu["action"]
+	if action == ACTION_DEPLACER and casesLibres(grille, joueur) == []:
+		message = MESSAGES[joueur+3]
+	else:
+		message = MESSAGES[joueur-1] + "\n" + MESSAGES[action+2]
+	afficherMessage(message)
+
+def afficherGrille(grille):
+	couleurs = [0xffffeeaa, 0xff4444ff, 0xffff0000, 0xff666666]
+	for i in range(7):
+		for j in range(7):
+			x, y = 50 * j, 50 * i
+			n = grille[i][j]
+			couleur = couleurs[n]
+			if n == CASE_JOUEUR1 or n == CASE_JOUEUR2:
+				fond = couleurs[0]
+				fill(fond)
+				rect(x, y, 50, 50)				
+				fill(couleur)
+				ellipse(x+25, y+25, 22, 22)
+			else:
+				fill(couleur)
+				rect(x, y, 50, 50)
+
+def afficherMessage(message):
+	fill(0xff446688)
+	rect(0, 350, 350, 69)
+	textSize(23)
+	textAlign(CENTER, CENTER)
+	fill(0xffffffff)
+	text(message, 175, 385)
+
+
+
+def initialiserJeu(jeu):
+	grille = [[CASE_LIBRE for j in range(7)] for i in range(7)]
+	grille[0][3] = CASE_JOUEUR1
+	grille[6][3] = CASE_JOUEUR2
+	jeu["grille"] = grille
+	jeu["joueur"] = 1
+	jeu["action"] = ACTION_DEPLACER
+
+def donnerPosition(grille, joueur):
+	for i in range(7):
+		for j in range(7):
+			if grille[i][j] == joueur:
+				return (i, j)
+
+def caseLibre(grille, i, j):
+	return 0 <= i < 7 and 0 <= j < 7 and grille[i][j] == CASE_LIBRE
+
+def casesLibres(grille, joueur):
+	libres = []
+	i0, j0 = donnerPosition(grille, joueur)
+	for i in range(i0-1, i0+2):
+		for j in range(j0-1, j0+2):
+			if caseLibre(grille, i, j):
+				libres.append((i,j))
+	return libres
+
+def jouer(jeu, i, j):
+	grille = jeu["grille"]
+	joueur = jeu["joueur"]
+	if jeu["action"] == ACTION_DEPLACER:
+		libres = casesLibres(grille, joueur)
+		if (i, j) not in libres:
+			return False
+		i0, j0 = donnerPosition(grille, joueur)
+		grille[i0][j0] = CASE_LIBRE
+		grille[i][j] = joueur
+	elif jeu["action"] == ACTION_SUPPRIMER:
+		if not caseLibre(grille, i, j):
+			return False
+		grille[i][j] = CASE_SUPPRIMEE
+		jeu["joueur"] = 3 - joueur
+	jeu["action"] = 1 - jeu["action"]
+	return True
+
+#### IA ####
+
+def heuristique(grille, joueur):
+	i0, j0 = donnerPosition(grille, joueur)
+	positions = casesLibres(grille, joueur)
+	shuffle(positions)
+	maximum = 0
+	pos_max = (randint(0,6), randint(0,6))
+	for i, j in positions:
+		g = [ligne[:] for ligne in grille]
+		g[i0][j0] = CASE_LIBRE
+		g[i][j] = joueur
+		n = len(casesLibres(g, joueur))
+		if maximum < n:
+			maximum = n
+			pos_max = (i, j)
+	return pos_max
+
+def jouerIA(jeu):
+	grille = jeu["grille"]
+	joueur = jeu["joueur"]
+	if jeu["action"] == ACTION_DEPLACER:
+		i, j = heuristique(grille, joueur)
+	elif jeu["action"] == ACTION_SUPPRIMER:
+		i, j = heuristique(grille, 3-joueur)
+	return jouer(jeu, i, j)
+
+
+run()
+</textarea>
+		<pre id="erreur"></pre>
+		<button type="button" onclick="executer()" id="execfb" disabled>Exécuter</button> 
+		<button type="button" onclick="verifier()" id="verifb" style="float: right; right: 3%;" disabled>Vérifier la réponse</button> 
+	</div>
+	<div class="reponses" id="resultat" style="visibility:hidden">
+		<pre id="sortie"></pre>
+		<div id="dessin"></div>
+	</div>
+	<pre id="solution" style="display:none"></pre>
+</article>
+<script>
+alltests = [ ];
+CodeMirror.keyMap.default.Tab = function(cm) { cm.execCommand(cm.getOption("indentWithTabs") ? "insertTab" : "insertSoftTab"); };
+editeur = CodeMirror.fromTextArea(document.getElementById("code"), { mode: "python", lineNumbers: true, indentWithTabs: false, indentUnit: 4, tabSize: 4 });
+function autoresize(event) {
+    if (1.2 * document.documentElement.clientHeight > document.documentElement.clientWidth) {
+        var hauteurEditeur = Math.floor(document.documentElement.clientHeight * 0.55);
+    } else {
+        var hauteurEditeur = document.documentElement.clientHeight - document.getElementById("travail").offsetTop - 110;
+    }
+    editeur.setSize(null, hauteurEditeur === undefined ? 370 : hauteurEditeur);
+}
+window.addEventListener('resize', autoresize);
+autoresize(null);
+</script>
+</body>
+</html>
