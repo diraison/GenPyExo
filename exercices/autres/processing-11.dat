@@ -1,0 +1,160 @@
+Processing en Python
+===============================
+Exemple 11
+===============================
+Le jeu <a href="https://fr.wikipedia.org/wiki/Isola_(jeu)">Isola</a> consiste à bloquer l'adversaire en vous déplaçant sur les cases adjacentes à votre position et en construisant un mur sur une autre case quelconque.
+===============================
+===============================
+[ ]
+===============================
+from processing import *
+from random import seed, randint, shuffle
+
+CASE_LIBRE = 0
+CASE_JOUEUR1 = 1
+CASE_JOUEUR2 = 2
+CASE_SUPPRIMEE = 3
+
+ACTION_DEPLACER = 0
+ACTION_SUPPRIMER = 1
+
+MESSAGES = ["C'est au joueur bleu de jouer.", "C'est au joueur rouge de jouer.",
+			"Cliquez sur une case voisine.", "Supprimez sur une case libre.",
+			"Le joueur rouge a gagné !", "Le joueur bleu a gagné !"]
+
+jeu = {"grille":None, "joueur":None, "action":None}
+
+
+
+def setup():
+	size(351,420)
+	frameRate(2)
+	initialiserJeu(jeu)
+	afficherJeu(jeu)
+
+def draw():
+	if jeu["joueur"] == 2:
+		jouerIA(jeu)
+		afficherJeu(jeu)
+
+def mousePressed():
+	if mouse.button == LEFT:
+		i, j = mouse.y // 50, mouse.x // 50
+		jouer(jeu, i, j)
+	if mouse.button == RIGHT:
+		initialiserJeu(jeu)
+	afficherJeu(jeu)
+
+
+
+def afficherJeu(jeu):
+	grille = jeu["grille"]
+	afficherGrille(grille)
+	joueur = jeu["joueur"]
+	action = jeu["action"]
+	if action == ACTION_DEPLACER and casesLibres(grille, joueur) == []:
+		message = MESSAGES[joueur+3]
+	else:
+		message = MESSAGES[joueur-1] + "\n" + MESSAGES[action+2]
+	afficherMessage(message)
+
+def afficherGrille(grille):
+	couleurs = [0xffffeeaa, 0xff4444ff, 0xffff0000, 0xff666666]
+	for i in range(7):
+		for j in range(7):
+			x, y = 50 * j, 50 * i
+			n = grille[i][j]
+			couleur = couleurs[n]
+			if n == CASE_JOUEUR1 or n == CASE_JOUEUR2:
+				fond = couleurs[0]
+				fill(fond)
+				rect(x, y, 50, 50)				
+				fill(couleur)
+				ellipse(x+25, y+25, 22, 22)
+			else:
+				fill(couleur)
+				rect(x, y, 50, 50)
+
+def afficherMessage(message):
+	fill(0xff446688)
+	rect(0, 350, 350, 69)
+	textSize(23)
+	textAlign(CENTER, CENTER)
+	fill(0xffffffff)
+	text(message, 175, 385)
+
+
+
+def initialiserJeu(jeu):
+	grille = [[CASE_LIBRE for j in range(7)] for i in range(7)]
+	grille[0][3] = CASE_JOUEUR1
+	grille[6][3] = CASE_JOUEUR2
+	jeu["grille"] = grille
+	jeu["joueur"] = 1
+	jeu["action"] = ACTION_DEPLACER
+
+def donnerPosition(grille, joueur):
+	for i in range(7):
+		for j in range(7):
+			if grille[i][j] == joueur:
+				return (i, j)
+
+def caseLibre(grille, i, j):
+	return 0 <= i < 7 and 0 <= j < 7 and grille[i][j] == CASE_LIBRE
+
+def casesLibres(grille, joueur):
+	libres = []
+	i0, j0 = donnerPosition(grille, joueur)
+	for i in range(i0-1, i0+2):
+		for j in range(j0-1, j0+2):
+			if caseLibre(grille, i, j):
+				libres.append((i,j))
+	return libres
+
+def jouer(jeu, i, j):
+	grille = jeu["grille"]
+	joueur = jeu["joueur"]
+	if jeu["action"] == ACTION_DEPLACER:
+		libres = casesLibres(grille, joueur)
+		if (i, j) not in libres:
+			return False
+		i0, j0 = donnerPosition(grille, joueur)
+		grille[i0][j0] = CASE_LIBRE
+		grille[i][j] = joueur
+	elif jeu["action"] == ACTION_SUPPRIMER:
+		if not caseLibre(grille, i, j):
+			return False
+		grille[i][j] = CASE_SUPPRIMEE
+		jeu["joueur"] = 3 - joueur
+	jeu["action"] = 1 - jeu["action"]
+	return True
+
+#### IA ####
+
+def heuristique(grille, joueur):
+	i0, j0 = donnerPosition(grille, joueur)
+	positions = casesLibres(grille, joueur)
+	shuffle(positions)
+	maximum = 0
+	pos_max = (randint(0,6), randint(0,6))
+	for i, j in positions:
+		g = [ligne[:] for ligne in grille]
+		g[i0][j0] = CASE_LIBRE
+		g[i][j] = joueur
+		n = len(casesLibres(g, joueur))
+		if maximum < n:
+			maximum = n
+			pos_max = (i, j)
+	return pos_max
+
+def jouerIA(jeu):
+	grille = jeu["grille"]
+	joueur = jeu["joueur"]
+	if jeu["action"] == ACTION_DEPLACER:
+		i, j = heuristique(grille, joueur)
+	elif jeu["action"] == ACTION_SUPPRIMER:
+		i, j = heuristique(grille, 3-joueur)
+	return jouer(jeu, i, j)
+
+
+run()
